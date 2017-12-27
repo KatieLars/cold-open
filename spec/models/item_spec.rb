@@ -28,10 +28,9 @@ RSpec.describe Item, type: :model do
   @item = User.first.items.create(title: "Hot Dogs", item_type_id: ItemType.first.id, freezer_id: Freezer.first.id)
   @item.users << User.second
 
-  @note = User.first.notes.create(item_id: @item.id)
+  User.first.notes.create(item_id: @item.id)
+  User.second.notes.create(item_id: @item.id)
 end
-
-
 
 
 it "has many users" do
@@ -43,11 +42,11 @@ it "belongs to a freezer" do
 end
 
 it "has many notes" do
-
+  expect(@item.notes.count).to eq(2)
 end
 
 it "belongs to an item type" do
-
+  expect(@item.item_type.title).to eq(ItemType.first.title)
 end
 
 describe "::expired" do
@@ -70,7 +69,7 @@ describe "::still_good" do
     expect(Item.still_good.pluck(:title)).to eq(items)
   end
 end
-end
+
 
 
 end
