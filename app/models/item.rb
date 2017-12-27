@@ -17,21 +17,37 @@ class Item < ApplicationRecord
 
   end
 
-  def self.expired
-    #lists all expired items
-    #items are expired if past the max storage date
+  def self.expired   #items are expired if today's date is past the max storage date
     expired_foods = []
     self.all.each {|item| expired_foods << item if item.expiration_range_ending < Time.now}
     expired_foods
-    binding.pry #finds items where today's date it outside their max date range
   end
 
-  def self.expiring_soon
-    #lists all items between storage min and storage_max
-    #finds items where today's date is inside their date range
+  def self.expiring_soon #lists all items between storage min and storage_max
+    expiring_foods = [] #greater times are future times
+    all.each do |item|
+      if item.item_type.storage_min #if storage min value is present
+        if Time.now < item.expiration_range_ending && Time.now > item.expiration_range_beginning
+          expiring_foods << item
+        end
+      else
+        if Time.now < item.expiration_range_ending
+          expiring_foods << item
+        end
+      end
+    end
+    expiring_foods
   end
 
   def self.still_good
+    still_good = []
+    all.each do |item|
+      binding.pry
+      if !self.expiring_soon.include?(item) && !self.expired.include?(item)
+        still_good << item
+      end
+    end
+    still_good
     #lists all items that have yet to hit the storage min mark
     #finds items where today's date is before entering the expiration range
   end
