@@ -5,10 +5,14 @@ class Item < ApplicationRecord
   has_many :users, through: :user_items
   has_many :notes #wired
 
-  def expiration_range
-    #finds the expiration date range for an item
-    #takes the date stored and:
-      #adds on storage min and storage max for entering the #expiring soon zone
+  def expiration_range_beginning #entering the min range of expiration
+    if item_type.storage_min
+      Chronic.parse("#{item_type.storage_min} from item.date_stored")
+    end
+  end
+
+  def expiration_range_ending #maximum range
+    Chronic.parse("#{item_type.storage_max} from item.date_stored")
   end
 
   def self.expired
