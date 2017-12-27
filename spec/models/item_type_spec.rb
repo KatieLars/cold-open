@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 
-RSpec.describe Type, type: :model do
+RSpec.describe ItemType, type: :model do
   before(:each) do
     3.times do
       User.create(
@@ -31,4 +31,5 @@ end
 
 it "has many items" do
   expect(@item_type.items.count).to eq(2)
+end
 end
