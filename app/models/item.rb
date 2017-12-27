@@ -13,13 +13,16 @@ class Item < ApplicationRecord
   end
 
   def expiration_range_ending #maximum range
-    Chronic.parse("#{item_type.storage_max} from item.date_stored")
+    x = Chronic.parse("#{item_type.storage_max} from item.date_stored")
+
   end
 
   def self.expired
     #lists all expired items
     #items are expired if past the max storage date
-    expired = all.collect {|item| item if item.expiration_range_ending < Time.now}
+    expired_foods = []
+    self.all.each {|item| expired_foods << item if item.expiration_range_ending < Time.now}
+    expired_foods
     binding.pry #finds items where today's date it outside their max date range
   end
 
