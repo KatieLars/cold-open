@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   has_many :users, through: :user_items
   has_many :notes #wired
 
+
   def expiration_range_beginning #entering the min range of expiration
     if item_type.storage_min
       Chronic.parse("#{item_type.storage_min} from item.date_stored")
@@ -18,7 +19,8 @@ class Item < ApplicationRecord
   def self.expired
     #lists all expired items
     #items are expired if past the max storage date
-    #finds items where today's date it outside their max date range
+    expired = all.collect {|item| item if item.expiration_range_ending < Time.now}
+    binding.pry #finds items where today's date it outside their max date range
   end
 
   def self.expiring_soon
