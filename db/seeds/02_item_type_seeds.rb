@@ -60,7 +60,6 @@ item_types = [
     types = item_type.split(" - ")#splits string into array ["Ham, cooked", "1-2 mos"]
     range = types[1].split("-")
     if range.count == 2
-
       range.collect do |t|
         if t.include?("mos")
           range[1] = t.gsub("mos", "months")
@@ -70,7 +69,6 @@ item_types = [
       end
     else
       range[0] = range[0].gsub("mos", "months")
-
     end
     types.pop
     types += range

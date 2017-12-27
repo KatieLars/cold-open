@@ -5,21 +5,26 @@ class Item < ApplicationRecord
   has_many :users, through: :user_items
   has_many :notes #wired
 
-  def expiration_date
+  def expiration_range
     #finds the expiration date range for an item
+    #takes the date stored and:
+      #adds on storage min and storage max for entering the #expiring soon zone
   end
 
   def self.expired
     #lists all expired items
     #items are expired if past the max storage date
+    #finds items where today's date it outside their max date range
   end
 
   def self.expiring_soon
     #lists all items between storage min and storage_max
+    #finds items where today's date is inside their date range
   end
 
   def self.still_good
     #lists all items that have yet to hit the storage min mark
+    #finds items where today's date is before entering the expiration range
   end
 
 #special specs needed
