@@ -4,22 +4,9 @@ class Item < ApplicationRecord
   has_many :user_items
   has_many :users, through: :user_items
   has_many :notes #wired
-  attr_reader :expiration_max, :expiration_min
-  def expiration_min #entering the min range of expiration
-    if item_type.storage_min
-      Chronic.parse("#{item_type.storage_min} from item.date_stored")
-    end
-  end
-
-  def expiration_max #maximum range
-    Chronic.parse("#{item_type.storage_max} from item.date_stored")
-  end
-
-  def initialize
-    item.exipiration_max = Chronic.parse("#{item_type.storage_max} from item.date_stored")
-    item.expiration_min = Chronic.parse("#{item_type.storage_min} from item.date_stored") if item_type.storage_min
-  end
-  #consider a belongs_to to give yourself the expiration max and min as columns
+  #attr_reader :expiration_max, :expiration_min
+  before_save :expiration_max
+  before_save :expiration_min, if: :storage_min?
 
   def expiration_range_beginning #entering the min range of expiration
     if item_type.storage_min
@@ -57,6 +44,22 @@ class Item < ApplicationRecord
       end
     end
     still_good
+  end
+
+private
+
+def storage_min?! #returns true if storage_min exists
+  !!item_type.storage_min
+end
+
+  def expiration_min #entering the min range of expiration
+    if item_type.storage_min
+      Chronic.parse("#{item_type.storage_min} from item.date_stored")
+    end
+  end
+
+  def expiration_max #maximum range
+    Chronic.parse("#{item_type.storage_max} from item.date_stored")
   end
 
 end

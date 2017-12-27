@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227024935) do
+ActiveRecord::Schema.define(version: 20171227225837) do
 
   create_table "freezers", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20171227024935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_type_id"
+    t.datetime "expiration_max"
+    t.datetime "expiration_min"
   end
 
   create_table "notes", force: :cascade do |t|
