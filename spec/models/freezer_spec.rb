@@ -16,7 +16,6 @@ require 'pry'
           freezer_type: Faker::GameOfThrones.house
         )
 
-
       10.times do
         ItemType.create(
           title: Faker::Dune.character,
