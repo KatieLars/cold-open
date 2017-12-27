@@ -46,6 +46,6 @@ RSpec.describe User, type: :model do
   it "has many item types" do
     expect(@user.item_types.count).to eq(2)
   end
-  end
+
 
 end
