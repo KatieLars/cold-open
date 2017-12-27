@@ -3,18 +3,19 @@ require 'pry'
 
   RSpec.describe Freezer, type: :model do
     before(:each) do
-      @user = User.create(
-        username: "admin",
-        password: "admin",
-        email: "admin@gmail.com"
-      )
-
       3.times do
-        Freezer.create(
+        User.create(
+          username: Faker::StarWars.character,
+          password: Faker::StarWars.vehicle,
+          email: "#{Faker::Lovecraft.deity}@gmail.com"
+        )
+      end
+
+        @freezer = Freezer.create(
           name: Faker::LordOfTheRings.location,
           freezer_type: Faker::GameOfThrones.house
         )
-      end
+
 
       10.times do
         ItemType.create(
@@ -24,23 +25,19 @@ require 'pry'
         )
       end
 
-      @item = @user.items.create(item_type_id: ItemType.first.id, freezer_id: Freezer.first.id)
-      @item2 = @user.items.create(item_type_id: ItemType.second.id, freezer_id: Freezer.second.id)
-
+      @item = @freezer.items.create(item_type_id: ItemType.first.id)
+      @item.users << User.first
+      @item2 = @freezer.items.create(item_type_id: ItemType.second.id)
+      @item2.users << User.second
     end
 
     it "has many items" do
-      expect(@user.items.count).to eq(2)
+      expect(@freezer.items.count).to eq(2)
     end
 
-    it "has many freezers through items" do
-      expect(@user.freezers.count).to eq(2)
+    it "has many users through items" do
+      expect(@freezer.users.count).to eq(2)
     end
 
-    it "has many notes" do
-      @user.notes.create(item_id: @item.id)
-      @user.notes.create(item_id: @item2.id)
-      expect(@user.notes.count).to eq(2)
-    end
 
   end
