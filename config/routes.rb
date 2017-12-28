@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :items, only: [:create, :update, :destroy]
   resources :freezers, only: [:create, :update, :destroy]
+  resources :users, only: [:new, :create, :update, :edit, :destroy]
 
   resources :users, only: [:home] do
     resources :freezers, only: [:index, :new, :edit, :show]

@@ -29,15 +29,13 @@ class ItemsController < ApplicationController
 
   def expiring_this_week #users/1/items/expiring_this_week
     #displays a list of foods expiring in the next week
-    #has options to show food expiring according to custom selected dates
-    #Pre-selected options: 1 month, 2 months, 3 months, 4 months, 6 months, 1 year
   end
 
   def expiring_this_month #nested
   end
 
   def expired #nested
-    
+
   end
 
 

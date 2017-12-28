@@ -1,7 +1,7 @@
 <nav class="">
   <%if logged_in?%>
   <ul>
-  <%=link_to "<%=current_user.username%> Home", user_home_path(current_user)%>
+  <%=link_to "#{current_user.username} Home", user_home_path(current_user)%>
     <li> <%= link_to "Freezers", freezers_path %></li>
     <li> <%= link_to "Items", items_path %></li>
     <li> <%= link_to "Items by Type", items_type_path%></li>
