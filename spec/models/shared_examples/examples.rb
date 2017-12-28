@@ -27,4 +27,6 @@ User.first.items.create(title: "peas", item_type_id: 1, freezer_id: 2, date_stor
 User.first.items.create(title: "cranberry pie", item_type_id: 2, freezer_id: 3, date_stored: "Sat, 21 Jan 2017".to_datetime)
 User.first.items.create(title: "broccoli", item_type_id: 1, freezer_id: 1, date_stored: "Fri, 13 Jan 2017".to_datetime)
 
-end
+User.first.notes.create(content: "blahblah", item_id: 1)
+User.second.notes.create(content: "so cool", item_id: 2)
+User.furst.notes.create(content: "beepboop", item_id: 1)
