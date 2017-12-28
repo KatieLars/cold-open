@@ -32,7 +32,7 @@ User.first.items.create(title: "apple pie", item_type_id: 2, freezer_id: 2, date
 User.first.items.create(title: "cranberry pie", item_type_id: 2, freezer_id: 3, date_stored: Time.now.months_ago(8)) #expired
 #1-2 mos
 User.first.items.create(title: "peas", item_type_id: 1, freezer_id: 2, date_stored: Time.now.months_ago(3)) #expired
-User.first.items.create(title: "broccoli", item_type_id: 1, freezer_id: 1, date_stored: Time.now.weeks_ago(2)) #still_good
+User.second.items.create(title: "broccoli", item_type_id: 1, freezer_id: 1, date_stored: Time.now.weeks_ago(2)) #still_good
 
 #3 notes
 User.first.notes.create(content: "blahblah", item_id: 1)
