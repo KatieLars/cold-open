@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :items
   resources :freezers
   resources :users
-  get '/users/:id/home' => 'users#home'
+  get '/users/:id/home' => 'users#home', as: 'user_home'
 
   get '/signin' => "sessions#new", as: 'signin'
   post '/signin' => "sessions#create"

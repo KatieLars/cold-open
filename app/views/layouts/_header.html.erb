@@ -1,15 +1,14 @@
 <nav class="">
-  <%=link_to "Store Home", store_path%>
-  <% if !!@cart %>
-    <li> <%= link_to "Cart", cart_path(current_cart) %></li>
-  <% end %>
-
-  <%if user_signed_in?%>
-    <li>Signed in as <%=current_user.email%></li>
+  <%if logged_in?%>
+  <ul>
+  <%=link_to "<%=current_user.username%> Home", user_home_path(current_user)%>
+    <li> <%= link_to "Freezers", freezers_path %></li>
+    <li> <%= link_to "Items", items_path %></li>
+    <li> <%= link_to "Items by Type", items_type_path%></li>
+    <li> <%= link_to "Expiring This Week", items_expire_week_path%></li>
+    <li> <%= link_to "Expiring This Month", items_expire_month_path%></li>
+    <li> <%= link_to "Expired", items_expired_path%></li>
     <li><%=link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
-    <%if current_user.current_cart%>
-      <li><%= link_to "Cart", cart_path(current_user.current_cart)%>
-    <%end%>
  <%else%>
     <li><%= link_to "Sign In", signin_path%></li>
     <li><%= link_to "Sign Up", new_user_path%></li>
