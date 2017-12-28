@@ -25,7 +25,7 @@ User.second.items.create(title: "curry", item_type_id: 4, freezer_id: 3, date_st
 User.first.items.create(title: "beef patties", item_type_id: 3, freezer_id: 1, date_stored: Time.now.months_ago(4)) #still good
 User.first.items.create(title: "beef stew", item_type_id: 3, freezer_id: 2, date_stored: Time.now.months_ago(6)) #expiration_zone, 1 mo
 #1 mos
-User.second.items.create(title: "broth", item_type_id: 5, freezer_id: 2, date_stored: Time.now.days_ago(25)) #in 1 week
+User.second.items.create(title: "broth", item_type_id: 5, freezer_id: 1, date_stored: Time.now.days_ago(25)) #in 1 week
 User.first.items.create(title: "cow parts", item_type_id: 5, freezer_id: 1, date_stored: Time.now.weeks_ago(1)) #still good, expire in one mo
 #2-4 mos
 User.first.items.create(title: "apple pie", item_type_id: 2, freezer_id: 2, date_stored: Time.now.months_ago(3)) #expiration zone, 1 mo
