@@ -4,55 +4,38 @@ class Item < ApplicationRecord
   has_many :user_items
   has_many :users, through: :user_items
   has_many :notes #wiredn
-  before_save :expiration_max
-  before_save :expiration_min, if: :storage_min?
+  before_save :expiration_max_set
+  before_save :expiration_min_set, if: :storage_min?
 
-  def expiration_min #entering the min range of expiration
+  def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
-    Chronic.parse("#{item_type.storage_min} from self.date_stored")
-    #self.save
+    self.expiration_min = date_stored.months_since(item_type.storage_min.to_i)
   end
 
-  def expiration_max #maximum range
+  def expiration_max_set #maximum range
     #problematic setter method
-    Chronic.parse("#{item_type.storage_max} from self.date_stored")
-    #self.save
+    self.expiration_max = date_stored.months_since(item_type.storage_max.to_i)
   end
-  exp max = April 27, 2018
-  stored =
 
-  def self.expired   #items are expired if today's date is past the max storage date
+  def self.expiration_one_month
+    where("expiration_max > ? AND expiration_max < ?", Time.now, Time.now.months_since(1))
+    #THE FUTURE DATES ARE HIGHER IN VALUE THAN PAST DATES
+  end
+
+  def self.expiration_this_week
+    where("expiration_max > ? AND expiration_max < ?", Time.now, Time.now.weeks_since(1))
+  end
+
+  def self.expired #items are expired if today's date is past the max storage date
     where("expiration_max < ?", Time.now)
-    #expired_foods = []
-    #all.each {|item| expired_foods << item if item.expiration_range_ending < Time.now}
-    #expired_foods
   end
 
-  def self.expiring_soon #lists all items between storage min and storage_max
-    #where("expiration_max > ? AND expiration_min < ?", Time.now, Time.now)
-
-    expiring_foods = []
-#Client.where("orders_count = ? AND locked = ?", params[:orders], false)
-    #greater times are future times
-    all.each do |item|
-      if item.item_type.storage_min #if storage min value is present
-        expiring_foods << item if Time.now < item.expiration_max && Time.now > item.expiration_min
-      else
-        expiring_foods << item if Time.now < item.expiration_max
-      end
-    end
-    expiring_foods
+  def self.expiration_zone #lists all items between storage min and storage_max
+    where("expiration_max > ? AND expiration_min < ?", Time.now, Time.now)
   end
 
-
-  def self.still_good
-    still_good = []
-    all.each do |item|
-      if !self.expiring_soon.include?(item) && !self.expired.include?(item)
-        still_good << item
-      end
-    end
-    still_good
+  def self.still_good #hasn't reached expiration_min yet
+    where.not("id IN (?) OR id IN (?)", self.expiration_zone.pluck(:id), self.expired.pluck(:id))
   end
 
 private
