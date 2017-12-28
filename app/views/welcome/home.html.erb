@@ -1,18 +1,17 @@
 
 <div class="theme-showcase" role="main">
 
-  <div class="left-pic">
+  <div class="left">
     <img src="http://4.bp.blogspot.com/_QJDOQQGmSDU/TMPSLK9uQNI/AAAAAAAAEgI/hqDDaZbJzwQ/s1600/G-516+-+DANA+closes+fridge,+screaming.jpg" width="550" height="325">
   </div>
 
-  <div class="right-info">
+  <div class="right">
     <h1>COLD OPEN</h1>
     <h3>What's in your freezer?</h3>
-    <div class="right-info">
-      <%= link_to "Sign In" %> | <%= link_to "Sign Up" %> | <%= link_to "Learn More"%>
-
-    </div>
-
+    <p><%= link_to "Learn More"%></p>
   </div>
+    <div class="bottom-center">
+      <%= link_to "Sign In", signin_path %> | <%= link_to "Sign Up", new_user_path %>
+    </div>
 
 </div>
