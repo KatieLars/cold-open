@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     #goes to user home page
     #updates user
 
-  def home
+  def home #distinct from show path, which is the user's account
     #displays:
       #food that expires this week
       #links to freezers

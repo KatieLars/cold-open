@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'welcome#home'
+  get '/about' => 'welcome#about'
   get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/google/callback' => 'sessions#create'
 
   resources :items
   resources :freezers
   resources :users
+  get '/users/:id/home' => 'users#home'
 
   get '/signin' => "sessions#new", as: 'signin'
   post '/signin' => "sessions#create"
