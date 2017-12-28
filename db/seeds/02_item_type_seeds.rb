@@ -58,19 +58,10 @@ item_types = [
   #creates item types
   item_types.each do |item_type|
     types = item_type.split(" - ")#splits string into array ["Ham, cooked", "1-2 mos"]
-    range = types[1].split("-")
-    if range.count == 2
-      range.collect do |t|
-        if t.include?("mos")
-          range[1] = t.gsub("mos", "months")
-        else
-          range[0] = t + " months"
-        end
-      end
-    else
-      range[0] = range[0].gsub("mos", "months")
+    range = types.pop.split("-")
+    range.collect do |t|
+      t.gsub!(" mos", "") if t.include?(" mos")
     end
-    types.pop
     types += range
     if types.count > 2
       ItemType.create(title: types[0], storage_min: types[1], storage_max: types[2])

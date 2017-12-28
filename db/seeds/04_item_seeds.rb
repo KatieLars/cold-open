@@ -4,7 +4,7 @@
 10.times do
   item = Item.new(
     title: Faker::Food.dish,
-    date_stored: Faker::Date.between(1.year.ago, Date.today)
+    date_stored: Faker::Date.between(1.year.ago, Date.tomorrow)
   )
 
   item.freezer_id = rand(Freezer.first.id..Freezer.last.id)
