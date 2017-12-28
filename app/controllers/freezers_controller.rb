@@ -33,7 +33,4 @@ class FreezersController < ApplicationController
     #redirects to User home page
   end
 
-  def top_10_expiration #users/1/freezers/expirations
-    #displays top 10 items expiring with the ones expiring sooner first 
-  end
 end
