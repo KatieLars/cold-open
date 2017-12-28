@@ -1,43 +1,22 @@
 require 'rails_helper'
+require 'pry'
+
 
 RSpec.describe Item, type: :model do
   before(:each) do
-  3.times do
-    User.create(
-      username: Faker::StarWars.character,
-      password: Faker::StarWars.vehicle,
-      email: "#{Faker::Lovecraft.deity}@gmail.com"
-    )
-  end
-
-  3.times do
-    Freezer.create(
-      name: Faker::LordOfTheRings.location,
-      freezer_type: Faker::GameOfThrones.house
-    )
-  end
-
-  10.times do
-    ItemType.create(
-      title: Faker::Dune.character,
-      storage_min: "#{rand(1..4)}",
-      storage_max: "#{rand(5..10)}"
-    )
-  end
-
-  @item = User.first.items.create(title: "Hot Dogs", item_type_id: ItemType.first.id, freezer_id: Freezer.first.id)
+  @item = Item.first
   @item.users << User.second
 
   User.first.notes.create(item_id: @item.id)
   User.second.notes.create(item_id: @item.id)
 end
 
-
 it "has many users" do
   expect(@item.users.count).to eq(2)
 end
 
 it "belongs to a freezer" do
+  binding.pry
   expect(@item.freezer.name).to eq(Freezer.first.name)
 end
 
@@ -50,7 +29,8 @@ it "belongs to an item type" do
 end
 
 it "has a maximum expiration date" do
-  expeect(@item.expiration_max)
+  max_storage = @item.item_type.storage_max.to_i
+  expect(@item.expiration_max).to eq(@item.date_stored.months_since(max_storage))
 end
 
 describe "::expired" do
