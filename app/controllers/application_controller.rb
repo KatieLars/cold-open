@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if params[:user_id]
-      @current_user ||= User.create(id: params[:user_id])
+      @current_user ||= User.find_or_create_by(id: params[:user_id])
     end
   end
 
