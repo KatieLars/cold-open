@@ -7,8 +7,6 @@ RSpec.describe Item, type: :model do
   @item = Item.first
   @item.users << User.second
 
-  User.first.notes.create(item_id: @item.id)
-  User.second.notes.create(item_id: @item.id)
 end
 
 it "has many users" do
@@ -24,7 +22,7 @@ it "has many notes" do
 end
 
 it "belongs to an item type" do
-  expect(@item.item_type.title).to eq(ItemType.third.title)
+  expect(@item.item_type.title).to eq(ItemType.fourth.title)
 end
 
 it "has a maximum expiration date" do
@@ -33,9 +31,9 @@ it "has a maximum expiration date" do
 end
 
 describe "::expired" do
-binding.pry
+
   it "returns all item beyond their maximum storage date" do
-      items = ["pizza", "Manwich", "peas", "cranberry pie"]
+      items = ["pizza", "Manwich", "cranberry pie", "peas"]
       expect(Item.expired.pluck(:title)).to eq(items)
   end
 end
@@ -43,13 +41,13 @@ end
 describe "::expiration_zone" do
   it "returns items between their storage min and storage max dates" do
     items = ["beef stew", "apple pie"]
-    expect(Item.expiring_soon.pluck(:title)).to eq(items)
+    expect(Item.expiration_zone.pluck(:title)).to eq(items)
   end
 end
 
 describe "::still_good" do
   it "return items that have not yet reached their storage min" do
-    items = ["broccoli", "casserole", "beef patties"]
+    items = ["casserole", "curry", "beef patties", "broth", "cow parts", "broccoli"]
     expect(Item.still_good.pluck(:title)).to eq(items)
   end
 end
@@ -57,14 +55,14 @@ end
 describe "::expiration_this_week" do
   it "returns a list of items that are expiring this week" do
     items = ["broth"]
-    expect(Item.still_good.pluck(:title)).to eq(items)
+    expect(Item.expiration_this_week.pluck(:title)).to eq(items)
   end
 end
 
 describe "::expiration_one_month" do
   it "returns a list of items expiring in the next month" do
-    items = ["beef stew", "curry", "apple pie"]
-    expect(Item.still_good.pluck(:title)).to eq(items)
+    items = ["beef stew", "broth", "cow parts", "apple pie"]
+    expect(Item.expiration_one_month.pluck(:title)).to eq(items)
   end
 end
 
