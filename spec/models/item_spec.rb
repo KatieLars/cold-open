@@ -16,7 +16,6 @@ it "has many users" do
 end
 
 it "belongs to a freezer" do
-  binding.pry
   expect(@item.freezer.name).to eq(Freezer.first.name)
 end
 
@@ -25,7 +24,7 @@ it "has many notes" do
 end
 
 it "belongs to an item type" do
-  expect(@item.item_type.title).to eq(ItemType.first.title)
+  expect(@item.item_type.title).to eq(ItemType.third.title)
 end
 
 it "has a maximum expiration date" do
@@ -34,13 +33,14 @@ it "has a maximum expiration date" do
 end
 
 describe "::expired" do
+
   it "returns all item beyond their maximum storage date" do
-      items = ["Captain Cook", "Captain Kidd", "Samuel Axe"]
+      items = ["Chilli con carne", "Vegetable Soup", "Pizza"]
       expect(Item.expired.pluck(:title)).to eq(items)
   end
 end
 
-describe "::expiring_soon" do
+describe "::expiration_zone" do
   it "returns items between their storage min and storage max dates" do
     items = []
     expect(Item.expiring_soon.pluck(:title)).to eq(items)
@@ -51,6 +51,18 @@ describe "::still_good" do
   it "return items that have not yet reached their storage min" do
     items = []
     expect(Item.still_good.pluck(:title)).to eq(items)
+  end
+end
+
+describe "::expiration_this_week" do
+  it "returns a list of items that are expiring this week" do
+
+  end
+end
+
+describe "::expiration_one_month" do
+  it "returns a list of items expiring this month" do
+
   end
 end
 
