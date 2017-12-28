@@ -33,7 +33,7 @@ class Item < ApplicationRecord
     where("expiration_max > ? AND expiration_min < ?", Time.now, Time.now)
   end
 
-  def self.still_good #hasn't reached expiration_min yet
+  def self.still_good #hasn't reached expiration_min yet or max if only max
     where.not("id IN (?) OR id IN (?)", self.expiration_zone.pluck(:id), self.expired.pluck(:id))
   end
 
