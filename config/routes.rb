@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/google/callback' => 'sessions#create'
 
-  resources :items
-  resources :freezers
-  resources :users
+  resources :items, only: [:create, :update, :destroy]
+  resources :freezers, only: [:create, :update, :destroy]
+  
+  resources :users, only: [:home] do
+    resources :freezers, only: [:index, :new, :edit, :show]
+    resources :items, only: [:index, :new, :edit, :show]
+  end
+
   get '/users/:id/home' => 'users#home', as: 'user_home'
 
   get '/signin' => "sessions#new", as: 'signin'
