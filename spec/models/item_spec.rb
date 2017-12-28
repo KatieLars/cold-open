@@ -33,9 +33,9 @@ it "has a maximum expiration date" do
 end
 
 describe "::expired" do
-
+binding.pry
   it "returns all item beyond their maximum storage date" do
-      items = ["Chilli con carne", "Vegetable Soup", "Pizza"]
+      items = ["casserole", "beef stew", "pizza", "Manwich", "peas", "cranberry pie", "broccoli"]
       expect(Item.expired.pluck(:title)).to eq(items)
   end
 end
@@ -49,20 +49,22 @@ end
 
 describe "::still_good" do
   it "return items that have not yet reached their storage min" do
-    items = []
+    items = ["beef patties", "apple pie", "cow parts"]
     expect(Item.still_good.pluck(:title)).to eq(items)
   end
 end
 
 describe "::expiration_this_week" do
   it "returns a list of items that are expiring this week" do
-
+    items = ["broth"]
+    expect(Item.still_good.pluck(:title)).to eq(items)
   end
 end
 
 describe "::expiration_one_month" do
-  it "returns a list of items expiring this month" do
-
+  it "returns a list of items expiring in the next month" do
+    items = ["broth", "curry"]
+    expect(Item.still_good.pluck(:title)).to eq(items)
   end
 end
 
