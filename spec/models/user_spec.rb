@@ -19,7 +19,6 @@ RSpec.describe User, type: :model do
   end
 
   it "has many item types" do
-    binding.pry
     expect(@user.item_types.count).to eq(5)
   end
 
