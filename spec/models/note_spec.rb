@@ -20,8 +20,8 @@ RSpec.describe Note, type: :model do
     10.times do
       ItemType.create(
         title: Faker::Dune.character,
-        storage_min: "#{rand(1..4)} months",
-        storage_max: "#{rand(5..10)} months"
+        storage_min: "#{rand(1..4)}",
+        storage_max: "#{rand(5..10)}"
       )
     end
 

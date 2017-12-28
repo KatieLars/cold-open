@@ -20,8 +20,8 @@ RSpec.describe Item, type: :model do
   10.times do
     ItemType.create(
       title: Faker::Dune.character,
-      storage_min: "#{rand(1..4)} months",
-      storage_max: "#{rand(5..10)} months"
+      storage_min: "#{rand(1..4)}",
+      storage_max: "#{rand(5..10)}"
     )
   end
 
@@ -47,6 +47,10 @@ end
 
 it "belongs to an item type" do
   expect(@item.item_type.title).to eq(ItemType.first.title)
+end
+
+it "has a maximum expiration date" do
+  expeect(@item.expiration_max)
 end
 
 describe "::expired" do

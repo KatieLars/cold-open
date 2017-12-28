@@ -19,7 +19,6 @@ class Item < ApplicationRecord
 
   def self.expiration_one_month
     where("expiration_max > ? AND expiration_max < ?", Time.now, Time.now.months_since(1))
-    #THE FUTURE DATES ARE HIGHER IN VALUE THAN PAST DATES
   end
 
   def self.expiration_this_week

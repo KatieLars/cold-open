@@ -20,8 +20,8 @@ RSpec.describe ItemType, type: :model do
 
       @item_type = ItemType.create(
         title: Faker::Dune.character,
-        storage_min: "#{rand(1..4)} months",
-        storage_max: "#{rand(5..10)} months"
+        storage_min: "#{rand(1..4)}",
+        storage_max: "#{rand(5..10)}"
       )
 
     @item = @item_type.items.create(freezer_id: Freezer.first.id)
