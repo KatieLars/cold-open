@@ -38,9 +38,14 @@ body {
 
 .right {
   float: left;
-
   right: 10px;
    width: 50%;
    padding: 10px;
    text-align: center;
+}
+
+.banner {
+
+  text-align: center;
+
 }
