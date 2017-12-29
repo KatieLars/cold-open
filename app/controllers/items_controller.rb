@@ -27,19 +27,13 @@ class ItemsController < ApplicationController
     #redirects to freezer path belonging to th item just destroyed
   end
 
-  def expiring_this_week #users/1/items/expiring_this_week
-    #displays a list of foods expiring in the next week
-  end
 
   def expiring_this_month #nested
   end
 
-  def expired #nested
-
-  end
 
   def items_by_type
-    
+
   end
 
 end
