@@ -1,14 +1,14 @@
 <nav class="">
   <%if logged_in?%>
 
-  <%=link_to "#{current_user.username} Home", user_home_path(current_user)%>
-    <li> <%= link_to "Freezers", freezers_path %></li>
-    <li> <%= link_to "Items", items_path %></li>
-    <li> <%= link_to "Items by Type", items_type_path%></li>
-    <li> <%= link_to "Expiring This Week", items_expire_week_path%></li>
-    <li> <%= link_to "Expiring This Month", items_expire_month_path%></li>
-    <li> <%= link_to "Expired", items_expired_path%></li>
-    <li><%=link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
+  <%=link_to "Home", user_home_path(current_user)%>
+    <li> <%= link_to "Freezers", user_freezers_path(current_user) %></li>
+    <li> <%= link_to "Items", user_items_path(current_user) %></li>
+    <li> <%= link_to "Items by Type", user_items_type_path(current_user)%></li>
+    <li> <%= link_to "Expiring This Week", user_items_expire_week_path(current_user)%></li>
+    <li> <%= link_to "Expiring This Month", user_items_expire_month_path(current_user)%></li>
+    <li> <%= link_to "Expired", user_items_expired_path(current_user)%></li>
+    <li><%=link_to "Sign out", signout_path, method: "delete"%></li>
  <%else%>
     <%= link_to "Sign In", signin_path%></li> |
     <%= link_to "Sign Up", new_user_path%>
