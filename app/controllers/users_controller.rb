@@ -12,11 +12,15 @@ class UsersController < ApplicationController
     #shows logged in user information and option to edit
   end
 
+  def new #displays new user sign up
+  end
+
   def create
     #creates user and logs them in
   end
 
   def edit
+
     #displays edit form
   end
 
