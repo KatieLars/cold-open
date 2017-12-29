@@ -60,6 +60,7 @@ body {
 .banner {
   text-align: center;
   padding: 10px;
+
 }
 
 .points {
@@ -67,8 +68,11 @@ body {
 }
 
 .footer {
-   position : absolute;
-   bottom : 0;
-   height : 40px;
-   margin-top : 40px;
- }
+  position: absolute;
+  text-align: center;
+  bottom : 0;
+  height : 40px;
+  margin-top : 40px;
+  width: 100%;
+  border: 3px solid green;
+}
