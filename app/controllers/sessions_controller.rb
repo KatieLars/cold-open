@@ -5,10 +5,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #logs a user in (creates session)
+    #request.env['omniauth.auth']
+    #if auth_hash = request.env["omniauth.auth"]
   end
 
   def destroy
     #Signs a user out
+  end
+
+  private
+
+  def auth
+    request.env['omniauth.auth']
   end
 end
