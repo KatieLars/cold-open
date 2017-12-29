@@ -1,19 +1,13 @@
 <h2>Sign In</h2>
 
 <%= form_for :user do |f|%>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.email_field :username %>
-  </div>
+    <%= f.label :email %><br />
+    <%= f.email_field :email %><br />
 
-  <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <%= f.password_field :password %>
 
-  <div class="actions">
     <%= f.submit "Sign In" %>
-  </div>
 <% end %></br>
 
 <%= link_to image_tag("facebook_login_btn.jpeg", height: "44.4", width: "181.6"), "/auth/facebook" %><br></br>
