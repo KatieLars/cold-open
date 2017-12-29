@@ -1,5 +1,5 @@
-<%= link_to "Add a New Freezer", new_user_freezer_path(user) %>&emsp;|&emsp;
-<%= link_to "Add a New Items", new_user_item_path(user) %>&emsp;|&emsp;
+<%= link_to "Add a New Freezer", new_user_freezer_path(current_user) %>&emsp;|&emsp;
+<%= link_to "Add a New Items", new_user_item_path(current_user) %>&emsp;|&emsp;
 <%= link_to "About", about_path%>
 <%if user.admin?%>
   <%= link_to "Create New Type", new_item_type_path%>
