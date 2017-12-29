@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
     #shows logged in user information and option to edit
   end
 
