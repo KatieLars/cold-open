@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
   #creates a new user and logs them in
-
-  #following actions happen when logged in
-    #goes to user home page
-    #updates user
-
   def home #distinct from show path, which is the user's account
     @user = User.find_by(id: params[:id])
   end
