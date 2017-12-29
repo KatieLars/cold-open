@@ -2,3 +2,13 @@
   <h1>Welcome <%=@user.username.capitalize%>!</h1>
   <p><%=image_tag(@user.image, width: "10%", height: "10%") if @user.image%></p>
 </div>
+
+<div class="left">
+  <h2><strong>Expired</strong></h2>
+    <ol>
+      <%@expired.each do |item|%>
+        <li><h4><%=link_to item.title, user_item_path(@user, item)%></h4></br>
+          <em><%=item.expiration_max%></em></li>
+        <%end%>
+      </ol>
+</div>

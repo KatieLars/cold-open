@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   #creates a new user and logs them in
   def home #distinct from show path, which is the user's account
     @user = User.find_by(id: params[:id])
-    @expired_items = @user.items.expired
+    @expired = @user.items.expired
     @expiration_week = @user.items.expiration_this_week
   end
 
