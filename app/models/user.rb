@@ -12,6 +12,7 @@ class User < ApplicationRecord
       user.uid = auth[:uid]
       user.username = auth[:info][:name]
       user.password = SecureRandom.hex
+      user.image = auth[:info][:image]
       user.save!
     end
   end
