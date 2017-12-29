@@ -10,7 +10,7 @@
     <%= link_to "Expired", user_items_expired_path(current_user)%>&emsp;|&emsp;
     <%=link_to "Sign out", signout_path, method: "delete"%>
  <%else%>
-    <%= link_to "Sign In", signin_path%></li> |
+    <%= link_to "Sign In", signin_path%></li>&emsp;|&emsp;
     <%= link_to "Sign Up", new_user_path%>
  <%end%>
 
