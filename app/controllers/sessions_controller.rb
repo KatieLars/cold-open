@@ -1,4 +1,4 @@
-def SessionsController < ApplicationController
+class SessionsController < ApplicationController
 
   def new
     #displays login form if not already logged in
