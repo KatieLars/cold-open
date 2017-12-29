@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :notes #wired
 
   def self.from_omniauth(auth) #passes in a hash
-    where(provider: auth[:provider], uid: auth[:uid]).first_or_initialize.tap do |user|
+    where(email: auth[:info][:email]).first_or_initialize.tap do |user|
       user.email = auth[:info][:email]
       user.uid = auth[:uid]
       user.username = auth[:info][:name]

@@ -6,9 +6,8 @@ class UsersController < ApplicationController
     #updates user
 
   def home #distinct from show path, which is the user's account
-    #displays:
-      #food that expires this week
-      #links to freezers
+
+    @user = User.find_by(id: params[:id])
   end
 
   def show
