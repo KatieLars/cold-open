@@ -4,9 +4,11 @@ class SessionsController < ApplicationController
     #displays login form if not already logged in
   end
 
-  def create
-    #request.env['omniauth.auth']
-    #if auth_hash = request.env["omniauth.auth"]
+  def create #creates a new user session
+    if auth_hash = request.env["omniauth.auth"]
+      user = User.from_omniauth(auth_hash)
+      session[:user_id] = user.id
+      redirect_to user_home_path(user)
   end
 
   def destroy

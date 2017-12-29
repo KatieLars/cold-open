@@ -6,14 +6,12 @@ class User < ApplicationRecord
   has_many :freezers, -> { distinct }, through: :items
   has_many :notes #wired
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      #user.provider = auth.provider
-      user.email = auth.info.email
-      user.uid = auth.uid
-      user.username = auth.info.name
-      #user.oauth_token = auth.credentials.token
-      #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+  def self.from_omniauth(auth) #passes in a hash
+    where(provider: auth[:provider], uid: auth[:uid]).first_or_initialize.tap do |user|
+      user.email = auth[:info][:email]
+      user.uid = auth[:uid]
+      user.username = auth[:info][:name]
+      user.password = SecureRandom.hex
       user.save!
     end
   end
