@@ -9,6 +9,14 @@ class SessionsController < ApplicationController
       user = User.from_omniauth(auth_hash)
       session[:user_id] = user.id
       redirect_to user_home_path(user)
+    else
+      user = User.find_by(username: params[:username])
+      if user && user.authenticate([params[:password])
+        session[:user_id] = user.id
+        redirect_to user_home_path(user)
+      else
+        render 'sessions/new'
+      end
   end
 
   def destroy
