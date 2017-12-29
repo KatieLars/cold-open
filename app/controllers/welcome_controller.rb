@@ -1,11 +1,12 @@
 class WelcomeController < ApplicationController
 
   def home
-    #sign in, sign up, or reroutes to user homepage if already logged in
+    if logged_in?
+      redirect_to user_home_path(current_user)
+    end
   end
 
   def about
-    #links to about page
   end
 
 end
