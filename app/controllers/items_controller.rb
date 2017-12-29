@@ -38,5 +38,8 @@ class ItemsController < ApplicationController
 
   end
 
+  def items_by_type
+    
+  end
 
 end
