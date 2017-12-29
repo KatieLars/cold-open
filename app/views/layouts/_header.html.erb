@@ -5,10 +5,8 @@
     <%= link_to "Freezers", user_freezers_path(current_user) %>&emsp;|&emsp;
     <%= link_to "Items", user_items_path(current_user) %>&emsp;|&emsp;
     <%= link_to "Items by Type", user_items_type_path(current_user)%>&emsp;|&emsp;
-    <%= link_to "Expiring This Week", user_items_expire_week_path(current_user)%>&emsp;|&emsp;
     <%= link_to "Expiring This Month", user_items_expire_month_path(current_user)%>&emsp;|&emsp;
-    <%= link_to "Expired", user_items_expired_path(current_user)%>&emsp;|&emsp;
-    <%=link_to "Sign out", signout_path, method: "delete"%>
+    <%= link_to "Sign out", signout_path, method: "delete"%>
  <%else%>
     <%= link_to "Sign In", signin_path%></li>&emsp;|&emsp;
     <%= link_to "Sign Up", new_user_path%>

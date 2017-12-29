@@ -3,12 +3,37 @@
   <p><%=image_tag(@user.image, width: "10%", height: "10%") if @user.image%></p>
 </div>
 
-<div class="left">
+<div class="left-expired">
   <h2><strong>Expired</strong></h2>
+
+  <%if @expired.any?%>
+  <div class="points">
     <ol>
       <%@expired.each do |item|%>
-        <li><h4><%=link_to item.title, user_item_path(@user, item)%></h4></br>
-          <em><%=item.expiration_max%></em></li>
+        <li><%=link_to item.title, user_item_path(@user, item)%> -
+          <em><%=format_date(item.expiration_max)%></em></li>
         <%end%>
       </ol>
+  </div>
+    <%else%>
+      <h2>No expired foods!</h2>
+    <%end%>
+  </div>
+
 </div>
+
+<div class="right-expiring">
+  <h2><strong>Expiring this week</strong></h2>
+    <%if @expiration_week.any?%>
+      <div class="points">
+      <ol>
+        <%@expiration_week.each do |item|%>
+          <li><%= link_to item.title, user_item_path(@user,item)%>
+            <em><%=format_date(item.expiration_max)%></em></li>
+            <%end%>
+          </ol>
+      </div>
+    <%else%>
+      <h4><em>You have no foods expiring this week</em></h4>
+    <%end%>
+  </div>

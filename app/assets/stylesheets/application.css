@@ -35,12 +35,26 @@ body {
   float: left;
 }
 
+.left-expired {
+  float: left;
+  width: 50%;
+  text-align: center;
+
+
+}
+
 .right {
   float: left;
   right: 10px;
    width: 50%;
    padding: 10px;
    text-align: center;
+}
+
+.right-expiring {
+  float: right;
+  text-align: center;
+  width: 49%;
 }
 
 .banner {
