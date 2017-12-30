@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    
     #displays edit form
   end
 
