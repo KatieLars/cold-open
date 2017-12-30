@@ -1,6 +1,6 @@
 <div class="banner">
-  <h1>Welcome <%=@user.username.capitalize%>!</h1>
-  <p><%=image_tag(@user.image, width: "10%", height: "10%") if @user.image%></p>
+  <h1>Welcome <%=current_user.username.capitalize%>!</h1>
+  <p><%=image_tag(current_user.image, width: "10%", height: "10%") if current_user.image%></p>
 </div>
 
 <div class="left-expired">
@@ -10,7 +10,7 @@
   <div class="points">
     <ol>
       <%@expired.each do |item|%>
-        <li><%=link_to item.title, user_item_path(@user, item)%> -
+        <li><%=link_to item.title, user_item_path(current_user, item)%> -
           <em><%=format_date(item.expiration_max)%></em></li>
         <%end%>
       </ol>
@@ -28,7 +28,7 @@
       <div class="points">
       <ol>
         <%@expiration_week.each do |item|%>
-          <li><%= link_to item.title, user_item_path(@user,item)%>
+          <li><%= link_to item.title, user_item_path(current_user,item)%>
             <em><%=format_date(item.expiration_max)%></em></li>
             <%end%>
           </ol>
