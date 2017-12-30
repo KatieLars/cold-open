@@ -1,14 +1,9 @@
 <div class="banner">
   <h1><%=current_user.username.capitalize%></h1>
-  <p><%=image_tag(@user.image, width: "10%", height: "10%") if @user.image%></p>
+  <p><%=image_tag(current_user.image, width: "10%", height: "10%") if current_user.image%></p>
   <p><strong>Email: </strong><%=current_user.email%></p>
   <p><strong>Username: </strong><%=current_user.username%></p>
-  <p><strong>Admin: </strong>
-    <%if current_user.admin?%>
-      Yes
-    <%else%>
-      No
-    <%end%></p>
+  <p><strong>Admin: </strong><%=admin_or_no%></p>
   <%=link_to "Edit User", edit_user_path(current_user)%>
 </div>
 

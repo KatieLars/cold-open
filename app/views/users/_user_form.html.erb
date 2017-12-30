@@ -1,9 +1,11 @@
 <%=form_for user do |f|%>
-  <%= f.label :title%><br/>
-    <%=f.text_field :title%><br></br>
+  <%= f.label "*Email: "%><br/>
+    <%=f.text_field :email%><br></br>
 
-    <%=f.label "Date Stored"%><br/>
-    <%=f.text_field :date_stored%><br></br>
+    <%=f.label "*Username: "%><br/>
+    <%=f.text_field :username%><br></br>
 
-    <%=f.submit%>
+    <%=f.label "Image(as link): "%><br/>
+    <%=f.text_field :image%><br></br>
+
 <%end%>
