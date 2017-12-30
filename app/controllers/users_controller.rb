@@ -20,10 +20,14 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
-    #displays edit form
+    #ADD ADMIN CHECKBOX
   end
 
   def update
+    raise params.inspect
+    @user = User.find_by(id: params[:id])
+    
+
     #updates user information
   end
 
