@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def logged_in?
+  def logged_in? #returns true if we can find a user
     !!current_user
   end
 

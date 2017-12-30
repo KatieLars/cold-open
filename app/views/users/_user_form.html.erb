@@ -1,11 +1,10 @@
 <%=form_for user do |f|%>
-  <%= f.label "*Email: "%><br/>
+  <sup>*</sup><%= f.label "Email: "%>
     <%=f.text_field :email%><br></br>
 
-    <%=f.label "*Username: "%><br/>
+    <sup>*</sup><%=f.label "Username: "%>
     <%=f.text_field :username%><br></br>
 
-    <%=f.label "Image(as link): "%><br/>
+    <%=f.label "Image(as link): "%>
     <%=f.text_field :image%><br></br>
-
 <%end%>

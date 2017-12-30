@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-#  before_action :authentication_required
+  before_action :authentication_required
 
   def home #done
     @user = User.find_by(id: params[:id])
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    @user = User.find_by(id: params[:id])
     #displays edit form
   end
 
