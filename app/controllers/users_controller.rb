@@ -13,15 +13,18 @@ class UsersController < ApplicationController
   end
 
   def new #displays new user sign up
+    @user = User.new
   end
 
   def create
+    @user = User.new(user_params)
+
+
     #creates user and logs them in
   end
 
   def edit
     @user = User.find_by(id: params[:id])
-    #ADD ADMIN CHECKBOX
   end
 
   def update
@@ -32,4 +35,9 @@ class UsersController < ApplicationController
     #updates user information
   end
 
+  private
+
+    def user_params
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :image, :admin)
+    end
 end
