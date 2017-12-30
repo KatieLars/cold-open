@@ -24,10 +24,9 @@ class UsersController < ApplicationController
       #need to raise any errors
       render 'new'
     end
-    #creates user and logs them in
   end
 
-  def edit #current_user instead of @user
+  def edit
   end
 
   def update
