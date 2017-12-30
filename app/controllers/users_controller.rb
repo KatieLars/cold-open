@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authentication_required
+  skip_before_action :authentication_required, only: [:new, :create]
 
   def home #done
     @user = User.find_by(id: params[:id])
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   def update
     raise params.inspect
     @user = User.find_by(id: params[:id])
-    
+
 
     #updates user information
   end
