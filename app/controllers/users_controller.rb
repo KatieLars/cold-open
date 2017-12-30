@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
-  #creates a new user and logs them in
-  def home #distinct from show path, which is the user's account
+  before_action :authentication_required
+  
+  def home
     @user = User.find_by(id: params[:id])
     @expired = @user.items.expired #list of expired items
     @expiration_week = @user.items.expiration_this_week
     @item = Item.new
   end
 
-  def show
-    @user = current_user
-    #shows logged in user information and option to edit
+  def show #done
   end
 
   def new #displays new user sign up
@@ -20,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+
     #displays edit form
   end
 
