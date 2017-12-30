@@ -23,19 +23,19 @@ class UsersController < ApplicationController
     #creates user and logs them in
   end
 
-  def edit
-    @user = User.find_by(id: params[:id])
+  def edit #current_user instead of @user
+
   end
 
   def update
-    raise params.inspect
-    @user = User.find_by(id: params[:id])
+    
 
 
     #updates user information
   end
 
   private
+
 
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :image, :admin)

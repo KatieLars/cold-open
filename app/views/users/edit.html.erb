@@ -1,9 +1,9 @@
 <div class="banner">
   <h1>Edit <%=current_user.username.capitalize%></h1>
 
-    <%=render 'user_form', user:@user%>
+    <%=render 'user_form', user:current_user%>
 
-  <%= button_to "Cancel", user_home_path(@user), {method: :get}%>
+  <%= button_to "Cancel", user_home_path(current_user), {method: :get}%>
   <p><sup>*</sup>Required field.</p>
 
 </div>
