@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   before_save :expiration_min_set, if: :storage_min?
   validates :date_stored, presence: true
   validates :title, presence: true
-  validates :expiration_max, presence: true
 
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
