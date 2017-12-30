@@ -10,10 +10,12 @@ module UsersHelper
 
   def user_errors(user)
     if user.errors.any?
-      user.errors.full_messages.each do |message|
+      user.errors.full_messages.e do |message|
         message
+        binding.pry
       end
     end
+    #THE RETURN VALUE OF THIS HELPER METhOD IS ACTUALLY AN ARRAY user.errors.full_messages
   end
 
 end
