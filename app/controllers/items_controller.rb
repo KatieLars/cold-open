@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def new #users/1/items/new
+    @item = Item.new
     #displays for for new item
   end
 
