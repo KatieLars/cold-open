@@ -2,11 +2,10 @@
   <sup>*</sup><%=f.label "Title: "%>
   <%=f.text_field :title%><br></br>
 
-  <%if storage_min_or_new_type(item_type)%>
-    <%=f.label "Storage Minimum (in months): "%>
-    <%=f.text_field :storage_min%></br>
-    <p><em>Time after which item may go bad</em></p>
-  <%end%>
+  <%=f.label "Storage Minimum (in months): "%>
+  <%=f.text_field :storage_min%></br>
+  <p><em>Time after which item may go bad</em></p>
+
 
   <sup>*</sup><%= f.label "Storage Maximum (in months): "%>
   <%=f.text_field :storage_max%></br>
