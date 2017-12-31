@@ -11,27 +11,25 @@ class UsersController < ApplicationController
   def show #done
   end
 
-  def new #displays new user sign up
+  def new #done
     @user = User.new
   end
 
-  def create
+  def create #done
     @user = User.new(user_params)
-
     if @user.save
       session[:user_id] = @user.id
       redirect_to user_home_path(@user)
     else
       @errors = @user.errors.full_messages
-      binding.pry
       render 'new'
     end
   end
 
-  def edit
+  def edit #done
   end
 
-  def update
+  def update #done
     current_user.update(user_params)
     redirect_to user_home_path(current_user)
   end
