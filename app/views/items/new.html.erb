@@ -11,13 +11,14 @@
       <%=freezer.hidden_field :user_ids%>
     <%end%>
 
-  <h3><strong><%=f.label "Notes: "%></strong></h3>
-  <%=f.fields_for :notes, @item.notes.build do |note|%>
-    <%=note.text_area :content%>
-  <%end%><br></br>
+    <h3><strong><%=f.label "Notes: "%></strong></h3>
+    <%=f.fields_for :notes, @item.notes.build do |note|%>
+      <%=note.text_area :content%>
+      <%=note.hidden_field :user_id%>
+      <%end%><br></br>
 
-  <%=f.submit%>
+      <%=f.submit%>
 
-<%end%>
+    <%end%>
 
 </div>
