@@ -17,7 +17,7 @@ class ItemTypesController < ApplicationController
   def update
     authorize @set_type
     @set_type.update(type_params)
-    redirect_to
+    redirect_to item_type_path(@set_type)
   end
 
   def new #creates new type
@@ -32,6 +32,8 @@ class ItemTypesController < ApplicationController
 
   def destroy
     authorize @set_type
+    Item.destroy(id: @set_type.id)
+    redirect_to item_types_path
   end
 
   private

@@ -1,7 +1,11 @@
 module ItemTypesHelper
 
   def min_and_max(type)
-    "#{type.storage_min}-#{type.storage_max} months"
+    if type.storage_min
+      "#{type.storage_min}-#{type.storage_max} months"
+    else
+      pluralize(type.storage_max, "month")
+    end
   end
 
   def link_format(type)
