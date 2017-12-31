@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   before_save :expiration_min_set, if: :storage_min?
   validates :date_stored, presence: true
   validates :title, presence: true
-  accepts_nested_attributes_for :freezers
+  accepts_nested_attributes_for :freezer
 
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic

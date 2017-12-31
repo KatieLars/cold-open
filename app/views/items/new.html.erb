@@ -1,9 +1,14 @@
 <div class="banner">
   <h1>Add a New Frozen Item</h1>
   <%=form_for @item do |f|%>
+
     <%=render 'new_item_form', f:f%>
-    <h3><strong><%=f.label "Create a New Freezer: "%></strong>
-    <%=render 'freezers/new_freezer', f:f%>
+
+    <h3><strong><%=f.label "Create a New Freezer: "%></strong></h3>
+    <%=f.fields_for @freezer do |freezer|%>
+      <h4><%=freezer.label :name%>: <%=freezer.text_field :name%></h4>
+      <h4><%=freezer.label :freezer_type%>: <%=freezer.text_field :freezer_type%></h4>
+    <%end%>
   <%end%>
 
 

@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   def new #users/1/items/new
     @item = Item.new
+    @freezer = Freezer.new
     #displays for for new item
   end
 
