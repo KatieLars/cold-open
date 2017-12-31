@@ -1,4 +1,4 @@
-class ItemTypeController < ApplicationController
+class ItemTypesController < ApplicationController
   #must be a user admin in order to change the item types
 
   def index #lists item_types --not nested, and no show page necessary
