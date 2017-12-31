@@ -1,21 +1,20 @@
 class ItemTypesController < ApplicationController
+  before_action :find_item_type, only: [:edit, :update, :destroy]
   #must be a user admin in order to change the item types
 
-  def index #lists item_types --not nested, and no show page necessary
+  def index
     @item_types = ItemType.all
     authorize @item_types
-    #clicking on a link goes to the item edit page if user logged in
   end
 
   def edit #page should have a drop down to select one item to edit
-    @item_type = ItemType.find_by(id: params[:id])
-    authorize @item_type
+    authorize @set_type
   end
 
   def update
-    @item_type = ItemType.find_by(id: params[:id])
-    authorize @item_type
-    #processes the edit form
+    authorize @set_type
+    @set_type.update(type_params)
+    redirect_to user_home_path(current_user)
   end
 
   def new #creates new type
@@ -29,8 +28,13 @@ class ItemTypesController < ApplicationController
   end
 
   def destroy
-    @item_type = ItemType.find_by(id: params[:id])
-    authorize @item_type
+    authorize @set_type
   end
+
+  private
+
+    def find_item_type
+      @set_type = ItemType.find_by(id: params[:id])
+    end
 
 end
