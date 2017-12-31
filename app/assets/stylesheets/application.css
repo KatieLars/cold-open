@@ -74,5 +74,9 @@ body {
   height : 40px;
   margin-top : 40px;
   width: 100%;
+}
 
+.no-wrap {
+  white-space: nowrap;
+  display: inline;
 }

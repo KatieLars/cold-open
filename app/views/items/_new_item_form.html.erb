@@ -1,8 +1,17 @@
-<%=form_for item do |f|%>
-  <%=f.label :title%><br/>
-  <%=f.text_field :title%><br></br>
 
-  <%=f.label "Date Stored"%><br/>
-  <%=f.text_field :date_stored%><br></br>
+  <h3><strong><%=f.label "Title: "%></strong>
+  <%=f.text_field :title%></h3>
 
-<%end%>
+  <h3><strong><%=f.label "Date Stored: "%></strong>
+  <%=f.text_field :date_stored%></h3>
+
+  <h3><strong><%=f.label "Item Type: "%></strong>
+
+  <%=f.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h3>
+
+  <h3><strong><%=f.label "Select a Freezer"%></strong></h3>
+<div class="no-wrap"%>
+  <%=f.collection_radio_buttons :freezer_id, current_user.freezers, :id, :name do |b|%>
+    <%= b.label { b.radio_button }%>
+  <%end%>
+</div>
