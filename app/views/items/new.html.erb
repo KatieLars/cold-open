@@ -14,7 +14,9 @@
   <h3><strong><%=f.label "Notes: "%></strong></h3>
   <%=f.fields_for :notes, @item.notes.build do |note|%>
     <%=note.text_area :content%>
-  <%end%>
+  <%end%><br></br>
+
+  <%=f.submit%>
 
 <%end%>
 
