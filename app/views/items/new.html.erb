@@ -2,6 +2,8 @@
   <h1>Add a New Frozen Item</h1>
   <%=form_for @item do |f|%>
     <%=render 'new_item_form', f:f%>
+    <h3><strong><%=f.label "Create a New Freezer: "%></strong>
+    <%=render 'freezers/new_freezer', f:f%>
   <%end%>
 
 

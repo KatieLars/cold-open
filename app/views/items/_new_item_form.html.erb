@@ -6,12 +6,7 @@
   <%=f.text_field :date_stored%></h3>
 
   <h3><strong><%=f.label "Item Type: "%></strong>
-
   <%=f.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h3>
 
-  <h3><strong><%=f.label "Select a Freezer"%></strong></h3>
-<div class="no-wrap"%>
-  <%=f.collection_radio_buttons :freezer_id, current_user.freezers, :id, :name do |b|%>
-    <%= b.label { b.radio_button }%>
-  <%end%>
-</div>
+  <h3><strong><%=f.label "Select a Freezer: "%></strong>
+  <%=f.collection_select :freezer_id, current_user.freezers, :id, :name, :include_blank => true %></h3>
