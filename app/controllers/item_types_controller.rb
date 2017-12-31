@@ -1,6 +1,6 @@
 class ItemTypesController < ApplicationController
   before_action :find_item_type, only: [:edit, :update, :destroy, :show]
-  #must be a user admin in order to change the item types
+
   def index
     @item_types = ItemType.all
     authorize @item_types
@@ -10,7 +10,7 @@ class ItemTypesController < ApplicationController
     authorize @set_type
   end
 
-  def edit #page should have a drop down to select one item to edit
+  def edit
     authorize @set_type
   end
 
@@ -20,7 +20,7 @@ class ItemTypesController < ApplicationController
     redirect_to item_type_path(@set_type)
   end
 
-  def new #creates new type
+  def new
     @item_type = ItemType.new
     authorize @item_type
   end
