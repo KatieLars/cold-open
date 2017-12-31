@@ -14,5 +14,7 @@
     <%= yield %>
   </body>
 
-<%= render 'quicklinks' if current_user%>
+  <div class="footer">
+    <%= render 'layouts/quicklinks' if current_user%>
+  </div>
 </html>
