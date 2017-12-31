@@ -2,5 +2,6 @@
   <h1>Edit <%=@set_type.title%></h1>
 
   <%=render 'item_type_form', item_type:@set_type%>
+  
   <%=button_to "Delete Type", item_type_path(@set_type), method: "delete"%>
 </div>

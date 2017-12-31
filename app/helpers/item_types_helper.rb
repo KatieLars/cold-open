@@ -12,5 +12,8 @@ module ItemTypesHelper
     "#{type.title}: #{min_and_max(type)}"
   end
 
+  def storage_min_or_new_type(type)
+    type.storage_min || !type.id
+  end
 
 end

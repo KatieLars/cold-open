@@ -32,7 +32,7 @@ class ItemTypesController < ApplicationController
 
   def destroy
     authorize @set_type
-    Item.destroy(id: @set_type.id)
+    ItemType.destroy(@set_type.id)
     redirect_to item_types_path
   end
 

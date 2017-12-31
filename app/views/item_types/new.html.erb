@@ -1,0 +1,7 @@
+<div class="banner">
+  <h1>Create a New Item Type%></h1>
+
+  <%=render 'item_type_form', item_type:@item_type%>
+
+  <%=button_to "Delete Type", item_type_path(@set_type), method: "delete"%>
+</div>
