@@ -2,6 +2,8 @@ class ItemTypeController < ApplicationController
   #must be a user admin in order to change the item types
 
   def index #lists item_types --not nested, and no show page necessary
+    @item_types = ItemType.all
+    authorize @item_types
     #clicking on a link goes to the item edit page if user logged in
   end
 
