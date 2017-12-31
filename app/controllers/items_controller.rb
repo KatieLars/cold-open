@@ -5,9 +5,8 @@ class ItemsController < ApplicationController
     #lists all the items in a user's freezer
   end
 
-  def new #users/1/items/new
+  def new
     @item = Item.new
-    #displays for for new item
   end
 
   def create
@@ -34,7 +33,13 @@ class ItemsController < ApplicationController
 
 
   def items_by_type
-
   end
+
+  private
+
+    def item_params
+      params.require(:items).permit(:title, :date_stored, :freezer_id, :item_type_id,
+        freezer_attributes: [:freezer_type, :name, :user_ids], notes_attributes: [:content])
+    end
 
 end
