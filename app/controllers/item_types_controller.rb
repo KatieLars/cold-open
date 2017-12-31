@@ -26,8 +26,14 @@ class ItemTypesController < ApplicationController
   end
 
   def create
-    @item_type = ItemType.new
+    @item_type = ItemType.new(type_params)
     authorize @item_type
+    if @item_type.save
+      redirect_to item_type_path(@item_type)
+    else
+      @errors = @item_type.errors.full_messages
+      render 'new'
+    end
   end
 
   def destroy
