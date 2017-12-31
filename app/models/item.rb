@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   validates :date_stored, presence: true
   validates :title, presence: true
   accepts_nested_attributes_for :freezer
+  accepts_nested_attributes_for :notes
 
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
