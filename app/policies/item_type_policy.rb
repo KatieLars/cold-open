@@ -3,7 +3,7 @@ class ItemTypePolicy < ApplicationPolicy
   def index?
     user.admin?
   end
-  
+
   def new?
     user.admin?
   end
@@ -17,6 +17,10 @@ class ItemTypePolicy < ApplicationPolicy
   end
 
   def create?
+    user.admin?
+  end
+
+  def show?
     user.admin?
   end
 end
