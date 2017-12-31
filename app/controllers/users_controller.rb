@@ -22,6 +22,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_home_path(@user)
     else
+      @errors = @user.errors.full_messages
+      binding.pry
       render 'new'
     end
   end

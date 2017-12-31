@@ -1,7 +1,9 @@
 <div class="banner">
   <h1>Sign Up!</h1>
 
-  <p><strong><%=user_errors(@user)%></strong></p>
+  <%=render partial: 'errors', collection: @errors if @user.errors.any?%>
+
+
 
   <%=render 'user_form', user:@user%>
 
