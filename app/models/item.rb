@@ -14,7 +14,7 @@ class Item < ApplicationRecord
 
   def notes_attributes=(note)
     if !note["0"]["content"].empty? #true if not empty
-      self.notes.new(content: note["0"]["content"])
+      self.notes.first_or_create(content: note["0"]["content"])
     end
   end
 

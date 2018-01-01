@@ -3,7 +3,7 @@
   <%=f.text_field :title%></h3>
 
   <h3><strong><%=f.label "Date Stored: "%></strong>
-  <%=f.text_field :date_stored%></h3>
+  <%=f.text_field :date_stored, value: format_date(f.object.date_stored)%></h3>
 
   <h3><strong><%=f.label "Item Type: "%></strong>
   <%=f.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h3>

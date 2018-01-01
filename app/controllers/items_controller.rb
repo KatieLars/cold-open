@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def edit #users/1/items/1/edit
-    #edits item form
+    @item = Item.find_by(id: params[:id])
   end
 
   def update

@@ -1,0 +1,23 @@
+<div class="banner">
+  <h1>Edit <%=@item.title%></h1>
+  <%=form_for @item do |f|%>
+
+  <%=render 'new_item_form', f:f%>
+
+  <h3><strong><%=f.label "Select a Freezer: "%></strong>
+  <%=f.collection_select :freezer_id, current_user.freezers, :id, :name, :include_blank => true %></h3>
+
+  <h3><strong><%=f.label "Create a New Freezer: "%></strong></h3>
+  <%=f.fields_for :freezer, @item.build_freezer do |freezer|%>
+    <h4><%=freezer.label :name%>: <%=freezer.text_field :name%></h4>
+    <h4><%=freezer.label :freezer_type%>: <%=freezer.text_field :freezer_type%></h4>
+  <%end%>
+
+  <h3><strong><%=f.label "Notes: "%></strong></h3>
+  <%=f.fields_for :notes, @item.notes.first_or_create do |note|%>
+    <%=note.text_area :content%>
+    <%=note.hidden_field :user_id%>
+  <%end%><br></br>
+
+  <%end%>
+</div>
