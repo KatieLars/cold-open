@@ -9,6 +9,7 @@ User.create(username: "Luke", password: "X-Wing", email: "force@gmail.com")
 Freezer.create(name: "basement", freezer_type: "chest")
 Freezer.create(name: "office", freezer_type: "beer")
 Freezer.create(name: "garage", freezer_type: "french door")
+
 #5 item types
 ItemType.create(title: "frozen veggies", storage_min: "1", storage_max: "2")
 ItemType.create(title: "fruit pie", storage_min: "2", storage_max: "4")
