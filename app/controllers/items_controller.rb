@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authentication_required
 #must authenticate user first
 #NESTED ROUTES
   def index #users/1/items
@@ -10,11 +11,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.build(item_params)
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     if @item.save
+      binding.pry
       redirect_to user_item_path(current_user, @item)
     else
+      binding.pry
       @errors = @item.errors.full_messages
       render 'new'
     end
@@ -45,7 +48,7 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:title, :date_stored, :freezer_id, :item_type_id,
-        freezer_attributes: [:freezer_type, :name], notes_attributes: [:content])
+        freezer_attributes: [:freezer_type, :name, user_ids: []], notes_attributes: [:content])
     end
 
 end
