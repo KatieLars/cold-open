@@ -12,10 +12,10 @@ class ItemsController < ApplicationController
 
   def create
 
-    @item = @current_user.items.build(item_params)
+    @item = current_user.items.build(item_params)
     binding.pry
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
-
+    @item.users << current_user
     if @item.save
       binding.pry
       redirect_to user_item_path(current_user, @item)
