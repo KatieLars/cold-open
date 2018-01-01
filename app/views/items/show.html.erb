@@ -4,5 +4,5 @@
     <p><strong>Date Stored: </strong><%=format_date(@item.date_stored)%></p>
     <p><strong>Expiration: </strong><%=expiration_zone(@item.expiration_min, @item.expiration_max)%></p>
     <p><strong>Freezer: </strong><em><%=@item.freezer.name%> - <%=@item.freezer.freezer_type%></em></p>
-    <%=link_to "Items List", items_path%>
+    <%=link_to "Items List", user_items_path(current_user)%>
 </div>

@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 #must authenticate user first
 #NESTED ROUTES
   def index #users/1/items
-
+    @items = current_user.items.alphabetize
   end
 
   def new
