@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :freezer
   accepts_nested_attributes_for :notes
 
+  def freezer_attributes=(freezer)
+    self.freezer = Freezer.create(freezer)
+  end
+
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
     self.expiration_min = date_stored.months_since(item_type.storage_min.to_i)

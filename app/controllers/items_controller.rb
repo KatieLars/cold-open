@@ -10,6 +10,15 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
+
+    if @item.save
+      binding.pry
+      redirect_to user_item_path(current_user, @item)
+    else
+      binding.pry
+      render 'new'
+    end
     #creates new item
     #redirects to item show page
   end
@@ -38,8 +47,8 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:items).permit(:title, :date_stored, :freezer_id, :item_type_id,
-        freezer_attributes: [:freezer_type, :name, :user_ids], notes_attributes: [:content])
+      params.require(:item).permit(:title, :date_stored, :freezer_id, :item_type_id,
+        freezer_attributes: [:freezer_type, :name], notes_attributes: [:content])
     end
 
 end

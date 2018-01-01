@@ -7,6 +7,3 @@
 
   <h3><strong><%=f.label "Item Type: "%></strong>
   <%=f.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h3>
-
-  <h3><strong><%=f.label "Select a Freezer: "%></strong>
-  <%=f.collection_select :freezer_id, current_user.freezers, :id, :name, :include_blank => true %></h3>
