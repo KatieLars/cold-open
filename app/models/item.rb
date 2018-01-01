@@ -7,7 +7,6 @@ class Item < ApplicationRecord
   has_many :notes #wiredn
   validates :date_stored, presence: true
   validates :title, presence: true
-  #before_save :date_conversion
   before_save :expiration_max_set
   before_save :expiration_min_set, if: :storage_min?
   accepts_nested_attributes_for :freezer
@@ -54,6 +53,10 @@ class Item < ApplicationRecord
 
   def self.still_good #hasn't reached expiration_min yet or max if only max
     where.not("id IN (?) OR id IN (?)", self.expiration_zone.pluck(:id), self.expired.pluck(:id))
+  end
+
+  def self.alphabetize
+    order(:title)
   end
 
 private

@@ -10,4 +10,9 @@ module ItemsHelper
       "#{format_date(expiration_max)}"
     end
   end
+
+  def item_link_format(item)
+    "#{item.title}: #{expiration_zone(item.expiration_min, item.expiration_max)}"
+  end
+
 end
