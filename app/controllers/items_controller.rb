@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authentication_required
-#must authenticate user first
-#NESTED ROUTES
-  def index #users/1/items
+
+  def index
     @items = current_user.items.alphabetize
   end
 
