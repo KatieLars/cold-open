@@ -11,19 +11,19 @@ class ItemsController < ApplicationController
   end
 
   def create
-
     @item = current_user.items.build(item_params)
-    binding.pry
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     @item.users << current_user
     if @item.save
-      binding.pry
       redirect_to user_item_path(current_user, @item)
     else
-      binding.pry
       @errors = @item.errors.full_messages
       render 'new'
     end
+  end
+
+  def show
+    @item = Item.find_by(id: params[:id])
   end
 
   def edit #users/1/items/1/edit
