@@ -1,5 +1,6 @@
 class Freezer < ApplicationRecord
   has_many :items
-  has_many :users, -> { distinct }, through: :items
+  has_many :user_freezers
+  has_many :users, through: :user_freezers
 
 end

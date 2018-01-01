@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :user_freezers
   has_many :user_items
   has_many :items, through: :user_items
-  has_many :item_types, -> { distinct }, through: :items
-  has_many :freezers, -> { distinct }, through: :items
+  #has_many :item_types, -> { distinct }, through: :items
+  has_many :freezers, through: :user_freezers
   has_many :notes #wired
 
   def self.from_omniauth(auth) #passes in a hash

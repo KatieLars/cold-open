@@ -22,8 +22,7 @@ class Item < ApplicationRecord
   def freezer_attributes=(freezer)
 
     self.freezer = Freezer.create(name: freezer[:name], freezer_type: freezer[:freezer_type])
-    self.freezer.users << User.find_by(id: freezer[:user_ids][0])
-    self.freezer.save
+  
 
   end
 
