@@ -12,14 +12,12 @@ class Item < ApplicationRecord
   before_save :expiration_min_set, if: :storage_min?
   accepts_nested_attributes_for :freezer
   accepts_nested_attributes_for :notes
-#
-#  def date_stored=(date)
-#
-#    self.date_stored = Chronic.parse(date).to_datetime
-#    binding.pry
-#    #Chronic.parse(date).to_datetime
-#
-#  end
+
+  def notes_attributes=(note)
+    if !note["0"]["content"].empty? #true if not empty
+      self.notes.new(content: note["0"]["content"])
+    end
+  end
 
   def freezer_attributes=(freezer)
     self.freezer = Freezer.create(freezer)
