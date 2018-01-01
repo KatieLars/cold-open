@@ -13,14 +13,11 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     if @item.save
-      binding.pry
       redirect_to user_item_path(current_user, @item)
     else
-      binding.pry
+      @errors = @item.errors.full_messages
       render 'new'
     end
-    #creates new item
-    #redirects to item show page
   end
 
   def edit #users/1/items/1/edit

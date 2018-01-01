@@ -1,5 +1,7 @@
 <div class="banner">
   <h1>Add a New Frozen Item</h1>
+  <%=render partial: 'users/errors', collection: @errors if @item.errors.any?%>
+
   <%=form_for @item do |f|%>
 
     <%=render 'new_item_form', f:f%>
