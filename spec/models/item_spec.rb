@@ -27,6 +27,7 @@ end
 
 it "has a maximum expiration date" do
   max_storage = @item.item_type.storage_max.to_i
+
   expect(@item.expiration_max).to eq(@item.date_stored.months_since(max_storage))
 end
 

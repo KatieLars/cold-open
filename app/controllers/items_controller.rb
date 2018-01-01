@@ -10,8 +10,10 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
 
+
+    @item = Item.new(item_params)
+binding.pry
     if @item.save
       binding.pry
       redirect_to user_item_path(current_user, @item)

@@ -1,22 +1,25 @@
+require 'pry'
 class Item < ApplicationRecord
   belongs_to :freezer #wired
   belongs_to :item_type #wired
   has_many :user_items
   has_many :users, through: :user_items
   has_many :notes #wiredn
+  validates :date_stored, presence: true
+  validates :title, presence: true
   #before_save :date_conversion
   before_save :expiration_max_set
   before_save :expiration_min_set, if: :storage_min?
-  validates :date_stored, presence: true
-  validates :title, presence: true
   accepts_nested_attributes_for :freezer
   accepts_nested_attributes_for :notes
-
+#
 #  def date_stored=(date)
-#    self.date_stored = date.to_datetime
+#
+#    self.date_stored = Chronic.parse(date).to_datetime
 #    binding.pry
+#    #Chronic.parse(date).to_datetime
+#
 #  end
-
 
   def freezer_attributes=(freezer)
     self.freezer = Freezer.create(freezer)
@@ -24,13 +27,12 @@ class Item < ApplicationRecord
 
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
-
     self.expiration_min = date_stored.months_since(item_type.storage_min.to_i)
   end
 
   def expiration_max_set #maximum range
     #problematic setter method
-    self.expiration_max = date_stored.months_since(item_type.storage_max.to_i)
+    self.expiration_max = self.date_stored.months_since(self.item_type.storage_max.to_i).to_datetime
   end
 
   def self.expiration_one_month
@@ -58,6 +60,5 @@ private
 def storage_min? #returns true if storage_min exists
   !!item_type.storage_min
 end
-
 
 end
