@@ -24,8 +24,6 @@ class Item < ApplicationRecord
     if freezie.valid?
       self.freezer = freezie
     end
-
-
   end
 
   def expiration_min_set #entering the min range of expiration
