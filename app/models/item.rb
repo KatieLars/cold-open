@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   has_many :user_items
   has_many :users, through: :user_items
   has_many :notes #wiredn
+  #before_save :date_conversion
   before_save :expiration_max_set
   before_save :expiration_min_set, if: :storage_min?
   validates :date_stored, presence: true
@@ -11,12 +12,19 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :freezer
   accepts_nested_attributes_for :notes
 
+#  def date_stored=(date)
+#    self.date_stored = date.to_datetime
+#    binding.pry
+#  end
+
+
   def freezer_attributes=(freezer)
     self.freezer = Freezer.create(freezer)
   end
 
   def expiration_min_set #entering the min range of expiration
     #setter methods are problematic
+
     self.expiration_min = date_stored.months_since(item_type.storage_min.to_i)
   end
 

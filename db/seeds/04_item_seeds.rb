@@ -1,6 +1,6 @@
 
 #creates items
-
+require 'pry'
 10.times do
   item = Item.new(
     title: Faker::Food.dish,
