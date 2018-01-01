@@ -20,7 +20,12 @@ class Item < ApplicationRecord
   end
 
   def freezer_attributes=(freezer)
-    self.freezer = Freezer.create(name: freezer[:name], freezer_type: freezer[:freezer_type])
+    freezie = Freezer.new(freezer)
+    if freezie.valid?
+      self.freezer = freezie
+    end
+
+
   end
 
   def expiration_min_set #entering the min range of expiration
