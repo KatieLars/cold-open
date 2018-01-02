@@ -1,6 +1,8 @@
 module ItemsHelper
   def format_date(date)
-    date.strftime("%B %d, %Y")
+    if date
+      date.strftime("%B %d, %Y")
+    end
   end
 
   def expiration_zone(expiration_min=0, expiration_max)
