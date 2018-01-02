@@ -1,7 +1,8 @@
 <div class="banner">
   <h1>Add a New Frozen Item</h1>
   <%=render partial: 'users/errors', collection: @errors if @item.errors.any?%>
-
-  <%=render 'new_item_form', item:@item%>
+<%=form_for @item, url: user_items_path(current_user) do |f|%>
+  <%=render 'new_item_form', f:f%>
+<%end%>
 
 </div>
