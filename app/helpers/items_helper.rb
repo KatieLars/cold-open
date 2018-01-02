@@ -19,7 +19,7 @@ module ItemsHelper
 
   def notes_display(notes)
     if notes.any?
-      notes.each {|note| puts "#{note.content}"}
+        render partial: 'note', collection: @item.notes
     else
       "No Notes"
     end

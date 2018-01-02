@@ -4,7 +4,7 @@
     <p><strong>Date Stored: </strong><%=format_date(@item.date_stored)%></p>
     <p><strong>Expiration: </strong><%=expiration_zone(@item.expiration_min, @item.expiration_max)%></p>
     <p><strong>Freezer: </strong><em><%=link_to freezer_link_format(@item.freezer), user_freezer_path(current_user, @item.freezer)%></em></p>
-    <p><strong>Notes: </strong><%=render partial: 'note', collection: @item.notes%></p>
+    <p><strong>Notes: </strong><%=notes_display(@item.notes)%></p>
     <%=link_to "Items List", user_items_path(current_user)%>&emsp;|&emsp;
     <%=link_to "Edit Item", edit_user_item_path(current_user, @item)%>&emsp;|&emsp;
     <%=link_to "Delete Item", user_item_path(current_user, @item), method: 'delete'%>
