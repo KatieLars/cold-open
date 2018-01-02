@@ -1,6 +1,8 @@
 <div class="banner">
   <h1>Edit <%=@item.title%></h1>
-  
-  <%=render 'new_item_form', item:@item%>
+  <%=render partial: 'users/errors', collection: @errors if @item.errors.any?%>
 
+  <%=render 'new_item_form', item:@item%></br>
+
+  <%= button_to "Delete Item", user_item_path(current_user, @item), method: "delete"%>
 </div>

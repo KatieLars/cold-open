@@ -1,4 +1,4 @@
-
+<%=form_for item do |f|%>
   <h3><strong><%=f.label "Title: "%></strong>
   <%=f.text_field :title%></h3>
 
@@ -11,6 +11,8 @@
   <h3><strong><%=f.label "Select a Freezer: "%></strong>
   <%=f.collection_select :freezer_id, current_user.freezers, :id, :name, :include_blank => true %></h3>
 
+  <h4><strong><em><sup>*</sup>You cannot create a new freezer unless 'Select a Freezer' is blank</em></strong></h4>
+
   <h3><strong><%=f.label "Create a New Freezer: "%></strong></h3>
   <%=f.fields_for :freezer, f.object.build_freezer do |freezer|%>
     <h4><%=freezer.label :name%>: <%=freezer.text_field :name%></h4>
@@ -18,9 +20,10 @@
   <%end%>
 
   <h3><strong><%=f.label "Notes: "%></strong></h3>
-  <%=f.fields_for :notes, f.object.notes.first_or_create do |note|%>
+  <%=f.fields_for :notes, f.object.notes.first_or_initialize do |note|%>
     <%=note.text_area :content%>
     <%=note.hidden_field :user_id%>
   <%end%><br></br>
 
   <%=f.submit%>
+<%end%>

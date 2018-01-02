@@ -25,17 +25,24 @@ class ItemsController < ApplicationController
     @item = Item.find_by(id: params[:id])
   end
 
-  def edit #users/1/items/1/edit
+  def edit
     @item = Item.find_by(id: params[:id])
   end
 
   def update
-    #updates items
+    @item = Item.find_by(id: params[:id])
+    if @item.update(item_params)
+      redirect_to user_item_path(current_user, @item)
+    else
+      @errors = @item.errors.full_messages
+      render 'edit'
+    end
   end
 
   def destroy
-    #deletes an item
-    #redirects to freezer path belonging to th item just destroyed
+    @item = Item.find_by(id: params[:id])
+    @item.destroy
+    redirect_to user_items_path(current_user)
   end
 
 
