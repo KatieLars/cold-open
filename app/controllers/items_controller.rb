@@ -31,7 +31,9 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find_by(id: params[:id])
-    if @item.update(item_params)
+    @item.assign_attributes(item_params)
+    @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
+    if @item.save
       redirect_to user_item_path(current_user, @item)
     else
       @errors = @item.errors.full_messages

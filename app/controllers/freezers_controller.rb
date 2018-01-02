@@ -1,7 +1,8 @@
 class FreezersController < ApplicationController
-#NESED ROUTE
+  before_action :authentication_required
+
   def index #users/1/freezers
-    #displays all the freezers a user has
+    @freezers =  current_user.freezers
   end
 
   def new #users/1/freezers/new
