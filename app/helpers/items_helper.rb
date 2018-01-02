@@ -48,5 +48,5 @@ module ItemsHelper
       "You have no items"
     end
   end
-  
+
 end
