@@ -17,4 +17,12 @@ module ItemsHelper
     "#{item.title}: #{expiration_zone(item.expiration_min, item.expiration_max)}"
   end
 
+  def notes_display(notes)
+    if notes.any?
+      notes.each {|note| puts "#{note.content}"}
+    else
+      "No Notes"
+    end
+  end
+
 end

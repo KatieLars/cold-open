@@ -57,7 +57,7 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:title, :date_stored, :freezer_id, :item_type_id,
-        freezer_attributes: [:freezer_type, :name, user_ids: []], notes_attributes: [:content])
+        freezer_attributes: [:freezer_type, :name], notes_attributes: [:content, :user_id])
     end
 
 end

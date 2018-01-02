@@ -22,7 +22,7 @@
   <h3><strong><%=f.label "Notes: "%></strong></h3>
   <%=f.fields_for :notes, f.object.notes.first_or_initialize do |note|%>
     <%=note.text_area :content%>
-    <%=note.hidden_field :user_id%>
+    <%=note.hidden_field :user_id, value: current_user.id%>
   <%end%><br></br>
 
   <%=f.submit%>
