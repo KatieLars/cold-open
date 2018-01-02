@@ -46,14 +46,13 @@ class ItemsController < ApplicationController
   end
 
 
-  def expiring_this_month #nested
+  def expiring_this_month
     @items = current_user.items.expiration_one_month
   end
 
 
   def items_by_type
-    @items = current_user.items
-    render 'items_by_type'
+    @item_types = current_user.item_types
   end
 
   private

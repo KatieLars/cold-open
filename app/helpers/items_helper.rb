@@ -41,4 +41,12 @@ module ItemsHelper
     end
   end
 
+  def any_item_types_display(item_types)
+    if item_types.any?
+      render partial: 'item_types', collection: @item_types
+    else
+      "You have no items"
+    end
+  end
+  
 end
