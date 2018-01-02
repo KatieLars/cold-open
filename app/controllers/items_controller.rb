@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    binding.pry
     @item = Item.find_by(id: params[:id])
   end
 
@@ -47,10 +48,15 @@ class ItemsController < ApplicationController
 
 
   def expiring_this_month #nested
+    binding.pry
+    @items = current_user.items.expiration_one_month
+    render "expiring_this_month"
   end
 
 
   def items_by_type
+    @items = current_user.items
+    render 'items_by_type'
   end
 
   private

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:home] do
     resources :freezers
-    resources :items
+    resources :items, only: [:show, :index, :create, :new, :update, :destroy, :edit]
     get "/items/expiring_this_month" => "items#expiring_this_month", as: 'items_expire_month'
     get "/items_by_type" => "items#items_by_type", as: 'items_type'
   end

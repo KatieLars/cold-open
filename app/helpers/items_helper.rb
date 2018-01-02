@@ -25,4 +25,20 @@ module ItemsHelper
     end
   end
 
+  def expiring_items_display(items)
+    if items.any?
+      render partial: 'items', collection: @items
+    else
+      "No items expiring"
+    end
+  end
+
+  def any_items_display(items)
+    if items.any?
+      render partial: 'items', collection: @items
+    else
+      "You have no items"
+    end
+  end
+
 end
