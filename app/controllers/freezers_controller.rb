@@ -10,11 +10,8 @@ class FreezersController < ApplicationController
   end
 
   def create
-
     @freezer = Freezer.new(freezer_params)
-binding.pry
     if @freezer.save
-      binding.pry
       redirect_to user_freezer_path(current_user, @freezer)
     else
       @errors = @freezer.errors.full_messages
