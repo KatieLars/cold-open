@@ -2,11 +2,11 @@ class FreezersController < ApplicationController
   before_action :authentication_required
 
   def index #users/1/freezers
-    @freezers =  current_user.freezers
+    @freezers =  @current_user.freezers
   end
 
   def new #users/1/freezers/new
-    #shows form for new freezer
+    @freezer = Freezer.new
   end
 
   def create

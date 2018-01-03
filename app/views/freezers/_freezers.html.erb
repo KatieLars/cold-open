@@ -1,2 +1,3 @@
-<h3><strong><%=freezer_link_format(freezers)%></strong></h3>
-<%=render partial: "items/items", collection: freezers.items%>
+
+<h3><%= link_to freezer_link_format(freezers), user_freezer_path(current_user, freezers)%></h3>
+<h5>Items stored: <%=freezers.number_of_items%></h5>

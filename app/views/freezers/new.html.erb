@@ -1,3 +1,6 @@
 <div class="banner">
-  <%= render partial: "freezers", collection: @freezers%>
+  <h1>Create New Freezer</h1>
+  <%=form_for @freezer do |f|%>
+    <%=render 'new_freezer', f:f%>
+  <%end%>
 </div>

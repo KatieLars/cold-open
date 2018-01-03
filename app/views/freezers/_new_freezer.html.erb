@@ -1,5 +1,21 @@
+<h3><strong><%=f.label "Name: "%></strong>
+<%=f.text_field :name%></h3>
 
-<%=f.label "Name: "%>
-<%=f.text_field :name%></br>
+<h3><strong><%=f.label "Freezer type (chest, drawer, etc.): "%></strong>
+<%=f.text_field :freezer_type%></h3>
 
-<%=
+<h3><strong><%=f.label "Add an existing item: "%></strong>
+<%=f.collection_select :item_id, current_user.items, :id, :name, :include_blank => true %></h3>
+
+<h3><strong><%=f.label "Create a new item: "%></strong></h3>
+<%=f.fields_for :item, f.object.items.build do |freezer|%>
+  <h4><%=item.label "Title: "%> <%=item.text_field :title%></h4>
+  <h4><%=item.label "Date Stored: "%><%=item.text_field :date_stored%></h4>
+  <h4><%=item.label "Select an Item Type: "%> <%=f.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h4>
+  <h4><strong><%=f.label "Notes: "%></strong></h4>
+  <%=f.fields_for :notes, item.notes.first_or_initialize do |note|%>
+    <h4><%=note.text_area :content%></h4>
+    <%=note.hidden_field :user_id, value: current_user.id%>
+<%end%>
+
+<%=f.submit%>
