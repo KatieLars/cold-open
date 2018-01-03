@@ -36,7 +36,6 @@ class FreezersController < ApplicationController
       @errors = @freezer.errors.full_messages
       render 'edit'
     end
-    #redirects to freezer show page
   end
 
   def destroy

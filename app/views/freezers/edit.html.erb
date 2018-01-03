@@ -4,8 +4,9 @@
   <%=render partial: 'users/errors', collection: @errors if @freezer.errors.any?%>
 
   <%=form_for @freezer, url: user_freezer_path(current_user, @freezer) do |f|%>
-    <%=render 'new_freezer', f:f%></br>
-  <%end%>
+    <%=render 'new_freezer', f:f%>
+  <%end%><br></br>
 
+  <p><strong>IF YOU DELETE THE FREEZER, ALL ITEMS INSIDE IT WILL BE DELETED</strong></p>
   <%= button_to "Delete Freezer", user_freezer_path(current_user, @freezer), method: "delete"%>
 </div>

@@ -2,6 +2,7 @@
   <h1><%=@freezer.name%></h1>
   <h3><em><%=@freezer.freezer_type%></em></h3>
   <%=render partial: "items/items", collection: @freezer.items%>
+    <p><strong>IF YOU DELETE THE FREEZER, ALL ITEMS INSIDE IT WILL BE DELETED</strong></p>
   <%=link_to "Freezers List", user_freezers_path(current_user)%>&emsp;|&emsp;
   <%=link_to "Edit Freezer", edit_user_freezer_path(current_user, @freezer)%>&emsp;|&emsp;
   <%=link_to "Delete Freezer", user_freezer_path(current_user, @freezer), method: 'delete'%>
