@@ -1,5 +1,5 @@
 <div class="banner">
   <h1><%=@freezer.name%></h1>
   <h3><em><%=@freezer.freezer_type%></em></h3>
-  
+  <%=render partial: "items/items", collection: @freezer.items%>
 </div>

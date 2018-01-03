@@ -48,7 +48,7 @@ class FreezersController < ApplicationController
 private
 
 def freezer_params
-  params.require(:freezer).permit(:name, :freezer_type, :item_ids => [])
+  params.require(:freezer).permit(:name, :freezer_type, :item_ids => [], items_attributes: [:title, :date_stored, :item_type_id, :user_ids => [])
 end
 
 end
