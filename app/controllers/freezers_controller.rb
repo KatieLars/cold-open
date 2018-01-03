@@ -11,7 +11,7 @@ class FreezersController < ApplicationController
 
   def create
     binding.pry
-    @freezer = Freezer.build(freezer_params)
+    @freezer = Freezer.new(freezer_params)
     binding.pry
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     @item.users << current_user
@@ -48,7 +48,7 @@ class FreezersController < ApplicationController
 private
 
 def freezer_params
-  params.require(:freezer).permit(:name, :freezer_type, :user_id, :item_ids)
+  params.require(:freezer).permit(:name, :freezer_type, :user_id, :item_ids => [])
 end
 
 end
