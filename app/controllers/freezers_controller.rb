@@ -10,17 +10,15 @@ class FreezersController < ApplicationController
   end
 
   def create
-
     @freezer = Freezer.new(freezer_params)
-    binding.pry
     #@item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
-    @item.users << current_user
-    if @item.save
+  #  @freezer.users << current_user
+    if @freezer.save
       binding.pry
-      redirect_to user_item_path(current_user, @item)
+      redirect_to user_freezer_path(current_user, @freezer)
     else
       binding.pry
-      @errors = @item.errors.full_messages
+      @errors = @freezer.errors.full_messages
       render 'new'
     end
     #creates new freezer
@@ -29,7 +27,7 @@ class FreezersController < ApplicationController
   end
 
   def show #users/1/freezers/1
-    #shows freezer and list of item sinside
+    @freezer = Freezer.find_by(id: params[:id])
   end
 
   def edit #users/1/freezers/1/edit
