@@ -28,7 +28,14 @@ class FreezersController < ApplicationController
   end
 
   def update
-    #updates freezer info
+    @freezer = Freezer.find_by(id: params[:id])
+    @freezer.assign_attributes(freezer_params)
+    if @freezer.save
+      redirect_to user_freezer_path(current_user, @freezer)
+    else
+      @errors = @freezer.errors.full_messages
+      render 'edit'
+    end
     #redirects to freezer show page
   end
 

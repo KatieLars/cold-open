@@ -1,9 +1,11 @@
 <div class="banner">
   <h1>Edit <%=@freezer.name%></h1>
-  <%=render partial: 'users/errors', collection: @errors if @freezer.errors.any?%>
-<%=form_for @item, url: user_item_path(current_user, @item) do |f|%>
-  <%=render 'new_item_form', f:f%></br>
-<%end%>
 
-  <%= button_to "Delete Item", user_item_path(current_user, @item), method: "delete"%>
+  <%=render partial: 'users/errors', collection: @errors if @freezer.errors.any?%>
+
+  <%=form_for @freezer, url: user_freezer_path(current_user, @freezer) do |f|%>
+    <%=render 'new_freezer', f:f%></br>
+  <%end%>
+
+  <%= button_to "Delete Freezer", user_freezer_path(current_user, @freezer), method: "delete"%>
 </div>
