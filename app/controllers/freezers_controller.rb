@@ -19,13 +19,12 @@ class FreezersController < ApplicationController
     end
   end
 
-  def show #users/1/freezers/1
+  def show
     @freezer = Freezer.find_by(id: params[:id])
   end
 
-  def edit #users/1/freezers/1/edit
-    #shows edit form for editing freezer
-    #NOT FOR EDITING ITEMS
+  def edit
+    @freezer = Freezer.find_by(id: params[:id])
   end
 
   def update
