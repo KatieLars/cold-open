@@ -1,6 +1,6 @@
 <div class="banner">
   <h1>Create New Freezer</h1>
-  <%=form_for @freezer do |f|%>
+  <%=form_for @freezer, url: user_freezers_path(current_user) do |f|%>
     <%=render 'new_freezer', f:f%>
   <%end%>
 </div>

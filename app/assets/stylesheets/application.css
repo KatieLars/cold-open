@@ -80,3 +80,7 @@ body {
   white-space: nowrap;
   display: inline;
 }
+
+.checkbox-container input {
+  display: inline;
+}
