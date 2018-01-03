@@ -10,20 +10,16 @@ class FreezersController < ApplicationController
   end
 
   def create
+
     @freezer = Freezer.new(freezer_params)
-    #@item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
-  #  @freezer.users << current_user
+binding.pry
     if @freezer.save
       binding.pry
       redirect_to user_freezer_path(current_user, @freezer)
     else
-      binding.pry
       @errors = @freezer.errors.full_messages
       render 'new'
     end
-    #creates new freezer
-    #NESTED FORM TO ADD ITEMS TO FREEZER
-    #redirects to freezer show page
   end
 
   def show #users/1/freezers/1
@@ -48,7 +44,7 @@ class FreezersController < ApplicationController
 private
 
 def freezer_params
-  params.require(:freezer).permit(:name, :freezer_type, :item_ids => [], items_attributes: [:title, :date_stored, :item_type_id, :user_ids => [])
+  params.require(:freezer).permit(:name, :freezer_type, items_attributes: [:title, :date_stored, :item_type_id, :user_ids => [], :note =>[:content, :user_id]], :item_ids => [])
 end
 
 end

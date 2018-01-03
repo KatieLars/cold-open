@@ -12,10 +12,18 @@
 
 <h3><strong><%=f.label "Create a new item: "%></strong></h3>
 <%=f.fields_for :items, f.object.items.build do |item|%>
-  <%=item.hidden_field :user_ids, value: current_user.id%>
+
+  <%=item.hidden_field "user_ids][", { :id => "user_ids", :value => [current_user.id] }%>
+  <%=item.hidden_field :freezer_id, value: f.object.id%>
+
   <h4><%=item.label "Title: "%> <%=item.text_field :title%></h4>
   <h4><%=item.label "Date Stored: "%><%=item.text_field :date_stored%></h4>
   <h4><%=item.label "Select an Item Type: "%> <%=item.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h4>
+  <h4><strong><%=item.label "Notes: "%></strong></h4>
+  <%=item.fields_for :note do |note|%>
+    <h4><%=note.text_area :content%></h4>
+    <%=note.hidden_field :user_id, value: current_user.id%>
+  <%end%>
 <%end%>
 
 <%=f.submit%>
