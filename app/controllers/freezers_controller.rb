@@ -34,8 +34,9 @@ class FreezersController < ApplicationController
   end
 
   def destroy
-    #destroys freezer
-    #redirects to User home page
+    freezer = Freezer.find_by(id: params[:id])
+    freezer.destroy
+    redirect_to user_freezers_path(current_user)
   end
 
 private
