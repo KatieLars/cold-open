@@ -1,7 +1,7 @@
 class Freezer < ApplicationRecord
   has_many :items
-  has_and_belongs_to_many :users
-  #has_many :users, -> { distinct }, through: :items
+
+  has_many :users, -> { distinct }, through: :items
   validates :name, presence: true
   accepts_nested_attributes_for :items
 

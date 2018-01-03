@@ -5,10 +5,9 @@
 <h3><strong><%=f.label "Freezer type: "%></strong>
 <%=f.text_field :freezer_type%></h3>
 
-<%=f.hidden_field :user_id, value: current_user.id%>
-
 <h3><strong><%=f.label "Add an existing item: "%></strong></h3>
 <%=f.collection_check_boxes(:item_ids, current_user.items, :id, :title) do |b|%>
   <%=b.check_box%><%=b.label%>&emsp;
 <%end%><br></br>
+
 <%=f.submit%>

@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
     expect(@user.items.count).to eq(9)
   end
 
-  it "has many freezers through items" do
+  it "has many freezers" do
     expect(@user.freezers.count).to eq(3)
   end
 

@@ -10,7 +10,7 @@ require 'pry'
       expect(@freezer.items.count).to eq(5)
     end
 
-    it "has many users through items" do
+    it "has many users" do
       expect(@freezer.users.count).to eq(2)
     end
 
