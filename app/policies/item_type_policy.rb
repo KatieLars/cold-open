@@ -1,5 +1,5 @@
 class ItemTypePolicy < ApplicationPolicy
-  #user can only add, update, create, edit if admin
+
   def index?
     user.admin?
   end
@@ -12,7 +12,7 @@ class ItemTypePolicy < ApplicationPolicy
     user.admin?
   end
 
-  def edit? #returns true if user is an admin
+  def edit?
     user.admin?
   end
 

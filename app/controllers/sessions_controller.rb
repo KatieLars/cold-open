@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
-    #displays login form if not already logged in
+
   end
 
-  def create #creates a new user session
+  def create
     if auth_hash = request.env["omniauth.auth"]
       user = User.from_omniauth(auth_hash)
       session[:user_id] = user.id

@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/google/callback' => 'sessions#create'
 
-  #resources :items, only: [:create, :update, :destroy]
-  #resources :freezers, only: [:create, :update, :destroy]
   resources :users, only: [:new, :create, :update, :edit, :destroy, :show]
   resources :item_types
 

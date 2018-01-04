@@ -5,9 +5,9 @@ class User < ApplicationRecord
   has_many :item_types, -> { distinct }, through: :items
 
   has_many :freezers, -> { distinct }, through: :items
-  has_many :notes #wired
+  has_many :notes
 
-  def self.from_omniauth(auth) #passes in a hash
+  def self.from_omniauth(auth)
     where(email: auth[:info][:email]).first_or_initialize.tap do |user|
       user.email = auth[:info][:email]
       user.uid = auth[:uid]

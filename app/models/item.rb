@@ -1,10 +1,10 @@
-require 'pry'
+
 class Item < ApplicationRecord
-  belongs_to :freezer #wired
-  belongs_to :item_type #wired
+  belongs_to :freezer
+  belongs_to :item_type
   has_many :user_items
   has_many :users, through: :user_items
-  has_many :notes #wiredn
+  has_many :notes
   validates :date_stored, presence: true
   validates :title, presence: true
   before_save :expiration_max_set
@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :notes
 
   def notes_attributes=(note)
-    if !note["0"]["content"].empty? #true if not empty
+    if !note["0"]["content"].empty?
       self.notes.first_or_initialize(content: note["0"]["content"], user_id: note["0"]["user_id"])
     end
   end
@@ -25,13 +25,11 @@ class Item < ApplicationRecord
     end
   end
 
-  def expiration_min_set #entering the min range of expiration
-    #setter methods are problematic
+  def expiration_min_set
     self.expiration_min = date_stored.months_since(item_type.storage_min.to_i)
   end
 
-  def expiration_max_set #maximum range
-    #problematic setter method
+  def expiration_max_set
     self.expiration_max = self.date_stored.months_since(self.item_type.storage_max.to_i).to_datetime
   end
 
@@ -43,15 +41,15 @@ class Item < ApplicationRecord
     where("expiration_max > ? AND expiration_max < ?", Time.now, Time.now.weeks_since(1))
   end
 
-  def self.expired #items are expired if today's date is past the max storage date
+  def self.expired
     where("expiration_max < ?", Time.now)
   end
 
-  def self.expiration_zone #lists all items between storage min and storage_max
+  def self.expiration_zone
     where("expiration_max > ? AND expiration_min < ?", Time.now, Time.now)
   end
 
-  def self.still_good #hasn't reached expiration_min yet or max if only max
+  def self.still_good
     where.not("id IN (?) OR id IN (?)", self.expiration_zone.pluck(:id), self.expired.pluck(:id))
   end
 
@@ -61,7 +59,7 @@ class Item < ApplicationRecord
 
 private
 
-def storage_min? #returns true if storage_min exists
+def storage_min?
   !!item_type.storage_min
 end
 

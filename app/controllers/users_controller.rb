@@ -2,16 +2,16 @@ class UsersController < ApplicationController
   before_action :authentication_required
   skip_before_action :authentication_required, only: [:new, :create]
 
-  def home #done
-    @expired = current_user.items.expired #list of expired items
+  def home
+    @expired = current_user.items.expired
     @expiration_week = current_user.items.expiration_this_week
     @item = Item.new
   end
 
-  def show #done
+  def show
   end
 
-  def new #done
+  def new
     @user = User.new
   end
 
@@ -26,10 +26,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit #done
+  def edit
   end
 
-  def update #done
+  def update
     current_user.update(user_params)
     redirect_to user_home_path(current_user)
   end
