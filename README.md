@@ -1,24 +1,5 @@
-# README
+Cold Open is a basic CRUD app designed to track the inventory (and expiration dates) of items in your freezer. It's aim is to reduce food waste and prevent freezer burn. All expiration dates are FDA guidelines.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web app developed with Ruby on Rails and can be accessed by going to ****WEBSITE HERE****
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Database used is Postgres, with authentication using Omniauth.
