@@ -3,6 +3,14 @@
 
     <%=render 'user_form', user:current_user%>
 
+  <%if !current_user.uid%>
+      <sup>*</sup><%=f.label "New Password: "%>
+      <%=f.password_field :password%><br></br>
+      
+      <sup>*</sup><%=f.label "Confirm New Password: "%>
+      <%=f.password_field :password_confirmation%><br></br>
+  <%end%>
+
   <%= button_to "Cancel", user_home_path(current_user), {method: :get}%>
   <p><sup>*</sup>Required field.</p>
 

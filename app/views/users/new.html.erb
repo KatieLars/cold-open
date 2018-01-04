@@ -5,6 +5,12 @@
 
   <%=render 'user_form', user:@user%>
 
+  <sup>*</sup><%=f.label "New Password: "%>
+  <%=f.password_field :password%><br></br>
+
+  <sup>*</sup><%=f.label "Confirm New Password: "%>
+  <%=f.password_field :password_confirmation%><br></br>
+
   <h3>Or Sign Up with Facebook or Google</h3>
 
   <%= link_to image_tag("facebook_login_btn.jpeg", height: "44.4", width: "181.6"), "/auth/facebook" %><br></br>

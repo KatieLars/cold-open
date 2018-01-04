@@ -12,14 +12,6 @@
   <%=f.label "Admin: "%>
   <%=f.check_box :admin, unchecked: false%><br></br>
 
-  <%if !current_user.uid%>
-    <sup>*</sup><%=f.label "New Password: "%>
-    <%=f.password_field :password%><br></br>
-
-    <sup>*</sup><%=f.label "Confirm New Password: "%>
-    <%=f.password_field :password_confirmation%><br></br>
-  <%end%>
-
   <%=f.submit%><br></br>
 
 <%end%>
