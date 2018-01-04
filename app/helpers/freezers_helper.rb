@@ -16,4 +16,13 @@ module FreezersHelper
     end
   end
 
+  def any_items(current_user, f)
+    if !current_user.items.empty?
+      f.collection_check_boxes(:item_ids, current_user.items, :id, :title) 
+    else
+      "You have no items"
+    end
+  end
+
+
 end
