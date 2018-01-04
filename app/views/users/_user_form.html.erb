@@ -1,4 +1,4 @@
-<%=form_for user do |f|%>
+
 
   <sup>*</sup><%= f.label "Email: "%>
   <%=f.text_field :email%><br></br>
@@ -11,7 +11,3 @@
 
   <%=f.label "Admin: "%>
   <%=f.check_box :admin, unchecked: false%><br></br>
-
-  <%=f.submit%><br></br>
-
-<%end%>

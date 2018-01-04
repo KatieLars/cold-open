@@ -1,14 +1,19 @@
 <div class="banner">
   <h1>Edit <%=current_user.username.capitalize%></h1>
 
-    <%=render 'user_form', user:current_user%>
+<%=form_for current_user do |f|%>
+
+  <%=render 'user_form', f:f%>
 
   <%if !current_user.uid%>
       <sup>*</sup><%=f.label "New Password: "%>
       <%=f.password_field :password%><br></br>
-      
+
       <sup>*</sup><%=f.label "Confirm New Password: "%>
       <%=f.password_field :password_confirmation%><br></br>
+  <%end%>
+
+    <%=f.submit%><br></br>
   <%end%>
 
   <%= button_to "Cancel", user_home_path(current_user), {method: :get}%>
