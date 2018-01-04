@@ -55,9 +55,9 @@ item_types = [
   "ice cream & sorbet - 2 mos",
   ]
 
-  #creates item types
+
   item_types.each do |item_type|
-    types = item_type.split(" - ")#splits string into array ["Ham, cooked", "1-2 mos"]
+    types = item_type.split(" - ")
     range = types.pop.split("-")
     range.collect do |t|
       t.gsub!(" mos", "") if t.include?(" mos")
