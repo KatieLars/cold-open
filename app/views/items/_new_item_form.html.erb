@@ -17,6 +17,7 @@
   <%=f.fields_for :freezer, f.object.build_freezer do |freezer|%>
     <h4><%=freezer.label :name%>: <%=freezer.text_field :name%></h4>
     <h4><%=freezer.label :freezer_type%>: <%=freezer.text_field :freezer_type%></h4>
+    <%=freezer.hidden_field :user_id, value=current_user.id%>
   <%end%>
 
   <h3><strong><%=f.label "Notes: "%></strong></h3>

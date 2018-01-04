@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :user_items
   has_many :items, through: :user_items
   has_many :item_types, -> { distinct }, through: :items
-  has_and_belongs_to_many :freezers
+  has_and_belongs_to_many :freezers, {:join_table => :user_freezers}
   #has_many :freezers, -> { distinct }, through: :items
   has_many :notes
 
