@@ -42,6 +42,8 @@ gem 'chronic'
 #  gem 'capybara', '~> 2.13'
 #  gem 'selenium-webdriver'
 #end
+gem 'figaro'
+
 group :production do
   gem 'pg', '~> 0.18.4'
 end
