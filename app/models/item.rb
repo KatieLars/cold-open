@@ -17,6 +17,9 @@ class Item < ApplicationRecord
 #      self.notes.first_or_initialize(content: note["0"]["content"], user_id: note["0"]["user_id"])
 #    end
 #  end
+def notes=(notes)
+  self.notes.build(notes)
+end
 
   def freezer_attributes=(freezer)
     freezie = Freezer.new(freezer)

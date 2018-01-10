@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    raise params.inspect
     @item = current_user.items.build(item_params)
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     @item.users << current_user
