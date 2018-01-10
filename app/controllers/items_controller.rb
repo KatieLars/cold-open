@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @item = current_user.items.build(item_params)
     @item.date_stored = Chronic.parse(params[:item][:date_stored]).to_datetime
     @item.users << current_user
@@ -61,7 +62,7 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:title, :date_stored, :freezer_id, :item_type_id,
-        freezer_attributes: [:freezer_type, :name], notes_attributes: [:content, :user_id])
+        freezer_attributes: [:freezer_type, :name], notes: [:content, :user_id])
     end
 
 end

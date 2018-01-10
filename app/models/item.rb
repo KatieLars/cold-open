@@ -10,13 +10,13 @@ class Item < ApplicationRecord
   before_save :expiration_max_set
   before_save :expiration_min_set, if: :storage_min?
   accepts_nested_attributes_for :freezer
-  accepts_nested_attributes_for :notes
+  #accepts_nested_attributes_for :notes
 
-  def notes_attributes=(note)
-    if !note["0"]["content"].empty?
-      self.notes.first_or_initialize(content: note["0"]["content"], user_id: note["0"]["user_id"])
-    end
-  end
+  #def notes_attributes=(note)
+#    if !note["0"]["content"].empty?
+#      self.notes.first_or_initialize(content: note["0"]["content"], user_id: note["0"]["user_id"])
+#    end
+#  end
 
   def freezer_attributes=(freezer)
     freezie = Freezer.new(freezer)

@@ -19,12 +19,11 @@
   <h4><%=item.label "Title: "%> <%=item.text_field :title%></h4>
   <h4><%=item.label "Date Stored: "%><%=item.text_field :date_stored%></h4>
   <h4><%=item.label "Select an Item Type: "%> <%=item.collection_select :item_type_id, ItemType.all, :id, :title, :include_blank => true %></h4>
+  <h4><strong><%=f.label "Notes: "%></strong></h4>
+  <%=item.fields_for :note do |note|%>
+  <h4><%=note.text_area :content%></h4>
+  <%=note.hidden_field :user_id, value:current_user.id%>
+  <%end%>
 <%end%>
-
-<h4><strong><%=f.label "Notes: "%></strong></h4>
-<%=f.fields_for :notes do |note|%>
-<h4><%=note.text_area :content%></h4>
-<%end%>
-
 
 <%=f.submit%>
