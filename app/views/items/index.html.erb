@@ -1,16 +1,18 @@
 <div class="banner">
     <h1>Your Frozen Items</h1>
     <h3><em>Click to see the deets</em></h3>
-    <div id="items" data-userId="<%=current_user.id%>">
+    <div id="items">
       <!-- <%=any_items_display(@items)%> -->
     </div>
   </div>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">//needs to be moved to assets
 $(function() {
-    //var user = $("#items").data().userid
-    $("#items").on("load", function(e){
-      debugger
+    $("#items-link").on("click", function(){
+      var user = $("#items-link").data().userid
+      $.get("/users/"+user+"/items", function(response){
+          debugger
+       })
 
     })
 

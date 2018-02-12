@@ -3,7 +3,7 @@
 
   <%=link_to "Home", user_home_path(current_user)%>&emsp;|&emsp;
     <%= link_to "Freezers", user_freezers_path(current_user) %>&emsp;|&emsp;
-    <a href="<%=user_items_path(current_user)%>" data-userId="<%=current_user.id%>">Items</a>&emsp;|&emsp;
+    <a href="<%=user_items_path(current_user)%>" id="items-link" data-userId="<%=current_user.id%>">Items</a>&emsp;|&emsp;
     <!-- <%= link_to "Items", user_items_path(current_user) %>&emsp;|&emsp; -->
     <%= link_to "Items by Type", user_items_type_path(current_user)%>&emsp;|&emsp;
     <%= link_to "Expiring This Month", user_items_expire_month_path(current_user)%>&emsp;|&emsp;
