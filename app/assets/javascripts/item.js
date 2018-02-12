@@ -9,7 +9,7 @@ $("#items-link").on("click", function(){
       })
       debugger
       console.log(itemList)
-    $("#items-list").html('<p>Hello World</p>')
+    $("#items-list").html(itemList)
    })
 })
 }
