@@ -33,6 +33,7 @@ module ItemsHelper
     end
   end
 
+
   def any_items_display(items)
     if items.any?
       render partial: 'items', collection: @items
