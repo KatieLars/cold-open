@@ -8,12 +8,12 @@ $("#items-link").on("click", function(){
         itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.attributes.title+':</a></br>'
       })
       debugger
-
       console.log(itemList)
     $("#items-list").html('<p>Hello World</p>')
    })
 })
 }
+
 $(function() {
     getItems()
 });
