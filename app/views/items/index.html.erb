@@ -2,7 +2,6 @@
     <h1>Your Frozen Items</h1>
     <h3><em>Click to see the deets</em></h3>
     <div id="items">
-      <!-- <%=any_items_display(@items)%> -->
     </div>
   </div>
 
@@ -10,17 +9,17 @@
 $(function() {
     $("#items-link").on("click", function(){
       var user = $("#items-link").data().userid
-      $.get("/users/"+user+"/items", function(response){
+      $.get("/users/"+user+"/items.json", function(response){
+          var data = response.data
+          var itemList = ""
+          data.forEach(item => {//eventually refactor into Item.prototype function ---may need to fuck with serializer to allow for expiration expiration_zone
+            itemList += "<a href='/users/"+user+"/items/"+item.id+"'>"+item.attributes.title+":</a></br>"
+          })
           debugger
+        $("#items").innerHtml = itemList
        })
-
     })
 
-    // $.get("/user/"+user+"/items", function(response){
-    //   debugger
-    // })
-  // $("#items").on("click", function() {
-  //   debugger
   //   var id = $(this).data("id");
   //   $.get("/products/" + id + ".json", function(data) {
   //     var product = data;
