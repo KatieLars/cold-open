@@ -7,8 +7,6 @@ $("#items-link").on("click", function(){
       data.forEach(item => {//eventually refactor into Item.prototype function ---may need to fuck with serializer to allow for expiration expiration_zone
         itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.attributes.title+':</a></br>'
       })
-      debugger
-      console.log(itemList)
     $("#items-list").html(itemList)
    })
 })
