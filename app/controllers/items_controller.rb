@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     @items = current_user.items.alphabetize
     respond_to do |format|
      format.html { render :index }
-     format.json { render json: @items }
+     format.json { render json: @items}
     end
   end
 

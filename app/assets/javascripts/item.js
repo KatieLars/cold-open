@@ -1,6 +1,6 @@
 function getItems() {
 $("#items-link").on("click", function(e){
-  e.preventDefault()
+  //e.preventDefault()
   var user = $("#items-link").data().userid
   $.get("/users/"+user+"/items.json", function(response){
       var data = response.data
