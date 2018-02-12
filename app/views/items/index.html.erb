@@ -1,31 +1,34 @@
 <div class="banner">
     <h1>Your Frozen Items</h1>
     <h3><em>Click to see the deets</em></h3>
-    <div id="items">
+    <div id="items" data-userId="<%=current_user.id%>">
       <!-- <%=any_items_display(@items)%> -->
     </div>
   </div>
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  $("#items").on("click", function() {
-    debugger
-    var id = $(this).data("id");
-    $.get("/products/" + id + ".json", function(data) {
-      var product = data;
-      var inventoryText = "<strong>Available</strong>";
-      if(product["inventory"] === 0){
-        inventoryText = "<strong>Sold Out</strong>";
-      }
-      var descriptionText = "<p>" + product["description"] + "</p><p>" + inventoryText + "</p>";
-      $("#product-" + id).html(descriptionText);
-      var orders = product["orders"];
-      var orderList = "";
-      orders.forEach(function(order) {
-        orderList += '<li class="js-order" data-id="' + order["id"] + '">' + order["id"] + ' - ' + order["created_at"] + '</li>';
-      });
-      $("#product-" + id + "-orders").html(orderList);
-    });
-  });
+    $.get("user/user_id/items", function(response){
+
+    })
+  // $("#items").on("click", function() {
+  //   debugger
+  //   var id = $(this).data("id");
+  //   $.get("/products/" + id + ".json", function(data) {
+  //     var product = data;
+  //     var inventoryText = "<strong>Available</strong>";
+  //     if(product["inventory"] === 0){
+  //       inventoryText = "<strong>Sold Out</strong>";
+  //     }
+  //     var descriptionText = "<p>" + product["description"] + "</p><p>" + inventoryText + "</p>";
+  //     $("#product-" + id).html(descriptionText);
+  //     var orders = product["orders"];
+  //     var orderList = "";
+  //     orders.forEach(function(order) {
+  //       orderList += '<li class="js-order" data-id="' + order["id"] + '">' + order["id"] + ' - ' + order["created_at"] + '</li>';
+  //     });
+  //     $("#product-" + id + "-orders").html(orderList);
+  //   });
+  // });
 });
 </script>
