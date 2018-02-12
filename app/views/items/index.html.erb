@@ -1,11 +1,11 @@
 <div class="banner">
     <h1>Your Frozen Items</h1>
     <h3><em>Click to see the deets</em></h3>
-    <div id="items">
+    <div id="items-list">
     </div>
   </div>
 
-<script type="text/javascript" charset="utf-8">//needs to be moved to assets
+<!-- <script type="text/javascript" charset="utf-8">//needs to be moved to assets
 $(function() {
     $("#items-link").on("click", function(){
       var user = $("#items-link").data().userid
@@ -15,8 +15,11 @@ $(function() {
           data.forEach(item => {//eventually refactor into Item.prototype function ---may need to fuck with serializer to allow for expiration expiration_zone
             itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.attributes.title+':</a></br>'
           })
-        $("#items").innerHtml = itemList
+          debugger
+
+          console.log(itemList)
+        $("#items-list").html('<p>Hello World</p>')
        })
     })
 });
-</script>
+</script> -->
