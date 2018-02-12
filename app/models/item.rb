@@ -22,6 +22,7 @@ class Item < ApplicationRecord
     freezie = Freezer.new(freezer)
     if freezie.valid?
       self.freezer = freezie
+      self.freezer.save
     end
   end
 
