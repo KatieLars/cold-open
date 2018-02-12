@@ -8,10 +8,15 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-    var user = $("#items").dataset.userId
-    $.get("/user/"+user+"/items", function(response){
+    //var user = $("#items").data().userid
+    $("#items").on("load", function(e){
       debugger
+
     })
+
+    // $.get("/user/"+user+"/items", function(response){
+    //   debugger
+    // })
   // $("#items").on("click", function() {
   //   debugger
   //   var id = $(this).data("id");
