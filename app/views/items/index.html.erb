@@ -8,8 +8,9 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-    $.get("user/user_id/items", function(response){
-
+    var user = $("#items").dataset.userId
+    $.get("/user/"+user+"/items", function(response){
+      debugger
     })
   // $("#items").on("click", function() {
   //   debugger
