@@ -1,6 +1,8 @@
 function getItems() {
 $("#items-link").on('click',function(e){
-  var user = $("#items-link").data().userid
+  
+  debugger
+  var user = $("#items-link").data().user
   $.get("/users/"+user+"/items.json", function(response){
       var data = response.data
       var itemList = ""
