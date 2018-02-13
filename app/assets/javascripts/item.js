@@ -31,7 +31,7 @@ function getItems() {//list user items on whatever page the Items link in header
 }
 
 function showNotes() {//should be on item show page--shows notes when clicked
-  $("button#show-notes").on('click', function(e){
+  $("button#show-notes").on('click', function(e){//might not need e . . .there is no default action
     e.preventDefault()
     var user = $(".main").data().userid
     var item = $(".main").data().itemid
@@ -40,10 +40,16 @@ function showNotes() {//should be on item show page--shows notes when clicked
       var noteList = ""
       notes.forEach(note => {
         if(note.updated_at)
-        noteList += '<p><strong>'+note.content+'</p></strong><h6>'+note.create_or_updated_at+'</h6>'
+        noteList += `<p><strong>${note.content}</p></strong><h6>${note.create_or_updated_at}</h6>&emsp;|&emsp;` //make a button to update note
       })
     $("button#show-notes").after(noteList)
     })
+  })
+}
+
+function showNoteForm() {
+  $("button#create-notes").on('submit', function(e){
+      e.preventDefault()
   })
 }
 
