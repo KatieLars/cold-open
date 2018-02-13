@@ -8,6 +8,7 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
+    binding.pry
     if @note.save #be sure that this is being saved to item as well
       render json: @note
     else

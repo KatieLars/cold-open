@@ -68,12 +68,14 @@ function showNoteForm() {
 
 function createNote(event) {
     event.preventDefault()
-    debugger
+
     var values = $(this).serialize()
     var item = $(".main").data().itemid
-    $.post("/items/"+item+"/notes.json", function(response) {
+    var notes = $.post("/items/"+item+"/notes.json", values)
+    debugger
+      function(response) {
 
-    })
+     })
   //post request for submitting the notes form
 }
 
