@@ -1,4 +1,5 @@
 <div class="banner">
+  <div class="main">
   <h1>Edit <%=@freezer.name%></h1>
 
   <%=render partial: 'users/errors', collection: @errors if @freezer.errors.any?%>
@@ -9,4 +10,5 @@
 
   <p><strong>IF YOU DELETE THE FREEZER, ALL ITEMS INSIDE IT WILL BE DELETED</strong></p>
   <%= button_to "Delete Freezer", user_freezer_path(current_user, @freezer), method: "delete"%>
+</div>
 </div>

@@ -1,8 +1,10 @@
 <div class="banner">
+  <div class="main">
   <h1>Create New Freezer</h1>
   <%=render partial: 'users/errors', collection: @errors if @freezer.errors.any?%>
-  
+
   <%=form_for @freezer, url: user_freezers_path(current_user) do |f|%>
     <%=render 'new_freezer', f:f%>
   <%end%>
+</div>
 </div>

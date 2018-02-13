@@ -1,8 +1,9 @@
 <div class="banner">
+<div class="main">
   <h1>Create a New Item Type</h1>
 
   <%=render partial: 'users/errors', collection: @errors if @item_type.errors.any?%>
 
   <%=render 'item_type_form', item_type:@item_type%>
-
+</div>
 </div>
