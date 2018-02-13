@@ -61,20 +61,19 @@ function showNoteForm() {
           </form>
         `
         $("#create-notes").after(noteForm)
+        $("form#note-form").on('submit', createNote(event))
       })
   })
 }
 
-function createNote() {
-  $("form#note-form").on('submit', function(e){
-    e.preventDefault()
+function createNote(event) {
+    event.preventDefault()
     debugger
     var values = $(this).serialize()
     var item = $(".main").data().itemid
     $.post("/items/"+item+"/notes.json", function(response) {
 
     })
-  })
   //post request for submitting the notes form
 }
 
