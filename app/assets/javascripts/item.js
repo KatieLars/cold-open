@@ -52,8 +52,20 @@ function showNoteForm() {
   $("button#create-notes").on('click', function(e){ //sends a request to get the note form
       e.preventDefault()
       //grabs a notes form to populate with hidden ID in it
-      //need a route
-      $.get("/item/item_id/notes")
+      var item = $(".main").data().itemid
+      $.get("/item/"+item+"/notes.json", function(response){
+        //this should render the form
+        debugger
+        noteForm = `
+          <form id="note-form">
+            <input type="text_area"></br>
+            <input type="hidden" name="item_id" value="${item}">
+            <input type="submit">
+          </form>
+        `
+        $("#create-notes").after(noteForm)
+
+      })
   })
 }
 
