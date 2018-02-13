@@ -55,13 +55,13 @@ function showNoteForm() {
       $.get("/items/"+item+"/notes.json", function(response){
         noteForm = `
           <form id="note-form">
-            <br></br><strong>New Note: </strong><input type="text_area"><br></br>
+            <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
             <input type="hidden" name="item_id" value="${item}">
-            <input type="submit">
+            <input type="submit" id="submit-form">
           </form>
         `
         $("#create-notes").after(noteForm)
-        $("form#note-form").on('submit', createNote(event))
+        $("form").on('submit', createNote)
       })
   })
 }
