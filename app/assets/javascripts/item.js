@@ -30,8 +30,8 @@ function getItems() {//list user items on whatever page the Items link in header
   })
 }
 
-function showNotes() {
-  $(".item-show").on('click', function(e){
+function showNotes() {//should be on item show page--shows notes
+  $(".show-notes").on('click', function(e){
     e.preventDefault()
 
   })
