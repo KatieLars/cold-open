@@ -38,9 +38,10 @@ function showNotes() {//should be on item show page--shows notes when clicked
     $.get("/users/"+user+"/items/"+item+".json", function(response){
       var notes = response.item.notes
       var noteList = ""
-      notes.forEach(note => {
-        if(note.updated_at)
-        noteList += `<p><strong>${note.content}</p></strong><h6>${note.create_or_updated_at}</h6>&emsp;|&emsp;` //make a button to update note
+      notes.forEach(note => { //add a click to update note
+        noteList += `
+        <p><strong>${note.content}</strong></p>
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>` //make a button to update note
       })
     $("button#show-notes").after(noteList)
     })
