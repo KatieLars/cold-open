@@ -1,4 +1,5 @@
 <div class="banner">
+  <div class="main">
   <h1>Edit <%=current_user.username.capitalize%></h1>
 
 <%=form_for current_user do |f|%>
@@ -18,5 +19,5 @@
 
   <%= button_to "Cancel", user_home_path(current_user), {method: :get}%>
   <p><sup>*</sup>Required field.</p>
-
+</div>
 </div>

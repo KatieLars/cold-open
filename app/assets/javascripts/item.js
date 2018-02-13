@@ -15,8 +15,19 @@ $("#items-link").on('click',function(e){
 }
 
 function getItems() {//list user items on whatever page the Items link in header is clicked
-  e.preventDefault()
-  var user = $("#items-index").data().id
+  $("#items-index").on('click', function(e){
+    e.preventDefault()
+    var user = $("#items-index").data().id
+    $.get("/users/"+user+"/items.json", function(response){
+      var items = response.items
+      var header = "<h1>Your Frozen Items</h1><h3><em>Click to see the deets</em></h3>"
+      var itemList = ""
+      items.forEach(item => {
+        itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.title+': '+item.expiration_zone+'</a></br>'
+      })
+    $(".banner").html(header+itemList)
+    })
+  })
 }
 
 $(function() {
