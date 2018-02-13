@@ -33,8 +33,19 @@ function getItems() {//list user items on whatever page the Items link in header
 function showNotes() {//should be on item show page--shows notes when clicked
   $("button#show-notes").on('click', function(e){
     e.preventDefault()
-    debugger
-    $
+    var user = $(".main").data().userid
+    var item = $(".main").data().itemid
+    $.get("/users/"+user+"/items/"+item+".json", function(response){
+      debugger
+      var notes = response.item.notes
+      var noteList = ""
+      items.forEach(item => {
+        itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.title+': '+item.expiration_zone+'</a></br>'
+      })
+    $(".main").html(header+itemList)
+    })
+
+    })
   })
 }
 $(function() {

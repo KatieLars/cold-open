@@ -8,7 +8,7 @@ class NoteSerializer < ActiveModel::Serializer
     end
   end
 
-  def create_or_updated_at
+  def create_or_updated_at#not working
     if object.updated_at
       "<p><strong>Created at: </strong>#{format_date(object.created_at)}</p>
         <p><strong>Last Updated at: </strong>#{format_date(object.updated_at)}</p>"
