@@ -53,11 +53,9 @@ function showNoteForm() {
       e.preventDefault()//do I need this?
       var item = $(".main").data().itemid
       $.get("/items/"+item+"/notes.json", function(response){
-        //this should render the form
-        debugger
         noteForm = `
           <form id="note-form">
-            <input type="text_area"></br>
+            <br></br><strong>New Note: </strong><input type="text_area"><br></br>
             <input type="hidden" name="item_id" value="${item}">
             <input type="submit">
           </form>
@@ -68,6 +66,9 @@ function showNoteForm() {
 }
 
 function createNote() {
+  $("form#note-form").on('submit', function(e){
+    e.preventDefault()
+  })
   //post request for submitting the notes form
 }
 
