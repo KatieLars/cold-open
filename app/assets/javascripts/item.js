@@ -68,6 +68,12 @@ function showNoteForm() {
 function createNote() {
   $("form#note-form").on('submit', function(e){
     e.preventDefault()
+    debugger
+    var values = $(this).serialize()
+    var item = $(".main").data().itemid
+    $.post("/items/"+item+"/notes.json", function(response) {
+
+    })
   })
   //post request for submitting the notes form
 }
