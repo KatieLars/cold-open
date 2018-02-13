@@ -49,11 +49,10 @@ function showNotes() {//should be on item show page--shows notes when clicked
 }
 
 function showNoteForm() {
-  $("button#create-notes").on('click', function(e){ //sends a request to get the note form
-      e.preventDefault()
-      //grabs a notes form to populate with hidden ID in it
+  $("#create-notes").on('click', function(e){ //sends a request to get the note form
+      e.preventDefault()//do I need this?
       var item = $(".main").data().itemid
-      $.get("/item/"+item+"/notes.json", function(response){
+      $.get("/items/"+item+"/notes.json", function(response){
         //this should render the form
         debugger
         noteForm = `
@@ -64,13 +63,17 @@ function showNoteForm() {
           </form>
         `
         $("#create-notes").after(noteForm)
-
       })
   })
+}
+
+function createNote() {
+  //post request for submitting the notes form
 }
 
 $(function() {
     getFreezerItems()
     getItems()
     showNotes()
+    showNoteForm()
 });
