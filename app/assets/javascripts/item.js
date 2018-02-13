@@ -36,18 +36,17 @@ function showNotes() {//should be on item show page--shows notes when clicked
     var user = $(".main").data().userid
     var item = $(".main").data().itemid
     $.get("/users/"+user+"/items/"+item+".json", function(response){
-      debugger
       var notes = response.item.notes
       var noteList = ""
-      items.forEach(item => {
-        itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.title+': '+item.expiration_zone+'</a></br>'
+      notes.forEach(note => {
+        if(note.updated_at)
+        noteList += '<li>'+note.content+' '+note.create_or_updated_at+'</li>'
       })
-    $(".main").html(header+itemList)
-    })
-
+    $("ul#note-list").html(noteList)
     })
   })
 }
+
 $(function() {
     getFreezerItems()
     getItems()
