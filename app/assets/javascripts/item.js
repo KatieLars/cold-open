@@ -49,8 +49,11 @@ function showNotes() {//should be on item show page--shows notes when clicked
 }
 
 function showNoteForm() {
-  $("button#create-notes").on('submit', function(e){
+  $("button#create-notes").on('click', function(e){ //sends a request to get the note form
       e.preventDefault()
+      //grabs a notes form to populate with hidden ID in it
+      //need a route
+      $.get("/item/item_id/notes")
   })
 }
 
