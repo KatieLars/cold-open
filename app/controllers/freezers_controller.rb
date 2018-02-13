@@ -1,7 +1,7 @@
 class FreezersController < ApplicationController
   before_action :authentication_required
 
-  def index
+  def index #should be jquery
     @freezers =  @current_user.freezers
   end
 
@@ -22,7 +22,7 @@ class FreezersController < ApplicationController
   def show
     @freezer = Freezer.find_by(id: params[:id])
     respond_to do |format|
-     format.html { render :show }
+     format.html { render :show } #in case of hard refresh
      format.json { render json: @freezer}
     end
   end

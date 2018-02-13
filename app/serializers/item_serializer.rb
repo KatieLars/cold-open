@@ -1,6 +1,5 @@
 class ItemSerializer < ActiveModel::Serializer
   attributes :id, :title, :expiration_max, :expiration_min, :date_stored, :expiration_zone
-  #belongs_to :freezer
 
   def expiration_zone
     if object.expiration_min
