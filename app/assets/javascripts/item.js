@@ -40,9 +40,9 @@ function showNotes() {//should be on item show page--shows notes when clicked
       var noteList = ""
       notes.forEach(note => {
         if(note.updated_at)
-        noteList += '<li>'+note.content+' '+note.create_or_updated_at+'</li>'
+        noteList += '<p><strong>'+note.content+'</p></strong><h6>'+note.create_or_updated_at+'</h6>'
       })
-    $("ul#note-list").html(noteList)
+    $("button#show-notes").after(noteList)
     })
   })
 }
