@@ -1,9 +1,9 @@
 <div class="banner">
   <h1><%=@freezer.name%></h1>
   <h3><em><%=@freezer.freezer_type%></em></h3>
-  <p>Click <a href="X" id="items-link" data-user="<%=current_user.id%>">here</a>to see items in this freezer</p>
+  <p>Click <a href="#" id="items-link" data-user="<%=current_user.id%>" data-freezer="<%=@freezer.id%>">here </a>to see items in this freezer</p>
   <div id="items-list"></div>
-  <!-- <%=render partial: "items/items", collection: @freezer.items%> -->
+
   <p><strong>IF YOU DELETE THE FREEZER, ALL ITEMS INSIDE IT WILL BE DELETED</strong></p>
   <%=link_to "Freezers List", user_freezers_path(current_user)%>&emsp;|&emsp;
   <%=link_to "Edit Freezer", edit_user_freezer_path(current_user, @freezer)%>&emsp;|&emsp;

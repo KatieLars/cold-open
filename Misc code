@@ -34,3 +34,5 @@ $(function() {
 </script> -->
 
 'data-turbolinks-track': 'reload'
+
+<!-- <%=render partial: "items/items", collection: @freezer.items%> -->
