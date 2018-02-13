@@ -5,6 +5,7 @@ $("#items-link").on('click',function(e){
   var user = $("#items-link").data().user
   $.get("/users/"+user+"/freezers/"+freezer+".json", function(response){ //get request to freezer show page
       var items = response.freezer.items
+      debugger
       var itemList = ""
       items.forEach(item => {
         itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.title+':</a></br>'
