@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items.alphabetize
+    # binding.pry
     respond_to do |format|
      format.html { render :index }
      format.json { render json: @items}
@@ -27,6 +28,10 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find_by(id: params[:id])
+    respond_to do |format|
+     format.html { render :show }
+     format.json { render json: @item}
+    end
   end
 
   def edit

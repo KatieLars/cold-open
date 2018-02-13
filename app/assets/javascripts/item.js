@@ -1,4 +1,4 @@
-function getFreezerItems() {
+function getFreezerItems() {//list items in freezer on a freezer show page
 $("#items-link").on('click',function(e){
   e.preventDefault()
   var freezer = $(this).data().freezer
@@ -23,20 +23,22 @@ function getItems() {//list user items on whatever page the Items link in header
       var header = "<h1>Your Frozen Items</h1><h3><em>Click to see the deets</em></h3>"
       var itemList = ""
       items.forEach(item => {
-        itemList += '<a href="/users/'+user+'/items/'+item.id+'>'+item.title+': '+item.expiration_zone+'</a></br>'
+        itemList += '<a href="/users/'+user+'/items/'+item.id+'">'+item.title+': '+item.expiration_zone+'</a></br>'
       })
     $(".main").html(header+itemList)
     })
   })
 }
 
-function showNotes() {//should be on item show page--shows notes
-  $(".show-notes").on('click', function(e){
+function showNotes() {//should be on item show page--shows notes when clicked
+  $("button#show-notes").on('click', function(e){
     e.preventDefault()
-
+    debugger
+    $
   })
 }
 $(function() {
     getFreezerItems()
     getItems()
+    showNotes()
 });
