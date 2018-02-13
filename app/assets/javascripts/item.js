@@ -1,4 +1,4 @@
-function getItems() {
+function getFreezerItems() {
 $("#items-link").on('click',function(e){
   e.preventDefault()
   var freezer = $(this).data().freezer
@@ -14,6 +14,12 @@ $("#items-link").on('click',function(e){
 })
 }
 
+function getItems() {//list user items on whatever page the Items link in header is clicked
+  e.preventDefault()
+  var user = $("#items-index").data().id
+}
+
 $(function() {
+    getFreezerItems()
     getItems()
 });

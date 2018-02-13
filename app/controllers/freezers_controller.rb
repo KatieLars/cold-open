@@ -1,7 +1,7 @@
 class FreezersController < ApplicationController
   before_action :authentication_required
 
-  def index #should be jquery
+  def index
     @freezers =  @current_user.freezers
   end
 
