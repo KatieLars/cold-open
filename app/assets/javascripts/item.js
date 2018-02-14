@@ -93,7 +93,7 @@ function showNoteForm() { //good
           </form>
         `
         debugger
-
+//THIS IS WHERE WE LEFT OFF--CANNOT FIND THE DIV WITH THE ID OF note.ID
       $(`div#${note}`).html(updateForm)
       $("form#edit-form").on('submit', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
@@ -102,7 +102,8 @@ function showNoteForm() { //good
  }
 
  function updateNote() {
-
+   //post to the update function and updates the note
+   //have an alert signaling that the item was updated successfully
  }
 
  // <input type="hidden" name="item_id" value="${item}">
