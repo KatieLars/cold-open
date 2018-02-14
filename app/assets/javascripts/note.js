@@ -52,22 +52,30 @@ function showNoteForm() { //good
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
-   $.get("/items/"+item+"/notes/"+note+".json", function(response){
-      var updateForm = `
+   var newNote = $.get("/items/"+item+"/notes/"+note+".json", updateForm)
+    //function(response){
+      // updateForm += `
+      //     <form id="edit-form">
+      //       <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
+      //       <input type="hidden" name="updated_at" value="${Date()}">
+      //       <input type="submit" id="update-form">Update Note</input>
+      //     </form>
+      //   `
+      debugger
+  $(`#${note}`).html(newNote)
+  $("form#edit-form").on('submit', updateNote)
+ }
+
+ function updateForm(response) {
+   var dataForm = `
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
             <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="update-form">Update Note</input>
           </form>
         `
-//THIS IS WHERE WE LEFT OFF--CANNOT FIND THE DIV WITH THE ID OF note.ID
-    debugger
-      $("#test").html(updateForm)
-      $("form#edit-form").on('submit', updateNote)
-//   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
-//   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
-  })
-  debugger
+
+  return dataForm
  }
 
  function updateNote() {
