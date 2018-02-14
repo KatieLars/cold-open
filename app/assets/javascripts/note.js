@@ -48,9 +48,8 @@ function showNoteForm() { //good
   })
 }
 
-function
 
- function editNoteForm() { //helper to be used in conjuctions with click events
+ function editNoteForm() {
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
@@ -105,6 +104,7 @@ function buttonOrSpan(newNote) {
 }
 
 $(function() {
+    showNotes()
     showNotesFirst()
     showNoteForm()
 });

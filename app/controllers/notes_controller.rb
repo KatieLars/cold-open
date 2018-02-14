@@ -11,15 +11,17 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find_by_id(params[:id])
+
     render json: @note
   end
 
   def update
-    @note = Note.(params[:id])
+    @note = Note.find_by_id(params[:id])
     if @note.update
       render json: @note
     else
       render html: "items/#{@note.item.id}/show"
+    end
   end
 
   private
