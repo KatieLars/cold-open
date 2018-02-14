@@ -52,11 +52,13 @@ function showNoteForm() {
   $("#create-notes").on('click', function(e){ //sends a request to get the note form
       e.preventDefault()//do I need this?
       var item = $(".main").data().itemid
+      var user = $(".main").data().userid
       $.get("/items/"+item+"/notes.json", function(response){
         noteForm = `
           <form id="note-form">
             <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
             <input type="hidden" name="item_id" value="${item}">
+            <input type="hidden" name="user_id" value="${user}"
             <input type="submit" id="submit-form">
           </form>
         `
@@ -68,14 +70,12 @@ function showNoteForm() {
 
 function createNote(event) {
     event.preventDefault()
-
     var values = $(this).serialize()
     var item = $(".main").data().itemid
+    debugger
     var notes = $.post("/items/"+item+"/notes.json", values)
     debugger
-      function(response) {
 
-     })
   //post request for submitting the notes form
 }
 
