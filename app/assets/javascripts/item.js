@@ -43,7 +43,7 @@ function showNotes() {//good
       var noteList = ""
       notes.forEach(note => {
         noteList += `
-        <div><p><strong>${note.content}</strong></p>
+        <div id="${note.id}"><p><strong>${note.content}</strong></p>
         <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid=${note.id} class="update-note">Update Note</a></span><br></br></div>
         `
       })
@@ -66,7 +66,7 @@ function showNoteForm() { //good
   $("#create-notes").on('click', function(){
       var item = $(".main").data().itemid
       var user = $(".main").data().userid
-        noteForm = `
+        var noteForm = `
           <form id="note-form">
             <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
             <input type="hidden" name="item_id" value="${item}">
@@ -84,18 +84,25 @@ function showNoteForm() { //good
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
-   debugger
    $.get("/items/"+item+"/notes/"+note+".json", function(response){
-      noteForm = `
+      var updateForm = `
           <form id="edit-form">
-            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${note.content}"><br></br>
+            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
             <input type="hidden" name="updated_at" value="${Date()}">
-            <input type="submit" id="submit-form">Update Note</input>
+            <input type="submit" id="update-form">Update Note</input>
           </form>
         `
+        debugger
+
+      $(`div#${note}`).html(updateForm)
+      $("form#edit-form").on('submit', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
- })
+  })
+ }
+
+ function updateNote() {
+
  }
 
  // <input type="hidden" name="item_id" value="${item}">
