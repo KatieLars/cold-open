@@ -34,7 +34,7 @@ function showNotesFirst() {
   $("button#show-notes").on('click', showNotes)
 }
 
-function showNotes() {
+function showNotes() {//good
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
@@ -42,8 +42,8 @@ function showNotes() {
     var noteList = ""
     notes.forEach(note => {
       noteList += `
-      <p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
+      <div><p><strong>${note.content}</strong></p>
+      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
     })
   $(".update-note").on('click', updateNote)
@@ -52,14 +52,13 @@ function showNotes() {
   })
 }
 
-function hideNotes() {
+function hideNotes() {//good
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', showNotes)
 }
 
-function showNoteForm() {
-  $("#create-notes").on('click', function(e){ //sends a request to get the note form
-      e.preventDefault()//do I need this?
+function showNoteForm() { //good
+  $("#create-notes").on('click', function(){
       var item = $(".main").data().itemid
       var user = $(".main").data().userid
         noteForm = `
@@ -77,23 +76,23 @@ function showNoteForm() {
   })
 }
 
-function updateNote() { //helper to be used in conjuctions with click events
-  var user = $(".main").data().userid
-  var item = $(".main").data().itemid
-  $.get("/users/"+user+"/items/"+item+".json", function(response){
-    var notes = response.item.notes
-    var noteList = ""
-    notes.forEach(note => {
-      noteList += `
-      <p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
-      `
-    })
-  $(".update-note").on('click', updateNote)
-  var hideButton = "<button id='hide-notes'>Hide Notes</button>"
-  $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
-  })
-}
+ function updateNote() { //helper to be used in conjuctions with click events
+//   var user = $(".main").data().userid
+//   var item = $(".main").data().itemid
+//   $.get("/users/"+user+"/items/"+item+".json", function(response){
+//     var notes = response.item.notes
+//     var noteList = ""
+//     notes.forEach(note => {
+//       noteList += `
+//       <p><strong>${note.content}</strong></p>
+//       <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
+//       `
+//     })
+//   $(".update-note").on('click', updateNote)
+//   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+//   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+//   })
+ }
 
 function createNote(event) {
     event.preventDefault()
@@ -102,11 +101,12 @@ function createNote(event) {
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
       newNote = `
-      <p><strong>${response.note.content}</strong></p>
-      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
+      <div><p><strong>${response.note.content}</strong></p>
+      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
-      $("span#display-notes").after(newNote)
-      $()
+      $("button#show-notes").after(newNote)
+      $("span#display-notes div:last-child").after(newNote)
+      $("form").empty()
     })
 }
 
