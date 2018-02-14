@@ -58,7 +58,9 @@ function showNoteForm() {
           <form id="note-form">
             <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
             <input type="hidden" name="item_id" value="${item}">
-            <input type="hidden" name="user_id" value="${user}"
+            <input type="hidden" name="user_id" value="${user}">
+            <input type="hidden" name="created_at" value="${Date()}">
+            <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="submit-form">
           </form>
         `
