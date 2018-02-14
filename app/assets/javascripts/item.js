@@ -39,16 +39,20 @@ function showNotes() {//good
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
     var notes = response.item.notes
-    var noteList = ""
-    notes.forEach(note => {
-      noteList += `
-      <div><p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
-      `
-    })
-  $(".update-note").on('click', updateNote)
-  var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
-  $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+    if(notes.length) {
+      var noteList = ""
+      notes.forEach(note => {
+        noteList += `
+        <div><p><strong>${note.content}</strong></p>
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
+        `
+      })
+      $(".update-note").on('click', updateNote)
+      var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
+      $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+    }else{
+      $("button#show-notes").after("<strong>No notes for this item.</strong>")
+    }
   })
 }
 
