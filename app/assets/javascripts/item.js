@@ -47,7 +47,7 @@ function showNotes() {//good
       `
     })
   $(".update-note").on('click', updateNote)
-  var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+  var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
   })
 }
@@ -104,11 +104,8 @@ function createNote(event) {
       <div><p><strong>${response.note.content}</strong></p>
       <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
-      if($("button#show-notes")) {
-        $("button#show-notes").after(newNote)
-      }else {
-        $("span#display-notes div:last-child").after(newNote)
-      }
+      // $("button#show-notes").after(newNote)
+      $("span#display-notes div:last-child").after(newNote)
       $("form").empty()
     })
 }
