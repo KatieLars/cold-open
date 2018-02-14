@@ -30,29 +30,46 @@ function getItems() {//list user items on whatever page the Items link in header
   })
 }
 
-function showNotes() {//should be on item show page--shows notes when clicked
-  $("button#show-notes").on('click', function(){//might not need e . . .there is no default action
-    var user = $(".main").data().userid
-    var item = $(".main").data().itemid
-    $.get("/users/"+user+"/items/"+item+".json", function(response){
-      var notes = response.item.notes
-      var noteList = ""
-      notes.forEach(note => { //add a click to update note
-        noteList += `
-        <p><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
-        `
-      })
-    var hideButton = "<button id='hide-notes'>Hide Notes</button>"
-    $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+function showNotesFirst() {//should be on item show page--shows notes when clicked
+  $("button#show-notes").on('click', showNotes)//might not need e . . .there is no default action
+
+    // var user = $(".main").data().userid
+    // var item = $(".main").data().itemid
+    // $.get("/users/"+user+"/items/"+item+".json", function(response){
+    //   var notes = response.item.notes
+    //   var noteList = ""
+    //   notes.forEach(note => { //add a click to update note
+    //     noteList += `
+    //     <p><strong>${note.content}</strong></p>
+    //     <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+    //     `
+    //   })
+    // var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+    // $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+    // })
+  // })
+}
+
+function showNotes() {
+  var user = $(".main").data().userid
+  var item = $(".main").data().itemid
+  $.get("/users/"+user+"/items/"+item+".json", function(response){
+    var notes = response.item.notes
+    var noteList = ""
+    notes.forEach(note => { //add a click to update note
+      noteList += `
+      <p><strong>${note.content}</strong></p>
+      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+      `
     })
+  var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+  $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
   })
 }
 
 function hideNotes() {
-    $("span#display-notes").html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
-
-  // $("span#display-notes").html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
+    $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
+    $("button#show-notes").on('click', showNotes)
 }
 
 function showNoteForm() {
@@ -95,6 +112,6 @@ function createNote(event) {
 $(function() {
     getFreezerItems()
     getItems()
-    showNotes()
+    showNotesFirst()
     showNoteForm()
 });
