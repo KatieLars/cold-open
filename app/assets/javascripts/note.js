@@ -18,7 +18,6 @@ function showNotes() {//good
 
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
-      $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -29,6 +28,17 @@ function hideNotes() {//good
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', showNotes)
 }
+
+function updateButtonOnClick(){
+  $(".update-note").on('click', editNoteForm)
+}
+
+$(function() {
+    // showNotes()
+    // showNotesFirst()
+    updateButtonOnClick()
+    editNoteForm()
+});
 
 function showNoteForm() { //good
   $("#create-notes").on('click', function(){
@@ -54,6 +64,7 @@ function showNoteForm() { //good
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response){
+     debugger
       var updateForm = `
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
@@ -61,9 +72,9 @@ function showNoteForm() { //good
             <input type="submit" id="update-form">Update Note</input>
           </form>
         `
-        debugger
 //THIS IS WHERE WE LEFT OFF--CANNOT FIND THE DIV WITH THE ID OF note.ID
       $(`div#${note}`).html(updateForm)
+      debugger
       $("form#edit-form").on('submit', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
