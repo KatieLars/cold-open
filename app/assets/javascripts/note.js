@@ -12,7 +12,7 @@ function showNotes() {//good
       notes.forEach(note => {
         noteList += `
         <div id="${note.id}"><p><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="test" class="update-note">Update Note</a></span><br></br></div>
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
         `
       })
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
@@ -51,9 +51,8 @@ function showNoteForm() { //good
  function editNoteForm() {
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
-   var note = 86//$(this).data().noteid
+   var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response){
-     debugger
       var updateForm = `
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
@@ -64,11 +63,11 @@ function showNoteForm() { //good
 //THIS IS WHERE WE LEFT OFF--CANNOT FIND THE DIV WITH THE ID OF note.ID
     debugger
       $("#test").html(updateForm)
-
       $("form#edit-form").on('submit', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
   })
+  debugger
  }
 
  function updateNote() {
