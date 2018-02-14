@@ -62,7 +62,6 @@ function showNoteForm() {
       e.preventDefault()//do I need this?
       var item = $(".main").data().itemid
       var user = $(".main").data().userid
-      // $.get("/items/"+item+"/notes.json", function(response){
         noteForm = `
           <form id="note-form">
             <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
@@ -75,11 +74,10 @@ function showNoteForm() {
         `
         $("#create-notes").after(noteForm)
         $("form").on('submit', createNote)
-      // })
   })
 }
 
-function updateNote() { //helper
+function updateNote() { //helper to be used in conjuctions with click events
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
@@ -105,9 +103,9 @@ function createNote(event) {
     note.done(function(response) {
       newNote = `
       <p><strong>${response.note.content}</strong></p>
-      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
       `
-      $("button#show_notes").after(newNote)
+      $("span#display-notes").after(newNote)
       $()
     })
 }
