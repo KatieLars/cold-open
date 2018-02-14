@@ -74,10 +74,14 @@ function createNote(event) {
     event.preventDefault()
     var values = $(this).serialize()
     var item = $(".main").data().itemid
-    var notes = $.post("/items/"+item+"/notes.json", values)
-
-
-  //post request for submitting the notes form
+    var note =  $.post("/items/"+item+"/notes.json", values)
+    note.done(function(response) {
+      newNote = `
+      <p><strong>${note.content}</strong></p>
+      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+      `
+      $("#show_notes span:last-child").after(newNote)
+    })
 }
 
 $(function() {
