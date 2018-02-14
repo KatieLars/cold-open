@@ -49,27 +49,13 @@ function showNoteForm() { //good
 
 
  function editNoteForm() {
-   //var user = $(".main").data().userid
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
-debugger
-   console.log($.get("/items/"+item+"/notes/"+note+".json", function(response) {
-      var newNote = updateForm(response)
+   $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       debugger
-      $("#show-notes").html(newNote)
-   }))
-    //function(response){
-      // updateForm += `
-      //     <form id="edit-form">
-      //       <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
-      //       <input type="hidden" name="updated_at" value="${Date()}">
-      //       <input type="submit" id="update-form">Update Note</input>
-      //     </form>
-      //   `
-
-  // $(`#${note}`).html(newNote)
-
-  $("form#edit-form").on('submit', updateNote)
+      $("#show-notes").html(updateForm(response))
+      $("form#edit-form").on('submit', updateNote)
+   })
  }
 
  function updateForm(response) {
