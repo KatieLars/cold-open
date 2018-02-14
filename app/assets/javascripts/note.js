@@ -7,17 +7,17 @@ function showNotes() {//good
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
     var notes = response.item.notes
-    if(notes.length) {
+    if(notes.length) {//if notes exist
       var noteList = ""
       notes.forEach(note => {
         noteList += `
         <div id="${note.id}"><p><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid=${note.id} class="update-note">Update Note</a></span><br></br></div>
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="test" class="update-note">Update Note</a></span><br></br></div>
         `
       })
-
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+      $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -28,17 +28,6 @@ function hideNotes() {//good
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', showNotes)
 }
-
-function updateButtonOnClick(){
-  $(".update-note").on('click', editNoteForm)
-}
-
-$(function() {
-    // showNotes()
-    // showNotesFirst()
-    updateButtonOnClick()
-    editNoteForm()
-});
 
 function showNoteForm() { //good
   $("#create-notes").on('click', function(){
@@ -62,7 +51,7 @@ function showNoteForm() { //good
  function editNoteForm() {
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
-   var note = $(this).data().noteid
+   var note = 86//$(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response){
      debugger
       var updateForm = `
@@ -73,8 +62,9 @@ function showNoteForm() { //good
           </form>
         `
 //THIS IS WHERE WE LEFT OFF--CANNOT FIND THE DIV WITH THE ID OF note.ID
-      $(`div#${note}`).html(updateForm)
-      debugger
+    debugger
+      $("#test").html(updateForm)
+
       $("form#edit-form").on('submit', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
