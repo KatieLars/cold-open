@@ -15,7 +15,11 @@ class NotesController < ApplicationController
   end
 
   def update
-
+    @note = Note.(params[:id])
+    if @note.update
+      render json: @note
+    else
+      render html: "items/#{@note.item.id}/show"
   end
 
   private
