@@ -51,7 +51,7 @@ function showNotes() {//good
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
     }else{
-      $("button#show-notes").after("<p><strong>No notes for this item.</strong></p>")
+      $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
   })
 }
@@ -117,6 +117,7 @@ function buttonOrSpan(newNote) {
   if($("span#display-notes div:last-child").length) {
     $("span#display-notes div:last-child").after(newNote)
   }else{
+    $("p#no-notes").remove()
     $("button#show-notes").after(newNote)
   }
 }
