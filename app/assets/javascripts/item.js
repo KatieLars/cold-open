@@ -76,9 +76,10 @@ function createNote(event) {
     var item = $(".main").data().itemid
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
+      debugger
       newNote = `
-      <p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+      <p><strong>${response.note.content}</strong></p>
+      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
       `
       $("#show_notes span:last-child").after(newNote)
     })
