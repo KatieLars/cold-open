@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources :items
   end
 
-  # get '/items/:id/notes' => "notes#new"
   post '/items/:id/notes' => "notes#create"
 
   get '/items/:id/notes/:id' => "notes#edit"
