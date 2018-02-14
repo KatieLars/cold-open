@@ -31,6 +31,7 @@ function getItems() {//list user items on whatever page the Items link in header
 }
 
 function showNotes() {//should be on item show page--shows notes when clicked
+  //turns into hide notes when clicked
   $("button#show-notes").on('click', function(e){//might not need e . . .there is no default action
     e.preventDefault()
     var user = $(".main").data().userid
@@ -41,9 +42,13 @@ function showNotes() {//should be on item show page--shows notes when clicked
       notes.forEach(note => { //add a click to update note
         noteList += `
         <p><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>` //make a button to update note
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
+        `
       })
-    $("button#show-notes").after(noteList)
+    var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+    $("span#display-notes").empty() //need to attach an event listener to hideButton
+    $("span#display-notes").after(hideButton + noteList)
+    //show notes, then becomes hide notes
     })
   })
 }
@@ -76,12 +81,12 @@ function createNote(event) {
     var item = $(".main").data().itemid
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
-      debugger
       newNote = `
       <p><strong>${response.note.content}</strong></p>
       <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
       `
-      $("#show_notes span:last-child").after(newNote)
+      $("button#show_notes").after(newNote)
+      $()
     })
 }
 
