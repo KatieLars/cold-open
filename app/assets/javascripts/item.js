@@ -43,10 +43,10 @@ function showNotes() {
     notes.forEach(note => {
       noteList += `
       <p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update-note">Update Note</a></span><br></br>
+      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
       `
     })
-  $("#update-note").on('click', updateNote)
+  $(".update-note").on('click', updateNote)
   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
   })
@@ -86,10 +86,10 @@ function updateNote() { //helper to be used in conjuctions with click events
     notes.forEach(note => {
       noteList += `
       <p><strong>${note.content}</strong></p>
-      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update-note">Update Note</a></span><br></br>
+      <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
       `
     })
-  $("#update-note").on('click', updateNote)
+  $(".update-note").on('click', updateNote)
   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
   })
