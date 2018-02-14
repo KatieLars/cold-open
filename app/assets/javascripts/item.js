@@ -104,10 +104,17 @@ function createNote(event) {
       <div><p><strong>${response.note.content}</strong></p>
       <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
-      // $("button#show-notes").after(newNote)
-      $("span#display-notes div:last-child").after(newNote)
+      buttonOrSpan(newNote)
       $("form").empty()
     })
+}
+
+function buttonOrSpan(newNote) {
+  if($("span#display-notes div:last-child").length) {
+    $("span#display-notes div:last-child").after(newNote)
+  }else{
+    $("button#show-notes").after(newNote)
+  }
 }
 
 $(function() {
