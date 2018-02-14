@@ -43,14 +43,14 @@ function showNotes() {//good
       var noteList = ""
       notes.forEach(note => {
         noteList += `
-        <div><p id=${note.id}><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
+        <div><p><strong>${note.content}</strong></p>
+        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid=${note.id} class="update-note">Update Note</a></span><br></br></div>
         `
       })
 
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
-      $(".update-note").on('click', updateNote)
+      $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -72,33 +72,34 @@ function showNoteForm() { //good
             <input type="hidden" name="item_id" value="${item}">
             <input type="hidden" name="user_id" value="${user}">
             <input type="hidden" name="created_at" value="${Date()}">
-            <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="submit-form">
           </form>
         `
         $("#create-notes").after(noteForm)
-        $("form").on('submit', createNote)
+        $("form#note-form").on('submit', createNote)
   })
 }
 
- function updateNote() { //helper to be used in conjuctions with click events
+ function editNoteForm() { //helper to be used in conjuctions with click events
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
+   var note = $(this).data().noteid
    debugger
    $.get("/items/"+item+"/notes/"+note+".json", function(response){
-//     var notes = response.item.notes
-//     var noteList = ""
-//     notes.forEach(note => {
-//       noteList += `
-//       <p><strong>${note.content}</strong></p>
-//       <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br>
-//       `
-//     })
-//   $(".update-note").on('click', updateNote)
+      noteForm = `
+          <form id="edit-form">
+            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${note.content}"><br></br>
+            <input type="hidden" name="updated_at" value="${Date()}">
+            <input type="submit" id="submit-form">Update Note</input>
+          </form>
+        `
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
  })
  }
+
+ // <input type="hidden" name="item_id" value="${item}">
+ // <input type="hidden" name="user_id" value="${user}">
 
 function createNote(event) {
     event.preventDefault()
@@ -111,7 +112,7 @@ function createNote(event) {
       <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
       buttonOrSpan(newNote)
-      $(".update-note").on('click', updateNote)
+      $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
 }
