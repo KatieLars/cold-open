@@ -46,11 +46,15 @@ function showNotes() {//should be on item show page--shows notes when clicked
         `
       })
     var hideButton = "<button id='hide-notes'>Hide Notes</button>"
-    $("span#display-notes").empty() //need to attach an event listener to hideButton
+    $("span#display-notes").empty()
     $("span#display-notes").after(hideButton + noteList)
-    //show notes, then becomes hide notes
+    $("button#hide-notes").on('click', hideNotes)
     })
   })
+}
+
+function hideNotes() {
+
 }
 
 function showNoteForm() {
