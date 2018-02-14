@@ -47,16 +47,14 @@ function showNotes() {//should be on item show page--shows notes when clicked
       })
     var hideButton = "<button id='hide-notes'>Hide Notes</button>"
     $("span#display-notes").empty()
-    $("span#display-notes").after(hideButton + noteList)
-    $("button#hide-notes").on('click', hideNotes)
+    $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
     })
   })
 }
 
 function hideNotes() {
-  $("span#display_notes").empty()
-  $("span#display_notes").html('<button id="show-notes">Show Notes</button>')
-  $("button#show-notes").on('click', showNotes)
+  $("span#display-notes").empty().html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
+  // $("span#display-notes").html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
 }
 
 function showNoteForm() {
