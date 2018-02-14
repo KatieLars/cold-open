@@ -31,8 +31,7 @@ function getItems() {//list user items on whatever page the Items link in header
 }
 
 function showNotes() {//should be on item show page--shows notes when clicked
-  $("button#show-notes").on('click', function(e){//might not need e . . .there is no default action
-    e.preventDefault()
+  $("button#show-notes").on('click', function(){//might not need e . . .there is no default action
     var user = $(".main").data().userid
     var item = $(".main").data().itemid
     $.get("/users/"+user+"/items/"+item+".json", function(response){
@@ -44,16 +43,15 @@ function showNotes() {//should be on item show page--shows notes when clicked
         <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" id="update_note">Update Note</a></span><br></br>
         `
       })
-    var hideButton = "<button id='hide-notes'>Hide Notes</button>"//this can be combined with below
-    $("span#display-notes").html(hideButton + noteList).toggle(hideNotes)//('click', hideNotes)
+    var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+    $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
     })
   })
 }
 
 function hideNotes() {
-  $("span#display-notes").toggle(function(){
-    $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
-  })
+    $("span#display-notes").html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
+
   // $("span#display-notes").html('<button id="show-notes">Show Notes</button>').on('click', showNotes)
 }
 
