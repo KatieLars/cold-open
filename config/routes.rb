@@ -14,9 +14,12 @@ Rails.application.routes.draw do
     resources :items
   end
 
-  get '/items/:id/notes' => "notes#new"
+  # get '/items/:id/notes' => "notes#new"
   post '/items/:id/notes' => "notes#create"
-  
+
+  get '/items/:id/notes/:id' => "notes#edit"
+  post '/items/:id/notes/:id' => "notes#update"
+
   get '/users/:id/home' => 'users#home', as: 'user_home'
 
   get '/signin' => "sessions#new", as: 'signin'
