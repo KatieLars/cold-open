@@ -52,7 +52,12 @@ function showNoteForm() { //good
    //var user = $(".main").data().userid
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
-   var newNote = $.get("/items/"+item+"/notes/"+note+".json", updateForm)
+debugger
+   console.log($.get("/items/"+item+"/notes/"+note+".json", function(response) {
+      var newNote = updateForm(response)
+      debugger
+      $("#show-notes").html(newNote)
+   }))
     //function(response){
       // updateForm += `
       //     <form id="edit-form">
@@ -61,8 +66,9 @@ function showNoteForm() { //good
       //       <input type="submit" id="update-form">Update Note</input>
       //     </form>
       //   `
-      debugger
-  $(`#${note}`).html(newNote)
+
+  // $(`#${note}`).html(newNote)
+
   $("form#edit-form").on('submit', updateNote)
  }
 
@@ -74,7 +80,6 @@ function showNoteForm() { //good
             <input type="submit" id="update-form">Update Note</input>
           </form>
         `
-
   return dataForm
  }
 
