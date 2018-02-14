@@ -43,13 +43,14 @@ function showNotes() {//good
       var noteList = ""
       notes.forEach(note => {
         noteList += `
-        <div><p><strong>${note.content}</strong></p>
+        <div><p id=${note.id}><strong>${note.content}</strong></p>
         <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
         `
       })
-      $(".update-note").on('click', updateNote)
+
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+      $(".update-note").on('click', updateNote)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -81,9 +82,10 @@ function showNoteForm() { //good
 }
 
  function updateNote() { //helper to be used in conjuctions with click events
-//   var user = $(".main").data().userid
-//   var item = $(".main").data().itemid
-//   $.get("/users/"+user+"/items/"+item+".json", function(response){
+   //var user = $(".main").data().userid
+   var item = $(".main").data().itemid
+   debugger
+   $.get("/items/"+item+"/notes/"+note+".json", function(response){
 //     var notes = response.item.notes
 //     var noteList = ""
 //     notes.forEach(note => {
@@ -95,7 +97,7 @@ function showNoteForm() { //good
 //   $(".update-note").on('click', updateNote)
 //   var hideButton = "<button id='hide-notes'>Hide Notes</button>"
 //   $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
-//   })
+ })
  }
 
 function createNote(event) {
@@ -109,6 +111,7 @@ function createNote(event) {
       <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
       `
       buttonOrSpan(newNote)
+      $(".update-note").on('click', updateNote)
       $("form").empty()
     })
 }
