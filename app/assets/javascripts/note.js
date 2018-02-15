@@ -52,17 +52,15 @@ function showNoteForm() { //good
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
-      $("span#note-form").empty()
-      $("#show-notes").after(updateForm(response))
-      
-      // $("form#edit-form").on('submit', updateNote)
+      $("#note-form").html(updateForm(response))
    })
+   $("form#edit-form").on('submit', updateNote)
  }
 
  function updateForm(response) {
    var dataForm = `
           <form id="edit-form">
-            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
+            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}" onclick=""><br></br>
             <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="update-form" value="Update Note"><br></br>
           </form>
