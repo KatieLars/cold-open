@@ -7,7 +7,7 @@ function Note(attributes){
   this.id = attributes.id
 }
 
-function showNotesFirst() {//working
+Note.showNotesFirst= function() {//working
   $("button#show-notes").on('click', Note.showNotes)
 }
 
@@ -44,10 +44,10 @@ function noteList(notes){//generates list of note divs
 
 function hideNotes() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
-    $("button#show-notes").on('click', showNotes)
+    $("button#show-notes").on('click', Note.showNotes)
 }
 
-function showNoteForm() { //shows create note form
+Note.showNoteForm = function() { //shows create note form
   $("#create-notes").on('click', function(){
         $("#create-notes").after(newNoteForm())
         $("form#note-form").on('submit', createNote)
@@ -120,14 +120,15 @@ function updateNote(event) { //updating a note
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
+    var note = new Note(response.note)
     buttonOrSpan(noteDiv(response.note))//nothing to do with  create button
     $(".update-note").on('click', editNoteForm)//attaches event listener
     $("span#note-form").html("<button id='create-notes'>Create Note</button>")//span becomes create note again
-    $("button#create-notes").on('click', showNoteForm)//hideNotes()//need to add create note button
+    $("button#create-notes").on('click', Note.showNoteForm)//hideNotes()//need to add create note button
   })
 }
 
 $(function() {
-    showNotesFirst()
-    showNoteForm()
+    Note.showNotesFirst()
+    Note.showNoteForm()
 });
