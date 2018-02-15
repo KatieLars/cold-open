@@ -1,6 +1,6 @@
 function Note(attributes){
   this.content = attributes.content
-  this.user_id = attributes.user_id
+  this.user_id = attributes.user.id
   this.item_id = attributes.item.id
   this.created_at = attributes.created_at
   this.updated_at = attributes.updated_at
@@ -33,9 +33,9 @@ function noteList(notes){//generates list of note divs
   return lister
 }
 
-function noteDiv(note) { //generates single note div
-  var oneNoteDiv = `<div id="${note.id}"><p><strong>${note.content}</strong></p>
-  <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
+Note.prototype.noteDiv = function(){ //generates single note div
+  var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
+  <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
   return oneNoteDiv
 }
@@ -74,19 +74,19 @@ function createNote(event) { //post request for creating new note
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
       var note = new Note(response.note)//
-      debugger
-      buttonOrSpan(noteDiv(response.note))
+      var noteHtml = note.noteDiv()
+      note.buttonOrSpan(noteHMTL)
       $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
 }
 
-function buttonOrSpan(newNote) {//displays note after last div or after show notes if no notes
+Note.prototype.buttonOrSpan = function(){//displays note after last div or after show notes if no notes
   if($("span#display-notes div:last-child").length) {
-    $("span#display-notes div:last-child").after(newNote)
+    $("span#display-notes div:last-child").after(this)
   }else{
     $("p#no-notes").remove()
-    $("button#show-notes").after(newNote)
+    $("button#show-notes").after(this)
   }
 }
 
