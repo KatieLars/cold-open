@@ -1,3 +1,9 @@
+function Note(attributes){
+  this.content = attributes.content
+  this.user_id = attributes.user_id
+  this.item_id = attributes.item_id
+}
+
 function showNotesFirst() {
   $("button#show-notes").on('click', showNotes)
 }
@@ -115,7 +121,6 @@ function buttonOrSpan(newNote) {
 }
 
 $(function() {
-    //showNotes()
     showNotesFirst()
     showNoteForm()
 });
