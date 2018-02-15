@@ -4,6 +4,7 @@ function Note(attributes){
   this.item_id = attributes.item.id
   this.created_at = attributes.created_at
   this.updated_at = attributes.updated_at
+  this.id = attributes.id
 }
 
 function showNotesFirst() {//first button listener
@@ -34,6 +35,7 @@ function noteList(notes){//generates list of note divs
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
+  debugger
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
@@ -71,11 +73,11 @@ function createNote(event) { //post request for creating new note
     event.preventDefault()
     var values = $(this).serialize()
     var item = $(".main").data().itemid
-    var note =  $.post("/items/"+item+"/notes.json", values)
-    note.done(function(response) {
+    var jsonNote =  $.post("/items/"+item+"/notes.json", values)
+    jsonNote.done(function(response) {
       var note = new Note(response.note)//
       var noteHtml = note.noteDiv()
-      note.buttonOrSpan(noteHMTL)
+      note.buttonOrSpan(noteHtml)
       $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
