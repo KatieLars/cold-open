@@ -1,7 +1,9 @@
 function Note(attributes){
   this.content = attributes.content
   this.user_id = attributes.user_id
-  this.item_id = attributes.item_id
+  this.item_id = attributes.item.id
+  this.created_at = attributes.created_at
+  this.updated_at = attributes.updated_at
 }
 
 function showNotesFirst() {//first button listener
@@ -71,6 +73,8 @@ function createNote(event) { //post request for creating new note
     var item = $(".main").data().itemid
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
+      var note = new Note(response.note)//
+      debugger
       buttonOrSpan(noteDiv(response.note))
       $(".update-note").on('click', editNoteForm)
       $("form").empty()

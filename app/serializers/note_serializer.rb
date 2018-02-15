@@ -1,6 +1,7 @@
 class NoteSerializer < ActiveModel::Serializer
   attributes :id, :updated_at, :content, :created_at, :create_or_updated_at
   belongs_to :item
+  belongs_to :user
 
   def format_date(date) #put this in concerns
     if date
