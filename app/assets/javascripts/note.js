@@ -19,7 +19,7 @@ Note.showNotes = function() {//displays notes for item--refactor for note protot
     if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', hideNotes)
-      //$(".update-note").on('click', editNoteForm)
+      $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -30,7 +30,6 @@ Note.prototype.noteDiv = function(){ //generates single note div
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
-  $(".update-note").on('click', this.editNoteForm())//attach event listener
   return oneNoteDiv
 }
 
@@ -79,7 +78,7 @@ function createNote(event) { //post request for creating new note
       var note = new Note(response.note)//
       var noteHtml = note.noteDiv()
       note.buttonOrSpan(noteHtml)
-      $(".update-note").on('click', note.editNoteForm())
+      $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
 }
@@ -93,10 +92,9 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
   }
 }
 
- Note.prototype.editNoteForm = function() {//displays edit note form--deletes create button
-   debugger
+ function editNoteForm() {//displays edit note form--deletes create button
    var item = $(".main").data().itemid
-   var note = $(this).data().noteid
+   var note = this.id
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var note = new Note(response.note)
       $("#note-form").html(note.updateForm())
@@ -117,6 +115,7 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
  }
 
 function updateNote(event) { //updating a note
+
   event.preventDefault()
   var values = $(this).serialize()
   var item = $(".main").data().itemid
