@@ -19,7 +19,7 @@ Note.showNotes = function() {//displays notes for item--refactor for note protot
     if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', hideNotes)
-      $(".update-note").on('click', editNoteForm)
+      //$(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
@@ -30,6 +30,7 @@ Note.prototype.noteDiv = function(){ //generates single note div
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
+  $(".update-note").on('click', this.editNoteForm())//attach event listener
   return oneNoteDiv
 }
 
@@ -78,7 +79,7 @@ function createNote(event) { //post request for creating new note
       var note = new Note(response.note)//
       var noteHtml = note.noteDiv()
       note.buttonOrSpan(noteHtml)
-      $(".update-note").on('click', editNoteForm)
+      $(".update-note").on('click', note.editNoteForm())
       $("form").empty()
     })
 }
@@ -92,7 +93,8 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
   }
 }
 
- function editNoteForm() {//displays edit note form--deletes create button
+ Note.prototype.editNoteForm = function() {//displays edit note form--deletes create button
+   debugger
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
@@ -103,7 +105,6 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
  }
 
  Note.prototype.updateForm = function() {//edit form
-   debugger
    var dataForm = `
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${this.content}" onclick=""><br></br>
@@ -122,11 +123,10 @@ function updateNote(event) { //updating a note
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
-    debugger
     var updatedNote = new Note(response.note)
     var noteHtml = updatedNote.noteDiv()
     updatedNote.buttonOrSpan(noteHtml)//nothing to do with  create button
-    $(".update-note").on('click', editNoteForm)//attaches event listener
+    $(".update-note").on('click', updatedNote.editNoteForm())//attaches event listener
     $("span#note-form").html("<button id='create-notes'>Create Note</button>")//span becomes create note again
     $("button#create-notes").on('click', Note.showNoteForm)//hideNotes()//need to add create note button
   })
