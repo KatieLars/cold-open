@@ -52,9 +52,10 @@ function showNoteForm() { //good
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
-      debugger
-      $("#show-notes").html(updateForm(response))
-      $("form#edit-form").on('submit', updateNote)
+      $("span#note-form").empty()
+      $("#show-notes").after(updateForm(response))
+      
+      // $("form#edit-form").on('submit', updateNote)
    })
  }
 
@@ -63,13 +64,16 @@ function showNoteForm() { //good
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}"><br></br>
             <input type="hidden" name="updated_at" value="${Date()}">
-            <input type="submit" id="update-form">Update Note</input>
+            <input type="submit" id="update-form" value="Update Note"><br></br>
           </form>
         `
   return dataForm
  }
 
  function updateNote() {
+   console.log(this)
+   debugger
+   //be sure you bring back create form button (toggle)
    //post to the update function and updates the note
    //have an alert signaling that the item was updated successfully
  }
