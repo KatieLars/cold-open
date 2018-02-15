@@ -13,16 +13,9 @@ function showNotes() {//good--refactor HTML
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
     var notes = response.item.notes
-    if(notes.length) {//if notes exist
-      var noteList = ""
-      notes.forEach(note => {
-        noteList += `
-        <div id="${note.id}"><p><strong>${note.content}</strong></p>
-        <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
-        `
-      })
+    if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
-      $("span#display-notes").html(hideButton + noteList).on('click', hideNotes)
+      $("span#display-notes").html(hideButton + noteDiv(notes)).on('click', hideNotes)
       $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
@@ -30,30 +23,30 @@ function showNotes() {//good--refactor HTML
   })
 }
 
-function hideNotes() {//good
+function noteDiv(notes){//generates notes div
+  var noteList = ""
+  notes.forEach(note => {
+    noteList += `
+    <div id="${note.id}"><p><strong>${note.content}</strong></p>
+    <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
+    `
+  })
+  return noteList
+}
+
+function hideNotes() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', showNotes)
 }
 
-function showNoteForm() {
+function showNoteForm() { //shows notes form
   $("#create-notes").on('click', function(){
-      // var item = $(".main").data().itemid
-      // var user = $(".main").data().userid
-      //   var noteForm = `
-      //     <form id="note-form">
-      //       <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
-      //       <input type="hidden" name="item_id" value="${item}">
-      //       <input type="hidden" name="user_id" value="${user}">
-      //       <input type="hidden" name="created_at" value="${Date()}">
-      //       <input type="submit" id="submit-form">
-      //     </form>
-      //   `
         $("#create-notes").after(newNoteForm())
         $("form#note-form").on('submit', createNote)
   })
 }
 
-function newNoteForm() {
+function newNoteForm() { //html for new note form
   var item = $(".main").data().itemid
   var user = $(".main").data().userid
   var noteForm = `
@@ -69,7 +62,7 @@ function newNoteForm() {
 }
 
 
-function updateNote(event) {
+function updateNote(event) { //updating a note
   event.preventDefault()
   var values = $(this).serialize()
   var item = $(".main").data().itemid
@@ -87,7 +80,7 @@ function updateNote(event) {
   })
 }
 
- function editNoteForm() {//good
+ function editNoteForm() {//displays edit note form
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
