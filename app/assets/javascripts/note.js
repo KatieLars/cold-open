@@ -5,6 +5,7 @@ function Note(attributes){
   this.created_at = attributes.created_at
   this.updated_at = attributes.updated_at
   this.id = attributes.id
+  this.create_or_updated_at = attributes.create_or_updated_at
 }
 
 Note.showNotesFirst= function() {//working
@@ -125,10 +126,10 @@ function updateNote(event) { //updating a note
     var updatedNote = new Note(response.note)
     var noteHtml = updatedNote.noteDiv()
     updatedNote.buttonOrSpan(noteHtml)
-    alert("Note Updated!")//nothing to do with  create button
-    $(".update-note").on('click', editNoteForm)//attaches event listener
-    $("span#note-form").html("<button id='create-notes'>Create Note</button>")//span becomes create note again
-    $("button#create-notes").on('click', Note.showNoteForm)//hideNotes()//need to add create note button
+    alert("Note Updated!")
+    $(".update-note").on('click', editNoteForm)
+    $("span#note-form").html("<button id='create-notes'>Create Note</button>")
+    $("button#create-notes").on('click', Note.showNoteForm)
   })
 }
 
