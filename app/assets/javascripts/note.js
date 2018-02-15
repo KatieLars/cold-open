@@ -1,13 +1,13 @@
 function Note(attributes){
   this.content = attributes.content
-  this.user_id = attributes.user.id
-  this.item_id = attributes.item.id
+  this.user_id = attributes.user_id
+  this.item_id = attributes.item_id
   this.created_at = attributes.created_at
   this.updated_at = attributes.updated_at
   this.id = attributes.id
 }
 
-function showNotesFirst() {//first button listener
+function showNotesFirst() {//working
   $("button#show-notes").on('click', Note.showNotes)
 }
 
@@ -17,7 +17,6 @@ Note.showNotes = function() {//displays notes for item--refactor for note protot
   $.get("/users/"+user+"/items/"+item+".json", function(response){
     var notes = response.item.notes //you will have to get user id and item id here too
     if(notes.length) {
-      debugger
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', hideNotes)
       $(".update-note").on('click', editNoteForm)
@@ -27,21 +26,20 @@ Note.showNotes = function() {//displays notes for item--refactor for note protot
   })
 }
 
-function noteList(notes){//generates list of note divs
-  var lister = ""
-  notes.forEach(note => {
-    debugger
-    var jsNote = new Note(note)
-    lister += note.noteDiv()
-  })
-  return lister
-}
-
 Note.prototype.noteDiv = function(){ //generates single note div
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
   return oneNoteDiv
+}
+
+function noteList(notes){//generates list of note divs
+  var lister = ""
+  notes.forEach(note => {
+    var jsNote = new Note(note)
+    lister += jsNote.noteDiv()
+  })
+  return lister
 }
 
 function hideNotes() {//makes hideNotes button disappear
