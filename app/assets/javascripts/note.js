@@ -71,18 +71,13 @@ function createNote(event) { //post request for creating new note
     var item = $(".main").data().itemid
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
-      //
-      // newNote = `
-      // <div><p><strong>${response.note.content}</strong></p>
-      // <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
-      // `
       buttonOrSpan(noteDiv(response.note))
       $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
 }
 
-function buttonOrSpan(newNote) {
+function buttonOrSpan(newNote) {//displays note after last div or after show notes if no notes
   if($("span#display-notes div:last-child").length) {
     $("span#display-notes div:last-child").after(newNote)
   }else{
@@ -91,7 +86,7 @@ function buttonOrSpan(newNote) {
   }
 }
 
- function editNoteForm() {//displays edit note form
+ function editNoteForm() {//displays edit note form--deletes create button
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
@@ -119,20 +114,12 @@ function updateNote(event) { //updating a note
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
-    // updatedNote = `
-    // <div><p><strong>${response.note.content}</strong></p>
-    // <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
-    // `
-    buttonOrSpan(noteDiv(response.note))
-    $(".update-note").on('click', editNoteForm)
-    $("form").empty()
-    hideNotes()//creates
+    buttonOrSpan(noteDiv(response.note))//nothing to do with  create button
+    $(".update-note").on('click', editNoteForm)//attaches event listener
+    $("span#note-form").html("<button id='create-notes'>Create Note</button>")//span becomes create note again
+    $("button#create-notes").on('click', showNoteForm)//hideNotes()//need to add create note button
   })
 }
-
- `<div id="${note.id}"><p><strong>${note.content}</strong></p>
- <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
- `
 
 $(function() {
     showNotesFirst()
