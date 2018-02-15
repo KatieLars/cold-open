@@ -4,11 +4,11 @@ function Note(attributes){
   this.item_id = attributes.item_id
 }
 
-function showNotesFirst() {
+function showNotesFirst() {//first button listener
   $("button#show-notes").on('click', showNotes)
 }
 
-function showNotes() {//good--refactor HTML
+function showNotes() {//displays notes for item
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
@@ -23,7 +23,7 @@ function showNotes() {//good--refactor HTML
   })
 }
 
-function noteList(notes){//generates notes div
+function noteList(notes){//generates list of note divs
   var lister = ""
   notes.forEach(note => {
     lister += noteDiv(note)
@@ -31,7 +31,7 @@ function noteList(notes){//generates notes div
   return lister
 }
 
-function noteDiv(note) {
+function noteDiv(note) { //generates single note div
   var oneNoteDiv = `<div id="${note.id}"><p><strong>${note.content}</strong></p>
   <span style="font-size: .67em">${note.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${note.id}" class="update-note">Update Note</a></span><br></br></div>
   `
@@ -43,7 +43,7 @@ function hideNotes() {//makes hideNotes button disappear
     $("button#show-notes").on('click', showNotes)
 }
 
-function showNoteForm() { //shows notes form
+function showNoteForm() { //shows create note form
   $("#create-notes").on('click', function(){
         $("#create-notes").after(newNoteForm())
         $("form#note-form").on('submit', createNote)
@@ -65,17 +65,18 @@ function newNoteForm() { //html for new note form
   return noteForm
 }
 
-function createNote(event) {
+function createNote(event) { //post request for creating new note
     event.preventDefault()
     var values = $(this).serialize()
     var item = $(".main").data().itemid
     var note =  $.post("/items/"+item+"/notes.json", values)
     note.done(function(response) {
-      newNote = `
-      <div><p><strong>${response.note.content}</strong></p>
-      <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
-      `
-      buttonOrSpan(newNote)
+      //
+      // newNote = `
+      // <div><p><strong>${response.note.content}</strong></p>
+      // <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
+      // `
+      buttonOrSpan(noteDiv(response.note))
       $(".update-note").on('click', editNoteForm)
       $("form").empty()
     })
@@ -111,7 +112,6 @@ function buttonOrSpan(newNote) {
   return dataForm
  }
 
-
 function updateNote(event) { //updating a note
   event.preventDefault()
   var values = $(this).serialize()
@@ -119,11 +119,11 @@ function updateNote(event) { //updating a note
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
-    updatedNote = `
-    <div><p><strong>${response.note.content}</strong></p>
-    <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
-    `
-    buttonOrSpan(updatedNote)
+    // updatedNote = `
+    // <div><p><strong>${response.note.content}</strong></p>
+    // <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
+    // `
+    buttonOrSpan(noteDiv(response.note))
     $(".update-note").on('click', editNoteForm)
     $("form").empty()
     hideNotes()//creates
