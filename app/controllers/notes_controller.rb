@@ -16,7 +16,7 @@ class NotesController < ApplicationController
 
   def update
     @note = Note.find_by_id(params[:id])
-    if @note.update
+    if @note.update(note_params)
       render json: @note
     else
       render html: "items/#{@note.item.id}/show"

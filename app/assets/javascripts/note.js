@@ -48,19 +48,41 @@ function showNoteForm() { //good
 }
 
 
- function editNoteForm() {
+function updateNote(event) {
+  event.preventDefault()
+  var values = $(this).serialize()
+  var item = $(".main").data().itemid
+  var note = this.id.value
+  var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
+  newNote.done(function(response) {
+    debugger
+    updatedNote = `
+    <div><p><strong>${response.note.content}</strong></p>
+    <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
+    `
+    buttonOrSpan(updatedNote)
+    $(".update-note").on('click', editNoteForm)
+    $("form").empty()
+  })
+  //be sure you bring back create form button (toggle)
+  //post to the update function and updates the note
+  //have an alert signaling that the item was updated successfully
+}
+
+ function editNoteForm() {//good
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       $("#note-form").html(updateForm(response))
+      $("form#edit-form").on('submit', updateNote)
    })
-   $("form#edit-form").on('submit', updateNote)
  }
 
  function updateForm(response) {
    var dataForm = `
           <form id="edit-form">
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}" onclick=""><br></br>
+            <input type="hidden" name="id" value="${response.note.id}">
             <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="update-form" value="Update Note"><br></br>
           </form>
@@ -68,16 +90,6 @@ function showNoteForm() { //good
   return dataForm
  }
 
- function updateNote() {
-   console.log(this)
-   debugger
-   //be sure you bring back create form button (toggle)
-   //post to the update function and updates the note
-   //have an alert signaling that the item was updated successfully
- }
-
- // <input type="hidden" name="item_id" value="${item}">
- // <input type="hidden" name="user_id" value="${user}">
 
 function createNote(event) {
     event.preventDefault()
@@ -105,7 +117,7 @@ function buttonOrSpan(newNote) {
 }
 
 $(function() {
-    showNotes()
+    //showNotes()
     showNotesFirst()
     showNoteForm()
 });
