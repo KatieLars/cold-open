@@ -63,10 +63,8 @@ function updateNote(event) {
     buttonOrSpan(updatedNote)
     $(".update-note").on('click', editNoteForm)
     $("form").empty()
+    hideNotes()//creates
   })
-  //be sure you bring back create form button (toggle)
-  //post to the update function and updates the note
-  //have an alert signaling that the item was updated successfully
 }
 
  function editNoteForm() {//good
