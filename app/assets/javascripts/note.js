@@ -96,9 +96,8 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
-     debugger
       var note = new Note(response.note)
-      $("#note-form").html(note.updateForm)
+      $("#note-form").html(note.updateForm())
       $("form#edit-form").on('submit', updateNote)
    })
  }
@@ -124,8 +123,9 @@ function updateNote(event) { //updating a note
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
     debugger
-    var note = new Note(response.note)
-    buttonOrSpan(noteDiv(response.note))//nothing to do with  create button
+    var updatedNote = new Note(response.note)
+    var noteHtml = updatedNote.noteDiv()
+    updatedNote.buttonOrSpan(noteHtml)//nothing to do with  create button
     $(".update-note").on('click', editNoteForm)//attaches event listener
     $("span#note-form").html("<button id='create-notes'>Create Note</button>")//span becomes create note again
     $("button#create-notes").on('click', Note.showNoteForm)//hideNotes()//need to add create note button
