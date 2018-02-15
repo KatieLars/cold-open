@@ -8,15 +8,16 @@ function Note(attributes){
 }
 
 function showNotesFirst() {//first button listener
-  $("button#show-notes").on('click', showNotes)
+  $("button#show-notes").on('click', Note.showNotes)
 }
 
-function showNotes() {//displays notes for item
+Note.showNotes = function() {//displays notes for item--refactor for note prototypes
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
-    var notes = response.item.notes
+    var notes = response.item.notes //you will have to get user id and item id here too
     if(notes.length) {
+      debugger
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', hideNotes)
       $(".update-note").on('click', editNoteForm)
@@ -29,13 +30,14 @@ function showNotes() {//displays notes for item
 function noteList(notes){//generates list of note divs
   var lister = ""
   notes.forEach(note => {
-    lister += noteDiv(note)
+    debugger
+    var jsNote = new Note(note)
+    lister += note.noteDiv()
   })
   return lister
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
-  debugger
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
