@@ -1,5 +1,5 @@
 class NoteSerializer < ActiveModel::Serializer
-  attributes :id, :updated_at, :content, :created_at, :create_or_updated_at
+  attributes :id, :updated_at, :content, :created_at, :create_or_updated_at, :user_id, :item_id
   belongs_to :item
   belongs_to :user
 
