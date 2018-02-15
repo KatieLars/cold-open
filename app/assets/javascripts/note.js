@@ -96,16 +96,19 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
-      $("#note-form").html(updateForm(response))
+     debugger
+      var note = new Note(response.note)
+      $("#note-form").html(note.updateForm)
       $("form#edit-form").on('submit', updateNote)
    })
  }
 
- function updateForm(response) {//edit form
+ Note.prototype.updateForm = function() {//edit form
+   debugger
    var dataForm = `
           <form id="edit-form">
-            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${response.note.content}" onclick=""><br></br>
-            <input type="hidden" name="id" value="${response.note.id}">
+            <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${this.content}" onclick=""><br></br>
+            <input type="hidden" name="id" value="${this.id}">
             <input type="hidden" name="updated_at" value="${Date()}">
             <input type="submit" id="update-form" value="Update Note"><br></br>
           </form>
@@ -120,6 +123,7 @@ function updateNote(event) { //updating a note
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
+    debugger
     var note = new Note(response.note)
     buttonOrSpan(noteDiv(response.note))//nothing to do with  create button
     $(".update-note").on('click', editNoteForm)//attaches event listener
