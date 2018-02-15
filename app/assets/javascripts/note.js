@@ -8,7 +8,7 @@ function showNotesFirst() {
   $("button#show-notes").on('click', showNotes)
 }
 
-function showNotes() {//good
+function showNotes() {//good--refactor HTML
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
@@ -35,22 +35,37 @@ function hideNotes() {//good
     $("button#show-notes").on('click', showNotes)
 }
 
-function showNoteForm() { //good
+function showNoteForm() {
   $("#create-notes").on('click', function(){
-      var item = $(".main").data().itemid
-      var user = $(".main").data().userid
-        var noteForm = `
-          <form id="note-form">
-            <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
-            <input type="hidden" name="item_id" value="${item}">
-            <input type="hidden" name="user_id" value="${user}">
-            <input type="hidden" name="created_at" value="${Date()}">
-            <input type="submit" id="submit-form">
-          </form>
-        `
-        $("#create-notes").after(noteForm)
+      // var item = $(".main").data().itemid
+      // var user = $(".main").data().userid
+      //   var noteForm = `
+      //     <form id="note-form">
+      //       <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
+      //       <input type="hidden" name="item_id" value="${item}">
+      //       <input type="hidden" name="user_id" value="${user}">
+      //       <input type="hidden" name="created_at" value="${Date()}">
+      //       <input type="submit" id="submit-form">
+      //     </form>
+      //   `
+        $("#create-notes").after(newNoteForm())
         $("form#note-form").on('submit', createNote)
   })
+}
+
+function newNoteForm() {
+  var item = $(".main").data().itemid
+  var user = $(".main").data().userid
+  var noteForm = `
+    <form id="note-form">
+      <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
+      <input type="hidden" name="item_id" value="${item}">
+      <input type="hidden" name="user_id" value="${user}">
+      <input type="hidden" name="created_at" value="${Date()}">
+      <input type="submit" id="submit-form">
+    </form>
+  `
+  return noteForm
 }
 
 
@@ -61,7 +76,6 @@ function updateNote(event) {
   var note = this.id.value
   var newNote = $.post("/items/"+item+"/notes/"+note+".json", values)
   newNote.done(function(response) {
-    debugger
     updatedNote = `
     <div><p><strong>${response.note.content}</strong></p>
     <span style="font-size: .67em">${response.note.create_or_updated_at}&emsp;|&emsp;<a href="#" class="update-note">Update Note</a></span><br></br></div>
