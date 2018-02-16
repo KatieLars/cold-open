@@ -7,6 +7,7 @@
     <p><strong>Freezer: </strong><em><%=link_to freezer_link_format(@item.freezer), user_freezer_path(current_user, @item.freezer)%></em></p>
 
     <span id="display-notes"><button id="show-notes">Show Notes</button></span>&emsp;
+    <div id="note-list"></div>
     <span id="note-form"><button id="create-notes">Create Note</button></span><br></br>
     <!-- <p><strong>Notes: </strong><%=notes_display(@item.notes)%></p> -->
     <%=link_to "Items List", user_items_path(current_user)%>&emsp;|&emsp;

@@ -55,7 +55,7 @@ Note.prototype.showOneNote = function() {//shows only last created note
   $("button#show-notes").after(noteHtml)
   $(".update-note").on('click', editNoteForm)
   $("#note-form").html('<button id="create-notes">Create Note</button>')
-  $("button#create-notes").on('click', Note.showNoteForm)
+  Note.showNoteForm()
 }
 
 Note.showNoteForm = function() { //shows create note form
