@@ -18,8 +18,9 @@ Note.showNotes = function() {//displays notes for item
   $.get("/users/"+user+"/items/"+item+".json", function(response){
     var notes = response.item.notes
     if(notes.length) {
-      var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
-      $("span#display-notes").html(hideButton + noteList(notes)).on('click', Note.hideNotes)
+      var hideButton = "<button id='hide-notes'>Hide Notes</button>"
+      $("span#display-notes").html(hideButton).on('click', Note.hideNotes)
+      $("#note-list").html(noteList(notes))
       $(".update-note").on('click', editNoteForm)
     }else{
       $("#note-list").html("<p id='no-notes'><strong>No notes for this item.</strong></p>")
@@ -91,7 +92,7 @@ Note.createNote = function(event) { //post request for creating new note
       note.buttonOrSpan(noteHtml)
       $(".update-note").on('click', editNoteForm)
       alert("Note created!")
-      $("form").empty()
+      $("#note-form").empty()
       note.showOneNote()
     })
 }
