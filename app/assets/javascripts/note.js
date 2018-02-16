@@ -103,7 +103,7 @@ function editNoteForm() {//displays edit note form--deletes create button
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var note = new Note(response.note)
       $("#note-form").html(note.updateForm())
-      $("form#edit-form").on('submit', updateNote)
+      $("form#edit-form").on('submit', note.updateNote)
    })
  }
 
@@ -119,7 +119,7 @@ function editNoteForm() {//displays edit note form--deletes create button
   return dataForm
  }
 
-function updateNote(event) { //updating a note
+Note.prototype.updateNote = function(event) { //updating a note
   event.preventDefault()
   var values = $(this).serialize()
   var item = $(".main").data().itemid
