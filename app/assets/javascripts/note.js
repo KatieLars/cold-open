@@ -108,12 +108,12 @@ function editNoteForm() {//displays edit note form--deletes create button
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var note = new Note(response.note)
-      debugger
-      $("#note-form").html(note.updateForm())
+      $(`#${note.id}`).html(note.updateForm())
+      // $("button#create-notes").detach() //$("#note-form").remove("button#create-notes")//attaches note form div with note id
       $("form#edit-form").on('submit', note.updateNote)
    })
  }
-
+//clear out div with note.id
  Note.prototype.updateForm = function() {//edit form
    var dataForm = `
           <form id="edit-form">
