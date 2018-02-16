@@ -109,10 +109,11 @@ function editNoteForm() {//displays edit note form--deletes create button
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
-      var note = new Note(response.note)
-      $(`#${note.id}`).html(note.updateForm())
-      $("button#create-notes").empty()
-      $("form#edit-form").on('submit', note.updateNote)
+      var updatedNote = new Note(response.note)
+      //$(`#${updatedNote.id}`).html(updatedNote.updateForm())
+      //debugger //problem:note div is no longer in the DOM
+      $("#note-form").html(updatedNote.updateForm())
+      $("form#edit-form").on('submit', updatedNote.updateNote)
    })
  }
 //clear out div with note.id
@@ -142,7 +143,7 @@ Note.prototype.updateNote = function(event) { //updating a note
     alert("Note Updated!")
     //$("span#note-form").html("<button id='create-notes'>Create Note</button>")
     //$("button#create-notes").on('click', Note.showNoteForm)
-    Note.showOneNote()
+    updatedNote.showOneNote()
   })
 }
 
