@@ -67,7 +67,6 @@ Note.showNoteForm = function() { //call this to attach click event
         $("form#note-form").on('submit', Note.createNote)
         $("#create-notes").off('click')
   })
-  //$("#create-notes").off('click')
 }
 
 Note.newNoteForm = function() { //html for new note form
