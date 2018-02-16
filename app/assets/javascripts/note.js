@@ -51,9 +51,9 @@ Note.hideNotes = function() {//makes hideNotes button disappear
 
 Note.prototype.showOneNote = function() {//shows only last created note
   var note = new Note(this)
-  var noteHtml = note.noteDiv()//returns html
-  debugger
+  var noteHtml = note.noteDiv()
   $("button#show-notes").after(noteHtml)
+  $(".update-note").on('click', editNoteForm)
 }
 
 Note.showNoteForm = function() { //shows create note form
@@ -108,6 +108,7 @@ function editNoteForm() {//displays edit note form--deletes create button
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var note = new Note(response.note)
+      debugger
       $("#note-form").html(note.updateForm())
       $("form#edit-form").on('submit', note.updateNote)
    })
