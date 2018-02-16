@@ -22,7 +22,7 @@ Note.showNotes = function() {//displays notes for item
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', Note.hideNotes)
       $(".update-note").on('click', editNoteForm)
     }else{
-      $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
+      $("#note-list").html("<p id='no-notes'><strong>No notes for this item.</strong></p>")
       $("button#show-notes").off('click')
     }
   })
@@ -52,13 +52,13 @@ Note.hideNotes = function() {//makes hideNotes button disappear
 Note.prototype.showOneNote = function() {//shows only last created note
   var note = new Note(this)
   var noteHtml = note.noteDiv()
-  $("button#show-notes").after(noteHtml)
+  $("#note-list").html(noteHtml)
   $(".update-note").on('click', editNoteForm)
   $("#note-form").html('<button id="create-notes">Create Note</button>')
   Note.showNoteForm()
 }
 
-Note.showNoteForm = function() { //shows create note form
+Note.showNoteForm = function() { //call this to attach click event
   $("#create-notes").on('click', function(){
         $("#create-notes").after(Note.newNoteForm())
         $("form#note-form").on('submit', Note.createNote)
@@ -101,7 +101,7 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
     $("span#display-notes").append(this)
   }else{
     $("p#no-notes").remove()
-    $("button#show-notes").after(this)
+    $("#note-list").html(this)
   }
 }
 
