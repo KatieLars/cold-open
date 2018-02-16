@@ -50,8 +50,10 @@ Note.hideNotes = function() {//makes hideNotes button disappear
 }
 
 Note.prototype.showOneNote = function() {//shows only last created note
+  var note = new Note(this)
+  var noteHtml = note.noteDiv()//returns html
   debugger
-
+  $("button#show-notes").after(noteHtml)
 }
 
 Note.showNoteForm = function() { //shows create note form
