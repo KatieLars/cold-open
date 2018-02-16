@@ -62,6 +62,7 @@ Note.prototype.showOneNote = function() {//shows only last created note
 
 Note.showNoteForm = function() { //call this to attach click event
   $("#create-notes").on('click', function(){
+      $("#note-list").empty()
         $("#create-notes").after(Note.newNoteForm())
         $("form#note-form").on('submit', Note.createNote)
   })
