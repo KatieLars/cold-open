@@ -20,10 +20,7 @@ Note.showNotes = function() {//displays notes for item
     if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', Note.hideNotes)
-      $(".update-note").on('click', function() {
-        console.log(this)
-        debugger
-        })
+      $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
