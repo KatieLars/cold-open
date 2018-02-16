@@ -48,6 +48,7 @@ function noteList(notes){//generates list of note divs--Item class?
 Note.hideNotes = function() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', Note.showNotes)
+    $("#note-list").empty()
 }
 
 Note.prototype.showOneNote = function() {//shows only last created note
