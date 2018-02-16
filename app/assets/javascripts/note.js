@@ -20,11 +20,15 @@ Note.showNotes = function() {//displays notes for item
     if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
       $("span#display-notes").html(hideButton + noteList(notes)).on('click', Note.hideNotes)
-      // $(".update-note").on('click', editNoteForm)
+      $(".update-note").on('click', () => {debugger})
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
     }
   })
+}
+// 
+// Note.prototype.updateEventListener = function() {
+//   $(".update-note").on('click', this.editNoteForm)
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
@@ -32,8 +36,7 @@ Note.prototype.noteDiv = function(){ //generates single note div
   var oneNoteDiv = `<div id="${divNote.id}"><p><strong>${divNote.content}</strong></p>
   <span style="font-size: .67em">${divNote.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${divNote.id}" class="update-note">Update Note</a></span><br></br></div>
   `
-  debugger
-  $(".update-note").on('click', divNote.editNoteForm)
+  divNote.updateEventListener()
   return oneNoteDiv
 }
 
