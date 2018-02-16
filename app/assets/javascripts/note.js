@@ -8,18 +8,17 @@ function Note(attributes){
   this.create_or_updated_at = attributes.create_or_updated_at
 }
 
-Note.showNotesFirst= function() {//working
+Note.showNotesFirst = function() {//working
   $("button#show-notes").on('click', Note.showNotes)
-}
 
-Note.showNotes = function() {//displays notes for item--refactor for note prototypes
+Note.showNotes = function() {//displays notes for item
   var user = $(".main").data().userid
   var item = $(".main").data().itemid
   $.get("/users/"+user+"/items/"+item+".json", function(response){
-    var notes = response.item.notes //you will have to get user id and item id here too
+    var notes = response.item.notes
     if(notes.length) {
       var hideButton = "<div><button id='hide-notes'>Hide Notes</button></div>"
-      $("span#display-notes").html(hideButton + noteList(notes)).on('click', hideNotes)
+      $("span#display-notes").html(hideButton + noteList(notes)).on('click', Note.hideNotes)
       $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
@@ -28,14 +27,13 @@ Note.showNotes = function() {//displays notes for item--refactor for note protot
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
-  debugger
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
   <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
   return oneNoteDiv
 }
 
-function noteList(notes){//generates list of note divs
+function noteList(notes){//generates list of note divs--Item class?
   var lister = ""
   notes.forEach(note => {
     var jsNote = new Note(note)
@@ -44,7 +42,7 @@ function noteList(notes){//generates list of note divs
   return lister
 }
 
-function hideNotes() {//makes hideNotes button disappear
+Note.hideNotes() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', Note.showNotes)
 }
