@@ -29,9 +29,8 @@ Note.showNotes = function() {//displays notes for item
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
-  var divNote = new Note(this)
-  var oneNoteDiv = `<div id="${divNote.id}"><p><strong>${divNote.content}</strong></p>
-  <span style="font-size: .67em">${divNote.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${divNote.id}" class="update-note">Update Note</a></span><br></br></div>
+  var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
+  <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
   return oneNoteDiv
 }
@@ -51,6 +50,7 @@ Note.hideNotes = function() {//makes hideNotes button disappear
 }
 
 Note.prototype.showOneNote = function() {//shows only last created note
+  debugger
 
 }
 
