@@ -54,6 +54,8 @@ Note.prototype.showOneNote = function() {//shows only last created note
   var noteHtml = note.noteDiv()
   $("button#show-notes").after(noteHtml)
   $(".update-note").on('click', editNoteForm)
+  $("#note-form").html('<button id="create-notes">Create Note</button>')
+  $("button#create-notes").on('click', Note.showNoteForm)
 }
 
 Note.showNoteForm = function() { //shows create note form
@@ -109,7 +111,7 @@ function editNoteForm() {//displays edit note form--deletes create button
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var note = new Note(response.note)
       $(`#${note.id}`).html(note.updateForm())
-      // $("button#create-notes").detach() //$("#note-form").remove("button#create-notes")//attaches note form div with note id
+      $("button#create-notes").empty()
       $("form#edit-form").on('submit', note.updateNote)
    })
  }
@@ -138,9 +140,9 @@ Note.prototype.updateNote = function(event) { //updating a note
     updatedNote.buttonOrSpan(noteHtml)
     $(".update-note").on('click', editNoteForm)
     alert("Note Updated!")
-    $("span#note-form").html("<button id='create-notes'>Create Note</button>")
-    $("button#create-notes").on('click', Note.showNoteForm)
-    Note.showNotes()
+    //$("span#note-form").html("<button id='create-notes'>Create Note</button>")
+    //$("button#create-notes").on('click', Note.showNoteForm)
+    Note.showOneNote()
   })
 }
 
