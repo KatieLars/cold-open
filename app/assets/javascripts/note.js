@@ -109,18 +109,16 @@ Note.prototype.buttonOrSpan = function(){//displays note after last div or after
   }
 }
 
-function editNoteForm() {//displays edit note form--deletes create button
+function editNoteForm() {//displays edit note form/deletes create button
    var item = $(".main").data().itemid
    var note = $(this).data().noteid
    $.get("/items/"+item+"/notes/"+note+".json", function(response) {
       var updatedNote = new Note(response.note)
-      //$(`#${updatedNote.id}`).html(updatedNote.updateForm())
-      //debugger //problem:note div is no longer in the DOM
       $("#note-form").html(updatedNote.updateForm())
       $("form#edit-form").on('submit', updatedNote.updateNote)
    })
  }
-//clear out div with note.id
+
  Note.prototype.updateForm = function() {//edit form
    var dataForm = `
           <form id="edit-form">
@@ -145,8 +143,6 @@ Note.prototype.updateNote = function(event) { //updating a note
     updatedNote.buttonOrSpan(noteHtml)
     $(".update-note").on('click', editNoteForm)
     alert("Note Updated!")
-    //$("span#note-form").html("<button id='create-notes'>Create Note</button>")
-    //$("button#create-notes").on('click', Note.showNoteForm)
     updatedNote.showOneNote()
   })
 }
