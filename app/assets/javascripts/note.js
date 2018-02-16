@@ -8,7 +8,7 @@ function Note(attributes){
   this.create_or_updated_at = attributes.create_or_updated_at
 }
 
-Note.showNotesFirst = function() {//working
+Note.showNotesFirst = function() {//good
   $("button#show-notes").on('click', Note.showNotes)
 }
 
@@ -50,12 +50,12 @@ Note.hideNotes = function() {//makes hideNotes button disappear
 
 Note.showNoteForm = function() { //shows create note form
   $("#create-notes").on('click', function(){
-        $("#create-notes").after(newNoteForm())
-        $("form#note-form").on('submit', createNote)
+        $("#create-notes").after(Note.newNoteForm())
+        $("form#note-form").on('submit', Note.createNote)
   })
 }
 
-function newNoteForm() { //html for new note form
+Note.newNoteForm = function() { //html for new note form
   var item = $(".main").data().itemid
   var user = $(".main").data().userid
   var noteForm = `
@@ -70,7 +70,7 @@ function newNoteForm() { //html for new note form
   return noteForm
 }
 
-function createNote(event) { //post request for creating new note
+Note.createNote = function(event) { //post request for creating new note
     event.preventDefault()
     var values = $(this).serialize()
     var item = $(".main").data().itemid
