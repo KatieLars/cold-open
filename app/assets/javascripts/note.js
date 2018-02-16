@@ -127,7 +127,7 @@ function editNoteForm() {//displays edit note form--deletes create button
             <br></br><strong>Note: </strong><input type="text_area" name="content" placeholder="${this.content}" onclick=""><br></br>
             <input type="hidden" name="id" value="${this.id}">
             <input type="hidden" name="updated_at" value="${Date()}">
-            <input type="submit" id="update-form" value="Update Note"><br></br>
+            <input type="submit" id="update-form" value="Update Note"></br>
           </form>
         `
   return dataForm
