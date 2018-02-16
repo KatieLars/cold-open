@@ -28,10 +28,12 @@ Note.showNotes = function() {//displays notes for item
 }
 
 Note.prototype.noteDiv = function(){ //generates single note div
-  var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
-  <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
+  var divNote = new Note(this)
+  var oneNoteDiv = `<div id="${divNote.id}"><p><strong>${divNote.content}</strong></p>
+  <span style="font-size: .67em">${divNote.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${divNote.id}" class="update-note">Update Note</a></span><br></br></div>
   `
-  $(".update-note").on('click', this.editNoteForm)
+  debugger
+  $(".update-note").on('click', divNote.editNoteForm)
   return oneNoteDiv
 }
 
@@ -80,7 +82,7 @@ Note.createNote = function(event) { //post request for creating new note
       var note = new Note(response.note)//
       var noteHtml = note.noteDiv()
       note.buttonOrSpan(noteHtml)
-      $(".update-note").on('click', note.editNoteForm)
+      //$(".update-note").on('click', note.editNoteForm) //consider getting rid of this
       $("form").empty()
     })
 }
