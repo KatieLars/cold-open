@@ -23,6 +23,7 @@ Note.showNotes = function() {//displays notes for item
       $(".update-note").on('click', editNoteForm)
     }else{
       $("button#show-notes").after("<p id='no-notes'><strong>No notes for this item.</strong></p>")
+      $("button#show-notes").off('click')
     }
   })
 }
@@ -47,6 +48,10 @@ function noteList(notes){//generates list of note divs--Item class?
 Note.hideNotes = function() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', Note.showNotes)
+}
+
+Note.prototype.showOneNote = function() {//shows only last created note
+
 }
 
 Note.showNoteForm = function() { //shows create note form
@@ -77,17 +82,19 @@ Note.createNote = function(event) { //post request for creating new note
     var item = $(".main").data().itemid
     var jsonNote =  $.post("/items/"+item+"/notes.json", values)
     jsonNote.done(function(response) {
-      var note = new Note(response.note)//
+      var note = new Note(response.note)
       var noteHtml = note.noteDiv()
       note.buttonOrSpan(noteHtml)
-      $(".update-note").on('click', editNoteForm) //consider getting rid of this
+      $(".update-note").on('click', editNoteForm)
+      alert("Note created!")
       $("form").empty()
+      note.showOneNote()
     })
 }
 
 Note.prototype.buttonOrSpan = function(){//displays note after last div or after show notes if no notes
   if($("span#display-notes div:last-child").length) {
-    $("span#display-notes div:last-child").after(this)
+    $("span#display-notes").append(this)
   }else{
     $("p#no-notes").remove()
     $("button#show-notes").after(this)
@@ -126,10 +133,11 @@ Note.prototype.updateNote = function(event) { //updating a note
     var updatedNote = new Note(response.note)
     var noteHtml = updatedNote.noteDiv()
     updatedNote.buttonOrSpan(noteHtml)
-    alert("Note Updated!")
     $(".update-note").on('click', editNoteForm)
+    alert("Note Updated!")
     $("span#note-form").html("<button id='create-notes'>Create Note</button>")
     $("button#create-notes").on('click', Note.showNoteForm)
+    Note.showNotes()
   })
 }
 
