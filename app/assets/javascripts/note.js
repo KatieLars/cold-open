@@ -10,6 +10,7 @@ function Note(attributes){
 
 Note.showNotesFirst = function() {//working
   $("button#show-notes").on('click', Note.showNotes)
+}
 
 Note.showNotes = function() {//displays notes for item
   var user = $(".main").data().userid
@@ -42,7 +43,7 @@ function noteList(notes){//generates list of note divs--Item class?
   return lister
 }
 
-Note.hideNotes() {//makes hideNotes button disappear
+Note.hideNotes = function() {//makes hideNotes button disappear
     $("span#display-notes").html('<button id="show-notes">Show Notes</button>')
     $("button#show-notes").on('click', Note.showNotes)
 }
