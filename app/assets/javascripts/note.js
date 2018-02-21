@@ -1,11 +1,11 @@
 function Note(attributes){
   this.content = attributes.content
-  this.user_id = attributes.user_id
-  this.item_id = attributes.item_id
-  this.created_at = attributes.created_at
-  this.updated_at = attributes.updated_at
+  this.userId = attributes.user_id
+  this.itemId = attributes.item_id
+  this.createdAt = attributes.created_at
+  this.updatedAt = attributes.updated_at
   this.id = attributes.id
-  this.create_or_updated_at = attributes.create_or_updated_at
+  this.createOrUpdatedAt = attributes.create_or_updated_at
 }
 
 Note.showNotesFirst = function() {//good
@@ -31,7 +31,7 @@ Note.showNotes = function() {//displays notes for item
 
 Note.prototype.noteDiv = function(){ //generates single note div
   var oneNoteDiv = `<div id="${this.id}"><p><strong>${this.content}</strong></p>
-  <span style="font-size: .67em">${this.create_or_updated_at}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
+  <span style="font-size: .67em">${this.createOrUpdatedAt}&emsp;|&emsp;<a href="#" data-noteid="${this.id}" class="update-note">Update Note</a></span><br></br></div>
   `
   return oneNoteDiv
 }
@@ -51,9 +51,10 @@ Note.hideNotes = function() {//makes hideNotes button disappear
     $("#note-list").empty()
 }
 
-Note.prototype.showOneNote = function() {//shows only last created note
-  var note = new Note(this)
-  var noteHtml = note.noteDiv()
+Note.prototype.showOneNote = function(noteHtml) {//shows only last created note
+  //SEE WHERE SHOWONENOTE IS ALSO CALLED
+  //var note = new Note(this)
+  //var noteHtml = note.noteDiv()
   $("#note-list").html(noteHtml)
   $(".update-note").on('click', editNoteForm)
   $("#note-form").html('<button id="create-notes">Create Note</button>')
@@ -70,9 +71,9 @@ Note.showNoteForm = function() { //call this to attach click event
 }
 
 Note.newNoteForm = function() { //html for new note form
-  var item = $(".main").data().itemid
-  var user = $(".main").data().userid
-  var noteForm = `
+  const item = $(".main").data().itemid
+  const user = $(".main").data().userid
+  const noteForm = `
     <form id="note-form">
       <br></br><strong>New Note: </strong><input type="text_area" name="content"><br></br>
       <input type="hidden" name="item_id" value="${item}">
@@ -91,12 +92,13 @@ Note.createNote = function(event) { //post request for creating new note
     var jsonNote =  $.post("/items/"+item+"/notes.json", values)
     jsonNote.done(function(response) {
       var note = new Note(response.note)
+      //debugger
       var noteHtml = note.noteDiv()
       note.buttonOrSpan(noteHtml)
       $(".update-note").on('click', editNoteForm)
       alert("Note created!")
       $("#note-form").empty()
-      note.showOneNote()
+      note.showOneNote(noteHtml)
     })
 }
 
